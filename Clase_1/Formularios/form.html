@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--En action va la conexion con php-->
+
+    <form action="" id="MiForm">
+        <!--El id lo vemos en el frontEnd, El name es lo que vemos del lado del servidor, type texto-->
+        <input type="text" name="Nombre" placeholder="Ingrese el nombre" id="nombre">
+        <!--En action va la conexion con php-->
+        <label for="Nombre">Ingrese el Texto</label>
+        <fieldset>
+            <legend>Titulo para fiedset</legend>
+            <input type="text" name="Nombre" placeholder="Ingrese el nombre" id="nombre">
+            <label for="">complete la casilla</label><br>
+            <input type="radio" name="rbNombre" , id="rdMasculino">
+            <label for="">Masculino</label><br>
+            <input type="radio" name="rbNombre" , id="rdFemenino">
+            <label for="">Femenino</label><br>
+            <input type="radio" name="rbNombre" , id="rdProgramador">
+            <label for="">Programador</label><br>
+
+
+            <input type="checkbox" name="chkMasculino" id="chkMasculino">
+            <label for="">Masculino</label><br>
+
+            <fiedset>
+                <select name="" id="">
+                   <optgroup label="Seleccione alguna opcion">
+                   <option value="vlaor1">Opcion1</option>
+                   <option value="vlaor2">Opcion2</option>
+                   </optgroup>
+                    <optgroup label="Seleccione otra opcion">
+                   <option value="vlaor1">Opcion1</option>
+                   <option value="vlaor2">Opcion2</option>
+                   </optgroup>
+                </select>
+            </fiedset>
+
+            <fieldset>
+
+                <input list="Lista">
+                <datalist id="marcas">
+                    <option value="Renault"></option>
+                    <option value="Ford"></option>
+                </datalist>
+            </fieldset>
+
+            <fieldset>
+                <input type="submit" onclick="alert('Hello World!')" value="Click Me!"> "submit" "resetear""
+</fieldset>
+
+<!--Lista de input que vamos a uar-->
+color
+date
+datetime-local
+email
+month
+number
+range
+search
+tel
+time
+url
+week
+
+<fieldset>
+    <input type="color" name="facolor",value="#ff0000">
+</fieldset>
+
+<!--Validaciones, siempre se valida del lado del cliente y del servidor-->
+
+<fieldset>  
+    <input type="text",pattern="[A-Za-z]{3}",required>
+    <input type="submit">
+</fieldset>
+
+
+</form>
+</body>
+
+</html>

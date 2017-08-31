@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registracion</title>
+    <h1>Registre su usuario y su vehiculo</h1>
+    <h2>Por favor llene los siguientes campos con su informacion</h2>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Datos de la cuenta</legend>
+        <input type="text" name="Nombre" placeholder="someone@example.com" id="lblNombre">
+        <label for="">Email(requerido)</label><br>
+        <input type="text" name="Nombre" placeholder="Clave de 8 caracteres" id="lblclave">
+        <label for="">Contraseña(requerido)</label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Datos personales</legend>
+        <input type="text" name="NomApe" placeholder="Nombre y apellido" id="lblNombre">
+        <label for="">Nombre Completo(requerido)</label><br>
+        <input type="text" name="Numero" placeholder="+54011424456789" id="lblNumero">
+        <label for="">Telefono</label><br>
+        <input type="text" name="Contraseña" placeholder="calle,nro,piso,dpto" id="lblDireccion">
+        <label for="">Direccion</label><br>
+        <input type="text" name="Codigo" placeholder="Codigo de 3 letras, ej ARG" id="lblCodigo">
+        <label for="">Pais</label><br>
+        <input type="date" name="Fecha" placeholder="dd/mm/aaaa" id="lblFecha">
+        <label for="">Fecha de nacimiento(requerido)</label><br>
+        <input type="text" name="Clave" id="lblclave">
+        <label for="">Area/Ocupacion</label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Datos del automovil</legend>
+        <select>       
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+        </select>
+        <label for="">Marca del Automovil</label><br>
+        <input type="text" name="NomApe" placeholder="Patente en formato AAA999" id="lblNombre">
+        <label for="">Patente(requerido)</label><br>
+        <label for="">Descripcion del Vehiculo</label><br>
+        <textarea name="mensaje" rows="10" cols="30" placeholder="Descripcion del vehiculo de hasta"></textarea>
+     
+    </fieldset>
+
+</body>
+
+</html>

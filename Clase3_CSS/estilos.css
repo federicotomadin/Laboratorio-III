@@ -1,0 +1,42 @@
+*
+{
+    box-sizing: 200;
+}
+
+
+
+
+h1{
+    background-color:red;
+    width: 600px;
+    height: 700x;
+    border: 10px;
+  /*  padding: 10px;  /*me agranda la caja */
+    margin: auto; /* bordes por fuera de la caja */
+    /*si pongo auto me lo centra*/
+  /*  border: 10px 5px; /* equivale a abajo, ariba y derecha e izq */
+    border: 0 0 10px 0;
+    float: left;
+
+}
+
+
+
+div{
+   
+    width: 600px;
+    height: 400px;
+    margin: auto;
+    border: 20px dotted black;
+    background-color: grey;
+    float: right;
+    position: relative;
+    
+    }
+
+   
+span
+{
+    background-color: pink;
+}
+

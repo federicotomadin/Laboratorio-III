@@ -1,21 +1,64 @@
-ul li
-{
-   display: inline;
-}
 
-ul li a
-{
-    text-decoration: none;
-    cursor:crosshair;
 
-}
-
-ul li a:hover
+#bloqueDerecho
 {
-    background-color: red;
-    cursor: crosshair;
+    display: inline-block;
+    vertical-align: top;
+    display: inline;
+    color: blue;
+   
 }
-#button
-{
+   
+#menu ul
+{ 
+       
+        text-align: center;  
+        list-style-type: none;
+        margin-left: 0px;
+        padding: 5px;
+        background-color: pink;
     
+}
+
+#menu li
+{
+
+    color: white;
+  
+
+    text-decoration-color: white;
+    display: inline;
+    text-align: center;
+    margin: 0 100px 0 0;
+}
+
+
+main
+{
+   
+    text-align: justify;
+    margin-left: 200px;
+    margin-right:500px;
+
+
+}
+
+
+header
+{
+   text-align: left;
+   margin-left: 200px;
+}
+ 
+footer 
+{
+    background-color: #C62440;
+    padding: 50px;
+    
+}
+
+footer h3 
+{
+    margin-left: 150px;
+    margin-right:500px;
 }

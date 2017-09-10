@@ -1,12 +1,24 @@
 
+#bloqueIzq
+{
+    width: 70%;
+    display: inline-block;
+}
+
 
 #bloqueDerecho
 {
     display: inline-block;
     vertical-align: top;
-    display: inline;
     color: blue;
+    width: 27%;
    
+}
+
+#menu
+{
+    background-color: pink;
+    
 }
    
 #menu ul
@@ -16,20 +28,18 @@
         list-style-type: none;
         margin-left: 0px;
         padding: 5px;
-        background-color: pink;
-    
+        max-width: 611px;
+        margin: 0px auto;
 }
 
 #menu li
 {
 
     color: white;
-  
-
     text-decoration-color: white;
     display: inline;
     text-align: center;
-    margin: 0 100px 0 0;
+    margin: 0 71px 0 0;
 }
 
 
@@ -39,7 +49,8 @@ main
     text-align: justify;
     margin-left: 200px;
     margin-right:500px;
-
+    max-width: 828px;
+    width: 100%;
 
 }
 
@@ -52,12 +63,44 @@ header
 footer 
 {
     background-color: #C62440;
-    padding: 50px;
-    
+
 }
 
-footer h3 
+.Contenedor
 {
-    margin-left: 150px;
-    margin-right:500px;
+    max-width: 828px;
+    margin: 0px auto;
+}
+
+.FooterIzquierdo
+{
+    display: inline-block;
+    vertical-align: top;
+    width: 40%
+
+}
+
+.FooterIzquierdo p
+{
+    text-align: justify;
+}
+
+.FooterDerecho ul
+{
+    list-style: none;
+    
+
+}
+
+.FooterDerecho ul li
+{
+    display: inline-block;
+}
+
+.FooterDerecho
+{
+    display: inline-block;
+    vertical-align: top;
+    width: 40%
+
 }

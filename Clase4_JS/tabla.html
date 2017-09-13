@@ -5,32 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="tabla.js"></script>
+    <link rel="stylesheet" href="estilos.css">
     <title>Document</title>
 </head>
 <body>
 
-    <input type="text" name="Nombre" placeholder="Ingrese el nombre" id="Nombre">.<br>
+    <input type="text" name="Nombre" placeholder="Ingrese el nombre" id="Nombre" >.<br>
     <input type="text" name="Apellido" placeholder="Ingrese el apellido" id="Apellido">.<br>
-    <input type="button" name="btnIngresar" id="Ingresar" value="Enviar">.<br>
+    <input type="button" name="Ingresar" id="btnIngresar" value="Enviar">.<br>
 
-    <h2>Lista de Personas</h1>
-
+    <h3>Lista de Personas</h3>
+    
+    <table id="tCuerpo">  
      <tr>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Accion</th>
-    
      </tr><br>
      <tr>
-        <th>Federico</th>
-        <th>Tomadin</th>
-        <th>saltar</th>
+        <td id="nombre">Federico</td>
+        <td>Tomadin</td>
+        <td>saltar</td>
      </tr><br>
      <tr>
-        <th>Tomas</th>
-        <th>Gutierrez</th>
-        <th>garchar</th>
+        <td>Tomas</td>
+        <td>Gutierrez</td>
+        <td>garchar</td>
      </tr>
+    </table>
 
 </body>
 </html>

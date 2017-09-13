@@ -5,20 +5,25 @@ window.onload=function()
 var btnIngresar=document.getElementById("btnIngresar");
 btnIngresar.addEventListener('click',function()
 {
-var txNombre=document.getElementById("Nombre").value;
+var txtNombre=document.getElementById("Nombre").value;
 var txtApellido=document.getElementById("Apellido").value;
-confirm("presione un boton");
+
+if(txtNombre=="" || txtApellido=="")
+    {
+        document.getElementById("Nombre").innerHTML="concha";
+        alert("No pueden haber campos vacios");
+    }
 
 
 if(txtNombre=="Federico" && txtApellido=="Tomadin")
 {
-    alert("Son iguales los parameros");
+    alert("Los parametros son iguales");
 }
+
+document.getElementById('<td>' + txtNombre + '</td>').innerHTML;
 
 })
 
-tCuerpo.innerHTML=Cuerpo.innerHTML + 
-"<td>" + nombre + "</td>"
-"<td>" + apellido + "</td>"
+
 
 }

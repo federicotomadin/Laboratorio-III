@@ -20,7 +20,8 @@ if(txtNombre=="Federico" && txtApellido=="Tomadin")
     alert("Los parametros son iguales");
 }
 
-document.getElementById('<td>' + txtNombre + '</td>').innerHTML;
+var tcuerpo = document.getElementById("tablaUsuarios");   
+    tcuerpo.innerHTML = tcuerpo.innerHTML+"<td>"+txtNombre+"</td>"+"<td>"+txtApellido+"</td>"
 
 })
 

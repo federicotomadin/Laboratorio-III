@@ -67,5 +67,44 @@ var b=document.getElementById("lbl2").value;
 }
 
 
+var Auto=function(nafta)
+{
+    var _nafta=nafta;
+    this.setNafta= function(value)
+    {
+        _nafta=value;
+    }
+
+    this.getNafta=function()
+    {
+       return _nafta;
+    }
+
+}
+
+var Auto1=new Auto(100);
+alert("La nafta es " + Auto1.getNafta());
+
+Auto2= {
+ 
+     nafta:100,
+     puertas:5,
+     color:"azul"
+   
+}
+
+Auto3={}
+
+nafta=100;
+getNafta=function(){}
+
+
+document.getElementsByTagName('p');  //me trae todos los parrafos
+document.getElementsByClassName('aqui');  
+
+FirstChild
+
+innerHtml='<p> alguna cosa>'Fecha </>
+
 
 

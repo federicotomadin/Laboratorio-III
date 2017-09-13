@@ -104,7 +104,7 @@ document.getElementsByClassName('aqui');
 
 FirstChild
 
-innerHtml='<p> alguna cosa>'Fecha </>
+
 
 
 

@@ -4,6 +4,7 @@ table
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    border: 2px;
 }
 
 td, th {
@@ -14,4 +15,10 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.CajaTexto
+{
+     border: 3px double black;
+    
 }

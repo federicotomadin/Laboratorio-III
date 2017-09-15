@@ -9,11 +9,20 @@ var txtNombre=document.getElementById("Nombre").value;
 var txtApellido=document.getElementById("Apellido").value;
 //confirm("Confirmo que deseo agregar un usuario");
 
-if(txtNombre=="" || txtApellido=="")
+if(txtNombre=="")
     {
         
-      alert("No esta ingresando ningun valor");
-        
+     document.getElementById("Nombre").style.borderColor = "red";
+     alert("Debe ingresar un Nombre");
+     
+    
+    }
+
+    
+if(txtApellido=="")
+    {
+        document.getElementById("Apellido").style.borderColor = "red";
+        alert("Debe ingresar un Apellido");
     }
 
 

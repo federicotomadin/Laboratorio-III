@@ -11,6 +11,8 @@ window.addEventListener('load',function()
 
 });
 
+datos=JSON.stringify("nombre " + nombre + "Edad" + apellido);
+
 
 //window.addEventListener("Load",()=>{})
 
@@ -37,9 +39,14 @@ function gestionarRespuesta()
    {
        if(xhr.status==200)
        {
-        div.innerHTML=xhr.responseText;
+        var obj =JSON.parse(xhr.responseText);
+        div.innerHTML=obj.nombre;
+
+       // div.innerHTML=xhr.responseText;
        
-        
+      // tengo que hacer esto el parcial "npinstall" para instalar los paquetes de node.js 
+      //node server
+      
        }
 
        else {

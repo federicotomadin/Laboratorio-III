@@ -12,29 +12,6 @@ var txtApellido=document.getElementById("Apellido").value;
 
 
 
-if(txtNombre=="")
-    {
-        
-     document.getElementById("Nombre").style.borderColor = "red";
-     alert("Debe ingresar un Nombre");
-   
-     
-    
-    }
-
-    
-if(txtApellido=="")
-    {
-        document.getElementById("Apellido").style.borderColor = "red";
-        alert("Debe ingresar un Apellido");
-    }
-
-
-if(txtNombre=="Federico" && txtApellido=="Tomadin")
-{
-    alert("Los parametros son iguales");
-}
-
 
 //var objJSON = { "nombre": txtNombre, "apellido=":txtApellido};
 var obj ='nombre=' + encodeURIComponent(txtNombre) + '&apellido=' + encodeURIComponent(txtApellido);
@@ -45,6 +22,7 @@ xhr.open('POST','http://localhost:3000/agregarpersona',true);
 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 //xhr.send(JSON.stringify(objJSON));
 xhr.send(obj);
+
 
 
 
@@ -70,6 +48,7 @@ function gestionarRespuesta()
         if(xhr.status==200)
         {
         alert('Envio exitoso');
+        traerTodos();
         }
     
         else {
@@ -77,6 +56,16 @@ function gestionarRespuesta()
         }
     }
 }
+
+function traerTodos()
+{
+    xhr= new XMLHttpRequest();
+    xhr.onreadystatechange=gestionarRespuesta;
+    xhr.open('GET','pagina1.php?nombre=' + nombre + '&edad= ' + edad ,true);
+    xhr.send();
+}
+
+
 
 function eliminar(index){
     alert("aca voy a borrar el indice " + index) ;

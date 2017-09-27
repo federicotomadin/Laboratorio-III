@@ -27,9 +27,6 @@ xhr.send(obj);
 
 
 
-
-
-
 var tcuerpo = document.getElementById("tablaUsuarios");   
 tcuerpo.innerHTML = "";
     tcuerpo.innerHTML = tcuerpo.innerHTML+
@@ -52,7 +49,7 @@ function gestionarRespuesta()
         }
     
         else {
-         div.innerHTML="Envio Exitoso";
+         div.innerHTML="ERROR";
         }
     }
 }
@@ -60,9 +57,25 @@ function gestionarRespuesta()
 function traerTodos()
 {
     xhr= new XMLHttpRequest();
-    xhr.onreadystatechange=gestionarRespuesta;
-    xhr.open('GET','pagina1.php?nombre=' + nombre + '&edad= ' + edad ,true);
+    xhr.onreadystatechange=gestionarRecepcion;
+    xhr.open('GET','http://localhost:3000/traerpersonas' + true);
     xhr.send();
+}
+
+function gestionarRecepcion()
+{
+    if(xhr.readyState==4) //4 quiere decir que lo puedo enviar y lo recibio
+    {
+        if(xhr.status==200)
+        {
+        alert('Recepcion Exitosa');
+       
+        }
+    
+        else {
+         div.innerHTML="Error en la recepcion";
+        }
+    }
 }
 
 

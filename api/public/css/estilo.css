@@ -1,0 +1,75 @@
+
+.todo
+{
+    background-color: green;
+}
+
+.rpta
+{
+    text-align: center;
+}
+
+.button
+{
+    background-color: #4C4CD7;
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+
+.container {
+ /* margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;*/
+
+  width: 70%;
+  max-width: 611px;
+  display: inline-block;
+  
+
+}
+
+h1{
+    text-align: center;
+}
+
+.login{
+    padding-top: 20px;
+    background-color:#f0efefcc;
+    height: 400px;
+    width: 250px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.login .textBox{
+    margin-top: 20px;
+    /*margin-left: 20px;*/
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 14px;
+    padding-left: 10px;
+    border: 1px;
+}
+
+.login .btn{
+    height: 40px;
+    border-radius: 6px;
+    background-color: green;
+    border: 0px;
+    color: #ffffff;
+    font-size: 14px;
+    width: 100px;
+}
+
+.login .btnContent{
+    text-align: center;
+}

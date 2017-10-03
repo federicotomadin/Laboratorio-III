@@ -1,101 +1,160 @@
 //HTTP
 
-var xhr;
+xhr = new XMLHttpRequest();
 
 /*########################################### VALIDAR USUARIO ############################################*/
 
 //Metodo para guardar en el servidor
-function Login() {
+function enviar() {
 
     //Tomo los valores del HTML
-    var email = document.getElementById('txtEmail').value;
-    var clave = document.getElementById('txtClave').value;
+    var email = document.getElementById('usrStr').value;
+    var clave = document.getElementById('passStr').value;
 
-    if (ValidarDatos(usuario, clave)) {
+    if (ValidarDatos(email, clave)) {
 
         //Guardo en un objeto persona - para JSON
-        var datosLogin= {  "email": email, "clave": clave };
+        // var datosLogin= { "email": email, "clave": clave };
 
         /*otra opcion*/
-        //var data = "nombre=" + encodeURIComponent(nombre) + "&apellido=" + encodeURIComponent(apellido);
-
-        xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = gestionarRespuestaLoginUsuario;
-        xhr.open('POST', "http://localhost:3000/loginUsuario", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
+        var datos = 'usr=' + encodeURIComponent(email) + '&pass=' + encodeURIComponent(clave);
+        xhr.responseType = 'text';
+        xhr.onreadystatechange = traerNoticias;
+        xhr.open('POST', 'http://localhost:3000/loginUsuario', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(datos);
         //Objeto transformando a JSON
-        var data = "usuario=" + JSON.stringify(datosLogin);
+        //var data =  JSON.stringify(datosLogin);
 
-        xhr.send(data);
+
+
     } else {
         alert("Falta cargar datos.");
     }
 
 }
 
-function gestionarRespuestaLoginUsuario() {
-    
-        var div = document.getElementById('rpta');
-    
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                div.innerHTML = responseText;
-                //si esta todo bien refresco la lista de personas
-                TraerPersonas();
-            } else {
-    
-                div.innerHTML = "Debe ingresar un email y un password valido";
-                document.getElementById("txtEmail").style.border = "red";
-                document.getElementById("txtClave").style.border = "red";
-            }
-        } else {
-            div.innerHTML = '<span>Algo esta pasando que no guarda los datos</span>';
+function traerNoticias() {
+
+
+
+    if (xhr.readyState == 4 && xhr.status == 200) {
+
+        respuesta = JSON.parse(xhr.responseText);
+        if (respuesta == false) {
+            alert("Usuario inválido!");
+        }
+        else {
+
+            req = new XMLHttpRequest();
+            req.responseType = 'text';
+            req.onreadystatechange = imprimirNoticias;
+            req.open('GET', 'http://localhost:3000/noticias', true);
+            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            req.send();
         }
     }
+}
+
+
+function mandarNoticia() {
+
+    varTema = document.getElementById("tema").value;
+    varTitulo = document.getElementById("titulo").value;
+    varNoticia = document.getElementById("noticia").value;
+    varEmail = "darioesteban21@hotmail.com"
+
+    xhr1 = new XMLHttpRequest();
+    xhr1.onreadystatechange = cerrarPopUp;
+    xhr1.open('POST', 'http://localhost:3000/nuevaNoticia', true);
+    xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var datos = 'tema=' + varTema + '&titulo=' + varTitulo + '&noticia=' + varNoticia + '&email=' + varEmail;
+    xhr1.send(datos);
+
+}
+
+
+
+function nuevaNoticia() {
+
+    popup.style.display = "block";
+
+}
+
+
+function imprimirNoticias() {
+
+    tcontentido = document.getElementById("contenido");
+    body = "";
+
+    if (req.readyState == 4 && req.status == 200) {
+        respuesta = JSON.parse(req.responseText);
+        respuesta.forEach(function (element) {
+            var noticia = '<br><h4>' + element.tema + '</h4><br><h3>' + element.titulo + '</h3><br><p>' + element.noticia + '<br><br>' + element.fecha + '</p><br><br>';
+            body += noticia;
+
+        }, this);
+
+        tcontentido.innerHTML = body;
+        ventana.style.display = "block";
+    }
+
+}
+
+function cerrarPopUp() {
+
+    req = new XMLHttpRequest();
+    req.responseType = 'text';
+    req.onreadystatechange = imprimirNoticias;
+    req.open('GET', 'http://localhost:3000/noticias', true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send()
+    popup.style.display = "none";
+}
+
+
+
+
+
 
 
 /*############################## ONLOAD #####################################################*/
 
-window.onload = function()
-{
-    //Boton guardar
-    var btnGuardar = document.getElementById("btnGuardar");
-    //Seteo un evento al btnGuardar
-    btnGuardar.addEventListener('click',function(){
-        GuardarServer();        
-    })
+addEventListener('load', () => {
 
-    //Boton modificar
-    var btnModificar = document.getElementById("btnModificar");
-    //Seteo un evento al btnModificar
-    btnModificar.addEventListener('click', function () {
-        ModificarServer();
-    })
+    btnLeer = document.getElementById("btnLogin");
+    btnLeer.addEventListener('click', enviar);
 
-    //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
-    TraerPersonas();
-    
-}
+    btnMostrarNoticias = document.getElementById("btnNoticia");
+    btnMostrarNoticias.addEventListener('click', mandarNoticia);
 
-function ValidarDatos(email,clave)
-{
-    if (usuario == '' && clave == '') {
-        
-                document.getElementById("txtEmail").style.border = "red";
-                document.getElementById("txtClave").style.border = "red";
-                return false;
-            } else if (email == '') {
-                document.getElementById("txtEmail").style.border = "red";
-                return false;
-            } else if (clave == '') {
-                document.getElementById("txtClave").style.border = "red";
-                return false;
-        
-            }
-        
-            return true;
-        
-            //  document.getElementById("myDiv").style.border = "thick solid #0000FF";
-        
+    btnNoticia = document.getElementById('btnNuevaNoticia');
+    btnNoticia.addEventListener('click', nuevaNoticia);
+
+
+    btnSalir = document.getElementById("btnSalir");
+    btnSalir.addEventListener('click', cerrarPopUp);
+
+});
+
+
+function ValidarDatos(email, clave) {
+    if (email == '' && clave == '') {
+
+        document.getElementById("usrStr").style.borderColor = "red";
+        document.getElementById("passStr").style.borderColor = "red";
+        return false;
+    } else if (email == '') {
+        document.getElementById("usrStr").style.borderColor = "red";
+        return false;
+    } else if (clave == '') {
+        document.getElementById("passSTr").style.borderColor = "red";
+        return false;
+
+    }
+
+    return true;
+
+    //  document.getElementById("myDiv").style.border = "thick solid #0000FF";
+
 }

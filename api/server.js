@@ -34,6 +34,7 @@ app.get("/loginUsuario",function(req,res){
     res.send("Debe ingresar Usuario y Contraseña");
     
 });
+
 app.get("/noticias",function(req,res){
    
  res.send(noticias);    

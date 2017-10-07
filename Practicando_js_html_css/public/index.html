@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="" href="css/estilos.css">
+    <script src="js/manejador.js"></script>
     <title>Formulario</title>
 </head>
 <header>
@@ -13,16 +14,19 @@
 </header>
 
 <body>
+        <input type="hidden"  id="hdIndice">
+      
     <fieldset>
         <legend>Ingrese usuario y clave</legend>
         <img src="img/820.gif" alt="">
         <div class="login">
             <label for="">Nombre</label>.<br>
-            <input type="text" id="txt" name="txtNombre" placeholder="ingrese nombre">.<br>
-            <label for="">Clave</label>.<br>
-            <input type="text" id="txt" name="txtClave" placeholder="ingrese clave">.<br>
+            <input type="text" id="txtNombre"  placeholder="ingrese nombre">.<br>
+            <label for="">Apellido</label>.<br>
+            <input type="text" id="txtApellido" placeholder="ingrese apellido">.<br>
             <br>
-            <input type="button" id="btnGuardar" name="" value="Guardar">
+            <input type="button" id="btnGuardar" value="Guardar">
+            <input type="button" id="btnModificar"  value="Modificar">
         </div>
     </fieldset>
     <div id="respuesta"></div>
@@ -30,20 +34,18 @@
     <h4>Lista de personas</h4>
 
 
-
     <table id="tabla" class="tabla">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Clave</th>
+                <th>Apellido</th>
                 <th>precio</th>
             </tr>
         </thead>
-        <tbody id="tbody">
+        <tbody id="tCuerpo">
 
         </tbody>
     </table>
-
 </body>
 
 

@@ -24,14 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.post('/agregarpersona', function (req, res) {
-   
-    //var nombre = req.body.nombre;
-    //var apellido = req.body.apellido;
-    var nuevaPersona = JSON.parse(req.body.persona);
-    //var nuevaPersona = {};
-    //nuevaPersona.nombre = nombre;
-    //nuevaPersona.apellido = apellido;
+    var nombre=req.body.nombre;
+    var apellido=req.body.apellido;
 
+    var nuevaPersona = {};
+    nuevaPersona.nombre = nombre;
+    nuevaPersona.apellido = apellido;
     Personas.push(nuevaPersona);    
 
     setTimeout(function() {
@@ -40,7 +38,7 @@ app.post('/agregarpersona', function (req, res) {
         
     }, 3000);
     
-    res.send('Alta exitosa ' + nuevaPersona.nombre + ' ' + nuevaPersona.apellido);       
+    res.send('Alta exitosa ' + nombre + ' ' + apellido);    
 });
 
 

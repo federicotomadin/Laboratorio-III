@@ -124,7 +124,7 @@ function TraerPersonas(){
     //Voy por GET a buscar a las personas
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = gestionarRespuestaTraerPersonas;
-    xhr.open('GET',"http://localhost:3000/traerpersonas", true);
+    xhr.open('GET','http://localhost:3000/traerpersonas', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send();
 }

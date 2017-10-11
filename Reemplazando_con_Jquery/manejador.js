@@ -7,18 +7,31 @@ var xhr;
 function GuardarServer(){
 
     //Tomo los valores del HTML
-    var nombre = document.getElementById('txtNombre').value;
-    var apellido = document.getElementById('txtApellido').value;
+    var nombre = $('#txtNombre');
+    var apellido = $('#txtApellido');
 
     if (ValidarDatos(nombre,apellido)){
 
         //Guardo en un objeto persona - para JSON
-        //var persona = { "nombre=" : nombre , "apellido=" : apellido };
+        var persona = { "nombre" : nombre , "apellido" : apellido };
 
         /*otra opcion*/
-        var data = "nombre:" + encodeURIComponent(nombre) + "&apellido:" + encodeURIComponent(apellido);
+        //var dataObject = "nombre=" + nombre + "&apellido=" +apellido;
 
-        xhr = new XMLHttpRequest();
+        $.ajax({
+            beforesend: function(){},
+            url: "http://localhost:3000/agregarpersona",
+            type: "post",
+            dataType: "html",
+            data: persona,
+            success:gestionarRespuestaGuardarServer,
+            cache: false,
+            error:function(jqXHR, textStatus, textError){ alert("error!!" + textStatus + textError)},
+            contentType: false,
+            processData: false         
+            });
+      
+      /*      xhr = new XMLHttpRequest();
         xhr.onreadystatechange = gestionarRespuestaGuardarServer;
         xhr.open('POST',"http://localhost:3000/agregarpersona",true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -29,27 +42,25 @@ function GuardarServer(){
         xhr.send(data);
     }else{
         alert("Falta cargar datos.");
-    }
+    }*/
 
     
 }
 //Respuesta al GuardarServer
-function gestionarRespuestaGuardarServer() {
+function gestionarRespuestaGuardarServer(respuesta) {
 
-    var div = document.getElementById('respuesta');
+    var div = $('#respuesta');
 
-    if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-            div.innerHTML = xhr.responseText; //SUCCESS function(responsText)
+            div.innerHTML = respuesta; //SUCCESS function(responsText)
             //Como esta todo bien, llamo asinconicamente a traer todos las personas del servidor
             TraerPersonas();
-        }
-        else {
+        
+     
 
             div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
         }
     }
-    else {
+   
 
         div.innerHTML = '<span>Algo pasa que sale por aca</span>';
     }
@@ -283,5 +294,3 @@ if(nombre=='' && apellido=='')
  
         return true;
 }
-
-

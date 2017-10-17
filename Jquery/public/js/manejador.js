@@ -1,7 +1,8 @@
-$(document).ready(function () {
+
+$(document).ready(function(){
     CargarLista();
     $("#btnAgregar").click(ManejadorBtn);
-});
+})
 
 //https://www.youtube.com/watch?v=kvlBmon98xg   
 function ManejadorBtn(index) {
@@ -22,15 +23,20 @@ function AgregarPersona() {
 
     var apellidoStr = $("#apellidoStr").val();
     var nombreStr = $("#nombreStr").val();
-    info = 'nombre=' + encodeURIComponent(nombreStr) + '&apellido=' + encodeURIComponent(apellidoStr);
+
+    if(ValidarDatos(apellidoStr,nombreStr))
+    {
+
+    info = "nombre=" + encodeURIComponent(nombreStr) + "&apellido=" + encodeURIComponent(apellidoStr);
 
     $.ajax({
         url: 'http://localhost:3000/agregarpersona',
         data: info,
         method: 'post',
-        dataType: 'json',     
+        dataType: 'json'    
     })
     CargarLista();
+}
 }
 
 
@@ -89,9 +95,7 @@ function CargarLista() {
     })
 }
 
-
 function BorrarJquery(index) {
-
     info = 'indice=' + encodeURIComponent(index);
     $.ajax({
         url: 'http://localhost:3000/eliminarpersona',
@@ -100,6 +104,26 @@ function BorrarJquery(index) {
         dataType: 'json',
     })
     CargarLista();
+}
+
+function ValidarDatos(nombre,apellido)
+{
+if(nombre=='' && apellido=='')
+    {
+        $('#nombreStr').css.borderColor="#FF0000 blue"
+        $('#apellidoStr').css.borderColor="#FF0000 blue"
+        return false;
+    } else if(nombre=='')
+    {
+        $('#nombreStr').style.borderColor="red";
+        return false;
+    } else if(apellido=='')
+    {
+        $('#apellidoStr').style.borderColor="red";
+        return false;
+    }
+ 
+        return true;
 }
 
 

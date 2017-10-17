@@ -79,7 +79,9 @@ function CargarLista() {
             for (i = 0; i < personas.length; i++) {
 
                 if (personas[i] == null) continue;
-                var cadena = "<tr><td>" + personas[i].nombre + "</td><td>" + personas[i].apellido + "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnAgregar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
+                var cadena = "<tr><td>" + personas[i].nombre + 
+                "</td><td>" + personas[i].apellido + 
+                "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnAgregar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
                 body += cadena;
             }
             $("#contenido").html(body);

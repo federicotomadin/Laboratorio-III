@@ -12,8 +12,10 @@
     <title>Bootstrap -Formulario Básico-</title>
 </head>
 
-<body>
-    <!-- controles soportados por Bootstrap (form-control)
+<div class="container">
+
+    <body>
+        <!-- controles soportados por Bootstrap (form-control)
          text
          password
          datetime
@@ -29,29 +31,38 @@
          tel
          color -->
 
-    <form action="#">
-        <label for="nombre">Nombre:</label>
-        <input type="text" class="" id="nombre" placeholder="Nombre">
+        <form action="#">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="time" class="form-control week" id="nombre" placeholder="Nombre">
+            </div>
 
-        <label for="opcion">Elige una opción:</label>
-        <select class="" name="" id="opcion">
-            <option value="">Opción #1</option>
-            <option value="">Opción #2</option>
-            <option value="">Opción #3</option>
-            <option value="">Opción #4</option>
-            <option value="">Opción #5</option>
-        </select>
+            <div>
+                <label for="opcion">Elige una opción:</label>
+                <select class="form-control" name="" id="opcion">
+                    <option value="">Opción #1</option>
+                    <option value="">Opción #2</option>
+                    <option value="">Opción #3</option>
+                    <option value="">Opción #4</option>
+                    <option value="">Opción #5</option>
+                </select>
+            </div>
+            <div>
+                <label for="mensaje">Mensaje:</label>
+                <textarea class="form-control" name="" id="mensaje" placeholder="Escribe tu mensaje:"></textarea>
+            </div>
 
-        <label for="mensaje">Mensaje:</label>
-        <textarea class="" name="" id="mensaje" placeholder="Escribe tu mensaje:"></textarea>
+            <div>
+                <label for="archivo">Archivo:</label>
+                <input type="file" id="archivo">
+            </div>
+            <p class="help-block">Máximo 50MB</p>
 
-        <label for="archivo">Archivo:</label>
-        <input type="file" id="archivo">
-        <p class="">Máximo 50MB</p>
+            <button class="btn btn-primary">Enviar</button>
 
-        <button class="">Enviar</button>
+        </form>
+    </body>
 
-    </form>
-</body>
+</div>
 
 </html>

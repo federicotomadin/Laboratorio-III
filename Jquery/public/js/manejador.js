@@ -63,6 +63,24 @@ function ModificarPersona(index) {
 
 }
 
+function TraerPersona()
+{
+   
+
+    $.ajax({
+
+    url:'http://localhost:3000/traerpersonas',
+    method: 'get',
+    dataType='json',
+    success: function(response)
+    {
+       
+    }
+
+
+    })
+}
+
 function ModificarJquery(index) {
 
     $("#btnAgregar").attr('value', 'Modificar');
@@ -87,7 +105,7 @@ function CargarLista() {
                 if (personas[i] == null) continue;
                 var cadena = "<tr><td>" + personas[i].nombre + 
                 "</td><td>" + personas[i].apellido + 
-                "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnAgregar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
+                "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnBorrar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
                 body += cadena;
             }
             $("#contenido").html(body);

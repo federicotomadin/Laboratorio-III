@@ -24,7 +24,7 @@ function AgregarPersona() {
     var apellidoStr = $("#apellidoStr").val();
     var nombreStr = $("#nombreStr").val();
 
-    if(ValidarDatos(apellidoStr,nombreStr))
+    if(ValidarDatos(nombreStr,apellidoStr))
     {
 
     info = "nombre=" + encodeURIComponent(nombreStr) + "&apellido=" + encodeURIComponent(apellidoStr);
@@ -63,27 +63,34 @@ function ModificarPersona(index) {
 
 }
 
-function TraerPersona()
+function TraerPersona(indice)
 {
    
+xhr =new XMLHttpRequest();
+xhr.onreadystatechange=gestionarRespuestaTraerPersona;
+xhr.open('get','traerpersona?indice='+indice,true);
+xhr.send();
 
-    $.ajax({
+}
 
-    url:'http://localhost:3000/traerpersonas',
-    method: 'get',
-    dataType='json',
-    success: function(response)
+function gestionarRespuestaTraerPersona()
+{
+    if(xhr.readyState==4)
     {
-       
+        if(xhr.status==200)
+        {
+            var persona=JSON.parse(xhr.responseText);
+            document.getElementById('nombreStr').value=persona.nombre;
+            document.getElementById('apellidoStr').value=persona.apellido;
+
+        }
     }
-
-
-    })
 }
 
 function ModificarJquery(index) {
 
     $("#btnAgregar").attr('value', 'Modificar');
+    TraerPersona(index);
     ManejadorBtn(index);
 }
 
@@ -128,16 +135,16 @@ function ValidarDatos(nombre,apellido)
 {
 if(nombre=='' && apellido=='')
     {
-        $('#nombreStr').css.borderColor="#FF0000 blue"
-        $('#apellidoStr').css.borderColor="#FF0000 blue"
+        $('#nombreStr').css("border-color","red");
+        $('#apellidoStr').css("border-color","red");
         return false;
     } else if(nombre=='')
     {
-        $('#nombreStr').style.borderColor="red";
+        $('#nombreStr').css("border-color","red");
         return false;
     } else if(apellido=='')
     {
-        $('#apellidoStr').style.borderColor="red";
+        $('#apellidoStr').css("border-color","red");
         return false;
     }
  

@@ -15,14 +15,14 @@ body
 .tabla 
 {
     font-family: arial, sans-serif;
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 100%;
     border: 3px;
   
 
 }
 
-td,th
+th
 {
     border: 1px solid #dddddd;
     text-align: center;

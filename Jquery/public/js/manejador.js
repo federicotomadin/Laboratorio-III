@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$(document).ready(function () {
     CargarLista();
     $("#btnAgregar").click(ManejadorBtn);
 })
@@ -21,71 +21,64 @@ function ManejadorBtn(index) {
 
 function AgregarPersona() {
 
-    var apellidoStr = $("#apellidoStr").val();
-    var nombreStr = $("#nombreStr").val();
+    var personaJson = { "nombre": $('#nombreStr').val(), "apellido": $('#apellidoStr').val() };
 
-    if(ValidarDatos(nombreStr,apellidoStr))
-    {
+    if (ValidarDatos($('#nombreStr').val(), $('#apellidoStr').val())) {
 
-    info = "nombre=" + encodeURIComponent(nombreStr) + "&apellido=" + encodeURIComponent(apellidoStr);
-
-    $.ajax({
-        url: 'http://localhost:3000/agregarpersona',
-        data: info,
-        method: 'post',
-        dataType: 'json'    
-    })
-    CargarLista();
-}
+        $.ajax({
+            url: 'http://localhost:3000/agregarpersona',
+            data: personaJson,
+            method: 'post',
+            dataType: 'json'
+        })
+        $("#nombreStr").val("");
+        $("#apellidoStr").val("");
+        CargarLista();
+    }
 }
 
 
 function ModificarPersona(index) {
-
-    var apellidoStr = $("#apellidoStr").val();
-    var nombreStr = $("#nombreStr").val();  
-
+ 
     varPersona = new Object();
-    varPersona.nombre = nombreStr;
-    varPersona.apellido = apellidoStr;
+    varPersona.nombre = $('#nombreStr').val();
+    varPersona.apellido = $('#apellidoStr').val();
 
-    info = 'indice=' + encodeURIComponent(index) + '&persona=' + encodeURIComponent(JSON.stringify(varPersona));
-
+     var personaJson = { "indice": index, "persona": JSON.stringify(varPersona) };
     $.ajax({
 
         url: 'http://localhost:3000/modificarpersona',
-        data: info,
+        data: personaJson,
         method: 'post',
-        dataType: 'json'        
+        dataType: 'json'
     })
     $("#btnAgregar").attr('value', 'Agregar');
+    $("#nombreStr").val("");
+    $("#apellidoStr").val("");
+    $("#respuesta").text("Modificado con exito");
+
     CargarLista();
 
 }
 
-function TraerPersona(indice)
-{
-   
-xhr =new XMLHttpRequest();
-xhr.onreadystatechange=gestionarRespuestaTraerPersona;
-xhr.open('get','traerpersona?indice='+indice,true);
-xhr.send();
+function TraerPersona(indice) {
 
-}
+   var persona="";
+    $.ajax({
 
-function gestionarRespuestaTraerPersona()
-{
-    if(xhr.readyState==4)
-    {
-        if(xhr.status==200)
+        url: 'http://localhost:3000/traerpersona?indice=' + indice,
+        method: 'get',
+        dataType: 'json',
+        success: function(response)
         {
-            var persona=JSON.parse(xhr.responseText);
-            document.getElementById('nombreStr').value=persona.nombre;
-            document.getElementById('apellidoStr').value=persona.apellido;
-
+         persona = response;
+         $('#nombreStr').val(persona.nombre);
+         $('#apellidoStr').val(persona.apellido);
         }
-    }
+    })
+
 }
+
 
 function ModificarJquery(index) {
 
@@ -110,9 +103,9 @@ function CargarLista() {
             for (i = 0; i < personas.length; i++) {
 
                 if (personas[i] == null) continue;
-                var cadena = "<tr><td>" + personas[i].nombre + 
-                "</td><td>" + personas[i].apellido + 
-                "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnBorrar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
+                var cadena = "<tr><td>" + personas[i].nombre +
+                    "</td><td>" + personas[i].apellido +
+                    "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnBorrar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
                 body += cadena;
             }
             $("#contenido").html(body);
@@ -131,24 +124,20 @@ function BorrarJquery(index) {
     CargarLista();
 }
 
-function ValidarDatos(nombre,apellido)
-{
-if(nombre=='' && apellido=='')
-    {
-        $('#nombreStr').css("border-color","red");
-        $('#apellidoStr').css("border-color","red");
+function ValidarDatos(nombre, apellido) {
+    if (nombre == '' && apellido == '') {
+        $('#nombreStr').css("border-color", "red");
+        $('#apellidoStr').css("border-color", "red");
         return false;
-    } else if(nombre=='')
-    {
-        $('#nombreStr').css("border-color","red");
+    } else if (nombre == '') {
+        $('#nombreStr').css("border-color", "red");
         return false;
-    } else if(apellido=='')
-    {
-        $('#apellidoStr').css("border-color","red");
+    } else if (apellido == '') {
+        $('#apellidoStr').css("border-color", "red");
         return false;
     }
- 
-        return true;
+
+    return true;
 }
 
 

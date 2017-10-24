@@ -12,7 +12,7 @@ function ManejadorBtn(index)
   {
     $('#btnAgregar').click(function()
     {
-     ModoficarPersona(index);
+     ModificarPersona(index);
     });
   }
   else 
@@ -22,18 +22,38 @@ function ManejadorBtn(index)
 
 }
 
-function AgregarPesona()
+function ModificarPersona(index)
 {
-    var nombre=$('#nombreStr').val();
-    var apellido=$('#apellidoStr').val();
+    var varPersona=new Object();
+    varPersona.nombre=$('#nombreStr').val();
+    varPersona.apellido=$('#apellidoStr').val();
 
-    if(validarDatos(nombre,apellido))
+    info= {'indice': index,'persona': JSON.stringify(varPersona)};
+
+    $.ajax({
+     url: 'http://localhost:3000/modificarpersona',
+     method: 'post',
+     data: info,
+     dataType: 'json'
+    })
+    $('#btnAgregar').attr('value','Agregar');
+    $('#nombreStr').val('');
+    $('#apellidoStr').val('');
+    CargarLista();
+
+}
+
+function AgregarPersona()
+{
+   
+    var personaJson={"nombre": $('#nombreStr').val() , "apellido":  $('#apellidoStr').val() };
+
+    if(ValidarDatos($('#nombreStr').val(),$('#apellidoStr').val()))
     {
-        info="nombre=" + encodeURIComponent(nombre) + "&apellido=" + encodeURIComponent(apellido);
-
+          
         $.ajax({
-         url:"http://localhost3000/agregarpersona",
-         data: info,
+         url:"http://localhost:3000/agregarpersona",
+         data: personaJson,
         method: 'post',
         dataType: 'json'
         })
@@ -41,13 +61,21 @@ function AgregarPesona()
     }
 
 }
+
+function ModificarJquery(index)
+{
+     $('#btnAgregar').attr('value','Modificar');
+     TraerPersona(index);
+     ManejadorBtn(index);
+}
+
 function CargarLista()
 {
     personas=[];
     var body="";
 
     $.ajax({
-    url: 'http://localhost3000/TraerPersonas',
+    url: 'http://localhost:3000/TraerPersonas',
     method: 'get',
     dataType:'json',
     success: function(response)
@@ -59,11 +87,28 @@ function CargarLista()
             if(personas[i]==null) continue;
             var cadena="<tr><td>"+ personas[i].nombre +
             "</td><td>" + personas[i].apellido + 
-            "</td><td><input type= 'button' onclick='borrarJquery(" + i + ")' id='btnBorrar' value='Borrar'></td><td><input type='button' onclick='ModificarQuery("+i+")' id='btnAgregar' value='Modificar'></tr>"
+            "</td><td><input type= 'button' onclick='BorrarJquery(" + i + ")' id='btnBorrar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery("+ i +")' id='btnAgregar' value='Modificar'></tr>"
             body+=cadena;
         }
         $('#contenido').html(body);
     }
+    })
+}
+
+function TraerPersona(index)
+{
+    var persona="";
+    $.ajax({
+    url: 'http://localhost:3000/traerpersona?indice='+ index,
+    method:'get',
+    dataType:'json',
+    success: function(response)
+    {
+        persona=response;
+        $('#nombreStr').val(persona.nombre);
+        $('#apellidoStr').val(persona.apellido);
+    }
+    
     })
 }
 
@@ -72,7 +117,7 @@ function BorrarJquery(index)
   info="indice=" + encodeURIComponent(index);
 
   $.ajax({
-   url: 'http://localhost3000/borrarpersona',
+   url: 'http://localhost:3000/eliminarpersona',
    data:info,
    method:'post',
    dataType:'json'

@@ -1,5 +1,5 @@
 
-///reference path='/node_modules/jquery/dis/jqeury.min.js'
+///<reference path="node_modules/jquery/dist/jquery.min.js"/>
 
 
 $(function(){

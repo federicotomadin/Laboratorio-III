@@ -5,7 +5,7 @@
 $(function(){
 
 
-$("#text").val("un valor");
+$("#txt").text("un valor");
 
 
 

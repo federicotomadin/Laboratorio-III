@@ -1,7 +1,6 @@
 {
-  "name": "api_rest",
+  "name": "y",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +10,17 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
-    "express": "^4.15.4"
-  }
+    "express": "^4.15.4",
+    "typescript": "^2.6.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federicotomadin/Laboratorio-III.git"
+  },
+  "bugs": {
+    "url": "https://github.com/federicotomadin/Laboratorio-III/issues"
+  },
+  "homepage": "https://github.com/federicotomadin/Laboratorio-III#readme",
+  "description": ""
 }

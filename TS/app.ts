@@ -10,6 +10,10 @@ $("#txt").val("un valor");
 console.log("hholaa");
 let variable:string = "probando";
 
+console.log(`HOla`)
+
+
+
 })
 
 //compilo con con tsc app

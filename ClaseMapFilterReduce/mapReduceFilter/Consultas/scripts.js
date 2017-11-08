@@ -17,6 +17,7 @@ soluciones.usuariosFemeninos = function(usuarios){
     .map(function(user){
         return user.nombre;
     });
+   
 }
 
 //console.log(soluciones.usuariosFemeninos(data));
@@ -24,10 +25,19 @@ soluciones.usuariosFemeninos = function(usuarios){
 // Retornar un array de strings (el email de los usuarios de sexo masculino)
 
 soluciones.mailsVarones = function(usuarios){
+    return usuarios.filter(function(user){
+          return user.genero==='Male';
+
+    })
+    .map(function(usr){
+      return user.email;
+   
+
+    })
    
 }
 
-//console.log(soluciones.mailsVarones(data));
+console.log(soluciones.mailsVarones(data));
 
 // Retornar un array de objetos que solo contengan las claves nombre, email y edad, de todos los usuarios mayores que 'edad'
 

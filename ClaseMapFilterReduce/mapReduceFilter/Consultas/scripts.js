@@ -83,25 +83,29 @@ soluciones.promedio = function(usuarios){
   var edadAcum=usuarios[0].edad;
   var cantidad=1;
 
-  usuarios.reduce(function(precio,actual){
+  usuarios.reduce(function(previo,actual){
 
    edadAcum+=actual.edad;
    cantidad+=1
 
    return actual;
 
-  })
+  });
 
     return (edadAcum /cantidad).toFixed(2);
 }
 
-console.log("Promedio edad usuarios " + soluciones.promedio(data));
+//console.log("Promedio edad usuarios " + soluciones.promedio(data));
 
 // Retornar el promedio de edad de los usuarios hombres (number)
 
 soluciones.promedioVarones = function(usuarios){
-   
-   
+   usuariosVarones= usuarios.filter(function(user){
+        return user.genero==='Male';
+    });
+    
+     return soluciones.promedio(usuariosVarones);
+
 }
 
 //console.log("Promedio edad Varones " + soluciones.promedioVarones(data));
@@ -109,7 +113,14 @@ soluciones.promedioVarones = function(usuarios){
  // Retornar el promedio de edad de los usuarios mujeres (number)
 
 soluciones.promedioMujeres = function(usuarios){
+    usuariosMujeres= usuarios.filter(function(user){
+
+        return user.genero==='Female';
+
+    });
+
+    return soluciones.promedio(usuariosMujeres);
    
 }
 
-//console.log("Promedio edad Mujeres " + soluciones.promedioMujeres(data));
+console.log("Promedio edad Mujeres " + soluciones.promedioMujeres(data));

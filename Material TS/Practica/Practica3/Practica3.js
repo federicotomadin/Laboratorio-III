@@ -1,20 +1,22 @@
 "use strict";
 // Objetos
-var batimovil = {
-    carroceria: "Negra",
-    modelo: "6x6",
-    antibalas: true,
-    pasajeros: 4
-};
-var bumblebee = {
-    carroceria: "Amarillo con negro",
-    modelo: "4x2",
-    antibalas: true,
-    pasajeros: 4,
-    disparar: function () {
-        console.log("Disparando");
+var otra = /** @class */ (function () {
+    function otra(carro, mod, anti, pasa) {
+        this.carroceria = carro;
+        this.modelo = mod;
+        this.antibalas = anti;
+        this.pasajeros = pasa;
     }
-};
+    otra.prototype.disparar = function () {
+        console.log("disparando");
+    };
+    return otra;
+}());
+var objeto = new otra("negra", "6x6", true, 4);
+objeto.disparar();
+var villano1 = new otra("negra", "6x6", false);
+var villano2 = new otra("Erik Magnus Lehnsherr", "6x6", false);
+var villanos = [villano1, villano2];
 // Villanos debe de ser un arreglo de objetos personalizados
 var villanos = [{
         nombre: "Lex Luthor",
@@ -29,8 +31,6 @@ var villanos = [{
         edad: undefined,
         mutante: true
     }];
-// Multiples tipos
-// cree dos tipos, uno para charles y otro para apocalipsis
 var charles = {
     poder: "psiquico",
     estatura: 1.78

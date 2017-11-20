@@ -2,14 +2,15 @@
 function enviarMision(man) {
     console.log(man.nombre);
 }
-var men;
-men.nombre = "lolo";
-men.peleasGanadas = 4;
+var men = {
+    nombre: "superheroe",
+    peleasGanadas: 5
+};
 enviarMision(men);
-var xmen2 = /** @class */ (function () {
-    function xmen2() {
+var xmen3 = /** @class */ (function () {
+    function xmen3() {
     }
-    return xmen2;
+    return xmen3;
 }());
 /*
 

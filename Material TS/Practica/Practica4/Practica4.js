@@ -1,26 +1,24 @@
 "use strict";
 // Crear interfaces
 // Cree una interfaz para validar el auto (el valor enviado por parametro)
-function conducirBatimovil(auto) {
+function conBatimovil(auto) {
     auto.encender = true;
     auto.velocidadMaxima = 100;
-    auto.acelear();
+    auto.acelerar();
 }
-var batimovil = {
+var Batimovil = {
     encender: false,
     velocidadMaxima: 0,
-    acelear: function () {
+    acelerar: function () {
         console.log("...... run!!!");
     }
 };
-// Cree una interfaz con que permita utilzar el siguiente objeto
-// utilizando propiedades opcionales
-var guason = {
+var Guason = {
     reir: true,
     comer: true,
     llorar: false
 };
-function reir(guason) {
+function Reir(guason) {
     if (guason.reir) {
         console.log("JAJAJAJA");
     }

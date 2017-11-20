@@ -14,7 +14,7 @@ function llamarBatman(llamar) {
         console.log("Batiseñal activada");
     }
 }
-llamarBatman();
+llamarBatman(true);
 // Rest?
 function unirheroes() {
     var personas = [];
@@ -28,3 +28,4 @@ function noHaceNada(numero, texto, booleano, arreglo) {
 }
 // Crear el tipo de funcion que acepte la funcion "noHaceNada"
 var noHaceNadaTampoco;
+noHaceNadaTampoco = noHaceNada(15, "texto", true, ["hola", "chau"]);

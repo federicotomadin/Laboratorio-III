@@ -1,12 +1,16 @@
 class Advanger{
-    private _nombre : String;
+    private _nombre : String|undefined;
     nombreRival : String;
     peleasGanadas : Number;
+
+
     constructor(peleas_ganadas:Number,nombre_rival:String,nombre?:String,){
-        this._nombre = nombre;
+
+        this._nombre=nombre;
         this.nombreRival = nombre_rival;
         this.peleasGanadas = peleas_ganadas;
     };
+
     mostrar():String{
         return `${this._nombre}, ${this.nombreRival}, ${this.peleasGanadas}`;
     }

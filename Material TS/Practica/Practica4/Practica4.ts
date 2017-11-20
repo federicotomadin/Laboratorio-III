@@ -1,16 +1,23 @@
 // Crear interfaces
 
-// Cree una interfaz para validar el auto (el valor enviado por parametro)
-function conducirBatimovil( auto ):void{
-  auto.encender = true;
-  auto.velocidadMaxima = 100;
-  auto.acelear();
+interface superheroe{
+     encender:boolean,
+     velocidadMaxima:number,
+     acelerar():void
+     
 }
 
-let batimovil = {
+// Cree una interfaz para validar el auto (el valor enviado por parametro)
+function conBatimovil( auto:superheroe ):void{
+  auto.encender = true;
+  auto.velocidadMaxima = 100;
+  auto.acelerar();
+}
+
+let Batimovil:superheroe = {
   encender:false,
   velocidadMaxima:0,
-  acelear(){
+  acelerar(){
     console.log("...... run!!!");
   }
 }
@@ -18,13 +25,21 @@ let batimovil = {
 // Cree una interfaz con que permita utilzar el siguiente objeto
 // utilizando propiedades opcionales
 
-let guason = {
+interface Pelicula{
+reir:boolean,
+comer:boolean,
+llorar?:boolean
+Reir():void;
+}
+
+
+let Guason:Pelicula = {
   reir: true,
   comer:true,
   llorar:false
 }
 
-function reir( guason ):void{
+function Reir( guason:Pelicula ):void{
   if( guason.reir ){
     console.log("JAJAJAJA");
   }

@@ -1,20 +1,25 @@
-interface Xmen{
+
+interface Xmenn{
     nombre:string,
     peleasGanadas:number
 }
 
-function enviarMision(man:Xmen){
+function enviarMision(man:Xmenn){
     console.log(man.nombre);
 }
 
-let men:Xmen 
-men.nombre = "lolo";
-men.peleasGanadas = 4;
+
+
+let men:Xmenn = { 
+     nombre:"superheroe",
+     peleasGanadas:5
+};
 enviarMision(men);
 
-class xmen2 implements Xmen{
-    public nombre: string;
-    public peleasGanadas: number;
+
+class xmen3 implements Xmenn{
+    nombre: string;
+    peleasGanadas: number;
     
 }
 

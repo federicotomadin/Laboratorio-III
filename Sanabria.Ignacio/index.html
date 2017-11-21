@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Segundo Parcial Laboratorio III</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+  <script src="persona.js"></script>
+  <script src="empleado.js"></script>
+  <script src="controladora.js"></script>
+  <script src="main.js"></script>
+    </head>
+    <body>
+        <div class="container">
+        <div class="row responsive-utilities-test visible-on">
+        <div class="col-xs-4 col-sm-4" style="background-color:lavender;">
+        <input type="hidden" id="indexModificar" >
+        <div class="form-group">
+          <label class="col-md-2 control-label">Nombre</label>
+          <div class="col-md-10">
+            <input type="text" id="nombre" name="nombre"/><input class="ch" type="checkbox" name="checkGroup[]" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Apellido</label>
+          <div class="col-md-10">
+            <input type="text" id="apellido" name="apellido" /><input class="ch" type="checkbox" name="checkGroup[]" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Edad</label>
+          <div class="col-md-10">
+            <input type="text" id="edad" name="edad" /><input class="ch" type="checkbox" name="checkGroup[]" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Legajo</label>
+          <div class="col-md-10">
+            <input type="text" id="legajo" name="legajo" /><input class="ch" type="checkbox" name="checkGroup[]" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Horario</label>
+          <div class="col-md-10">
+            <select id="horario" name="horario">
+              <option value="Mañana">Mañana</option>
+              <option value="Tarde">Tarde</option>
+              <option value="Noche">Noche</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="button" value="Agregar" class="btn btn-primary" onclick="main.agregar()"/>
+            <input type="button" value="Mostrar" class="btn btn-primary" onclick="main.mostrar()"/>
+            <input type="button" value="Filtrar por Horario" class="btn btn-default" onclick="main.filtrar()"/>
+            <input type="button" value="Promedio Por Horario" class="btn btn-default" onclick="main.promedioHorario()"/>
+            <div id="promedio"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8 col-sm-8" style="background-color:lavenderblush;">
+        <div id="divTabla">
+          tabla aqui...
+        </div>
+      </div>
+
+
+        </div>
+        </div>
+        </div><!-- cierre Container -->
+    </body>
+</html>

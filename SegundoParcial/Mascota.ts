@@ -1,4 +1,5 @@
-
+/// <reference path="Animal.ts" />
+        
 
 class Mascota extends Animal
 {

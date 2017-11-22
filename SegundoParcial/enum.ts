@@ -1,4 +1,7 @@
-enum Tipos{
+namespace clases{
+
+
+export enum Tipos{
     perro,
     gato,
     reptil,
@@ -6,3 +9,6 @@ enum Tipos{
     ave,
     pez
 }
+}
+
+

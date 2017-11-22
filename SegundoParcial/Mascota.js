@@ -9,21 +9,21 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Mascota = /** @class */ (function (_super) {
-    __extends(Mascota, _super);
-    function Mascota(nom, ed, cantPatas, identidad) {
-        var _this = _super.call(this) || this;
-        _this.nombre = nom;
-        _this.edad = ed;
-        _this.cantidad_patas = cantPatas;
-        _this.id = identidad;
-        return _this;
-    }
-    Mascota.prototype.MascotaJson = function () {
-        var json = _super.prototype.AnimalJson.call(this) + ("" + this.id);
-        return json;
-    };
-    return Mascota;
-}(Animal));
-var mascota = new Mascota("perro", 20, 4, 1);
-console.log(mascota);
+/// <reference path="Animal.ts" />
+var clases;
+(function (clases) {
+    var Mascota = /** @class */ (function (_super) {
+        __extends(Mascota, _super);
+        function Mascota(identidad, nom, ed, cantPatas) {
+            var _this = _super.call(this, nom, ed, cantPatas) || this;
+            _this.id = identidad;
+            return _this;
+        }
+        Mascota.prototype.MascotaJson = function () {
+            var json = _super.prototype.AnimalJson.call(this) + ("" + this.id);
+            return json;
+        };
+        return Mascota;
+    }(clases.Animal));
+    clases.Mascota = Mascota;
+})(clases || (clases = {}));

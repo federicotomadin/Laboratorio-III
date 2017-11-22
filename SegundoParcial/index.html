@@ -7,10 +7,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="Animal.js"></script>
-    <script src="Mascota.js"></script>
+    <script src="Mascota.js"></script><script src="enum.js"></script>
+    <script src="index.js"></script>
 </head>
 
 <body>
-    
+    <h1>Ingrese los datos de la mascota</h1>.<br>
+  <label for="">ID</label>.<input type="text" id="id">.<br>
+  <label for="">NOMBRE</label>.<input type="text" id="nombre">.<br>
+  <label for="">CANTIDAD DE PATAS</label>.<input type="text" id="cantidad_patas">.<br>
+  <label for="">EDAD</label>.<input type="text" id="edad">.<br>
+  <select name="" id="lista">
+  
+
+
+  </select>
+  <br>
+  <input type="button" id="CargarMascota" value="Cargar Mascota">
+
+
+  <section id="listado" class="container" style="padding-top: 45px;">
+    <h2>Listado de inscriptos</h2>
+    <div class="table-responsive">
+      <table class="table table-hover" id="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody id="tCuerpo">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
 </body>
 </html>

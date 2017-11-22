@@ -1,19 +1,19 @@
 /// <reference path="Animal.ts" />
-        
-
-class Mascota extends Animal
+namespace clases
+{
+    
+ export class Mascota extends clases.Animal
 {
    id:number;
 
    
 
-   constructor(nom:string,ed:number,cantPatas:number,identidad:number)
+   constructor(identidad:number,nom:string,ed:number,cantPatas:number)
    {
-       super();
-       this.nombre=nom;
-       this.edad=ed;
-       this.cantidad_patas=cantPatas;
+       super(nom,ed,cantPatas);
        this.id=identidad;
+
+       
    }
 
    public MascotaJson():string{
@@ -22,9 +22,7 @@ class Mascota extends Animal
 
    }
 }
-
-   let mascota:Mascota=new Mascota("perro",20,4,1);
-   console.log(mascota);
+}
 
 
  

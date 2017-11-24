@@ -37,11 +37,10 @@ $(document).ready(function(){
 });
 
 function agregar() {
-  var txtNombre = $('#nombre');
-  var txtApellido = $('#apellido');
+  var txtNombre = $('#nombre').val();
+  var txtApellido = $('#apellido').val();
 
-  var nombre = txtNombre.val();
-  var apellido = txtApellido.val();
+
   if (nombre == ""){
     txtNombre.addClass("error");
     alert("Debe ingresar un nombre");

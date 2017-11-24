@@ -1,6 +1,8 @@
 
 /// <reference path="enum.ts" />
 /// <reference path="Mascota.ts" />
+/// <reference path="node_modules/jquery/dist/jquery.min.js" />
+
 
 
 $(document).ready(function(){

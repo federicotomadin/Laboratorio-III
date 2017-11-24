@@ -1,6 +1,14 @@
 "use strict";
 ///<reference path="persona.ts" />
 ///<reference path="empleado.ts" />
+$(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+});
 var Controladora = /** @class */ (function () {
     function Controladora() {
     }
@@ -32,6 +40,7 @@ var Controladora = /** @class */ (function () {
             localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
             Controladora.LimpiarForm();
         }
+        Controladora.MostrarEmpleados();
     };
     Controladora.LimpiarForm = function () {
         document.getElementById("nombre").value = "";

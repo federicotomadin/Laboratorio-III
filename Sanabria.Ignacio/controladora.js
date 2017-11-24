@@ -2,22 +2,23 @@
 ///<reference path="persona.ts" />
 ///<reference path="empleado.ts" />
 $(document).ready(function () {
-    $("#myInput").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-        });
-    });
+    /* $("#myInput").on("keyup", function() {
+     var value = $(this).val().toLowerCase();
+     $("#divTabla").filter(function() {
+       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)*/
+    Controladora.MostrarEmpleados();
 });
+/* });
+});*/
 var Controladora = /** @class */ (function () {
     function Controladora() {
     }
     Controladora.AgregarEmpleado = function () {
-        var nombre = document.getElementById("nombre").value;
-        var apellido = document.getElementById("apellido").value;
-        var horario = document.getElementById("horario").value;
-        var edad = Number(document.getElementById("edad").value);
-        var legajo = Number(document.getElementById("legajo").value);
+        var nombre = $("#nombre").val();
+        var apellido = $("#apellido").val();
+        var horario = $("#horario").val();
+        var edad = Number($("#edad").val());
+        var legajo = Number($("#legajo").val());
         var empleadosStorage = localStorage.getItem("Empleados");
         var arrayEmpleados = Array();
         var empleadoNuevo = new Empleado(nombre, apellido, edad, horario, legajo);
@@ -27,7 +28,7 @@ var Controladora = /** @class */ (function () {
             localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
         }
         else {
-            var index = document.getElementById("indexModificar").value;
+            var index = $("#indexModificar").val();
             arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
             if (index !== "") {
                 var i = Number(index);
@@ -43,17 +44,17 @@ var Controladora = /** @class */ (function () {
         Controladora.MostrarEmpleados();
     };
     Controladora.LimpiarForm = function () {
-        document.getElementById("nombre").value = "";
-        document.getElementById("apellido").value = "";
-        document.getElementById("edad").value = "";
-        document.getElementById("horario").value = "Mañana";
-        document.getElementById("legajo").value = "";
-        document.getElementById("indexModificar").value = "";
+        $("#nombre").val("");
+        $("#apellido").val("");
+        $("#edad").val("");
+        $("#horario").val("Mañana");
+        $("#legajo").val("");
+        $("#indexModificar").val("");
     };
     Controladora.MostrarEmpleados = function () {
         var stringTabla;
-        stringTabla = "<table class='table'><thead><tr><th>NOMBRE</th>" +
-            "<th>APELLIDO</th><th>EDAD</th><th>LEGAJO</th><th>HORARIO</th><th>ACCION</th></tr>";
+        stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>NOMBRE</th>" +
+            "<th>APELLIDO</th><th>EDAD</th><th>LEGAJO</th><th>HORARIO</th><th>ACCION</th></tr></thead>";
         var valoresTabla = " ";
         var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
         for (var i = 0; i < arrayEmpleados.length; i++) {
@@ -63,7 +64,7 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "<td>" + arrayEmpleados[i].edad + "</td>";
             valoresTabla += "<td>" + arrayEmpleados[i].legajo + "</td>";
             valoresTabla += "<td>" + arrayEmpleados[i].horario + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><br><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
         document.getElementById("divTabla").innerHTML = stringTabla + valoresTabla;
@@ -76,18 +77,18 @@ var Controladora = /** @class */ (function () {
     };
     Controladora.ModificarEmpleado = function (index) {
         var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
-        document.getElementById("nombre").value = arrayEmpleados[index].nombre;
-        document.getElementById("apellido").value = arrayEmpleados[index].apellido;
-        document.getElementById("edad").value = arrayEmpleados[index].edad;
-        document.getElementById("horario").value = arrayEmpleados[index].horario;
-        document.getElementById("legajo").value = arrayEmpleados[index].legajo;
-        document.getElementById("indexModificar").value = index.toString();
+        $("#nombre").val(arrayEmpleados[index].nombre);
+        $("#apellido").val(arrayEmpleados[index].apellido);
+        $("#edad").val(arrayEmpleados[index].edad);
+        $("#horario").val(arrayEmpleados[index].horario);
+        $("#legajo").val(arrayEmpleados[index].legajo);
+        $("#indexModificar").val(index.toString());
     };
     Controladora.FiltrarPorHorario = function () {
         var filtro;
-        filtro = document.getElementById("horario").value;
+        filtro = $("#horario").val();
         var stringTabla;
-        stringTabla = "<table class='table'><thead><tr><th>NOMBRE</th>" +
+        stringTabla = "<table class='table table-bordered'><thead><tr><th>NOMBRE</th>" +
             "<th>APELLIDO</th><th>EDAD</th><th>LEGAJO</th><th>HORARIO</th></tr>";
         var valoresTabla = " ";
         var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
@@ -104,11 +105,11 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "<td>" + EmpleadosFiltrados[i].horario + "</td>";
             valoresTabla += "</tr>";
         }
-        document.getElementById("divTabla").innerHTML = stringTabla + valoresTabla;
+        $("#divTabla").html(stringTabla + valoresTabla);
     };
     Controladora.PromedioEdadPorHorario = function () {
         var filtro;
-        filtro = document.getElementById("horario").value;
+        filtro = $("#horario").val();
         var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
         var EmpleadosFiltrados;
         EmpleadosFiltrados = arrayEmpleados.filter(function (elemento) {
@@ -123,7 +124,7 @@ var Controladora = /** @class */ (function () {
         console.log(promedio);
         var stringPromedio;
         stringPromedio = "<input type='text' value=" + promedio + " />";
-        document.getElementById("promedio").innerHTML = stringPromedio;
+        $("#promedio").html(stringPromedio);
     };
     return Controladora;
 }());

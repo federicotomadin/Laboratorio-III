@@ -7,7 +7,7 @@
 $(document).ready(function(){
 
 
-       Controladora.MostrarMascotas();
+      Controladora.MostrarMascotas();
        Controladora.CargarSelect();
      });
 
@@ -70,8 +70,21 @@ public static MostrarMascotas()
     let stringTabla : string;
     stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>"+
     "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+    
     let valoresTabla = " ";
-    if($("#chID").is(":checked"))
+    let arrayMascotas :Array<clases.Mascota> = JSON.parse(localStorage.getItem("Mascotas"));
+    for(let i = 0;i<arrayMascotas.length;i++)
+    {
+        valoresTabla += "<tr>";
+        valoresTabla += "<td>"+arrayMascotas[i].id+"</td>";
+        valoresTabla += "<td>"+arrayMascotas[i].nombre+"</td>";
+        valoresTabla += "<td>"+arrayMascotas[i].edad+"</td>";
+        valoresTabla += "<td>"+arrayMascotas[i].cantidad_patas+"</td>";
+        valoresTabla += "<td>"+arrayMascotas[i].tipo+"</td>";
+        valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
+        valoresTabla += "</tr>";
+    }
+   /* if($("#chID").is(":checked"))
     {
        let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
                return   (elemeto.id);
@@ -104,27 +117,17 @@ public static MostrarMascotas()
         valoresTabla += "</tr>";
      }
      $("#divTabla").html(stringTabla + valoresTabla);
-    }
+    }*/
 
-    let arrayMascotas :Array<JSON> = JSON.parse(localStorage.getItem("Mascotas"));
-    for(let i = 0;i<arrayMascotas.length;i++)
-    {
-        valoresTabla += "<tr>";
-        valoresTabla += "<td>"+arrayMascotas[i].id+"</td>";
-        valoresTabla += "<td>"+arrayMascotas[i].nombre+"</td>";
-        valoresTabla += "<td>"+arrayMascotas[i].edad+"</td>";
-        valoresTabla += "<td>"+arrayMascotas[i].cantidad_patas+"</td>";
-        valoresTabla += "<td>"+arrayMascotas[i].tipo+"</td>";
-        valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
-        valoresTabla += "</tr>";
-    }
+   
+   
 
   
     $("#divTabla").html(stringTabla + valoresTabla);
 }
 
 public static EliminarEmpleado(index:number):void{
-   let arrayMascotas: Array<clases.Mascota>=JSON.parse(localStorage.getItem("Mascotas"));
+   let arrayMascotas: Array<JSON>=JSON.parse(localStorage.getItem("Mascotas"));
    arrayMascotas.splice(index,1);
    localStorage.setItem("Mascotas",JSON.stringify(arrayMascotas));
    Controladora.MostrarMascotas();

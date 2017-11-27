@@ -49,36 +49,43 @@ var Controladora = /** @class */ (function () {
         var stringTabla;
         stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
             "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+        console.log("estoy aca");
         var valoresTabla = " ";
-        if ($("#chID").is(":checked")) {
-            var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
-                return (elemeto.id);
-            });
-            var stringTabla_1 = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
-            var valoresTable = "";
-            for (var i = 0; i < arrayMapMascotas.length; i++) {
-                valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-                valoresTabla += "</tr>";
-            }
-            $("#divTabla").html(stringTabla_1 + valoresTabla);
-        }
-        if ($("#chNombre").is(":checked")) {
-            var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
-                return (elemeto.id);
-            });
-            var stringTabla_2 = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Nombre</th><th>ACCION</th></tr></thead>";
-            var valoresTable = "";
-            for (var i = 0; i < arrayMapMascotas.length; i++) {
-                valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayMascotas[i].nombre + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-                valoresTabla += "</tr>";
-            }
-            $("#divTabla").html(stringTabla_2 + valoresTabla);
-        }
         var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        /* if($("#chID").is(":checked"))
+         {
+            let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
+                    return   (elemeto.id);
+     
+             });
+          let stringTabla:string="<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
+          let valoresTable="";
+          for(let i=0;i<arrayMapMascotas.length;i++)
+          {
+             valoresTabla += "<tr>";
+             valoresTabla += "<td>"+arrayMascotas[i].id+"</td>";
+             valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
+             valoresTabla += "</tr>";
+          }
+          $("#divTabla").html(stringTabla + valoresTabla);
+         }
+         if($("#chNombre").is(":checked"))
+         {
+            let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
+                    return   (elemeto.id);
+     
+             });
+          let stringTabla:string="<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Nombre</th><th>ACCION</th></tr></thead>";
+          let valoresTable="";
+          for(let i=0;i<arrayMapMascotas.length;i++)
+          {
+             valoresTabla += "<tr>";
+             valoresTabla += "<td>"+arrayMascotas[i].nombre+"</td>";
+             valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
+             valoresTabla += "</tr>";
+          }
+          $("#divTabla").html(stringTabla + valoresTabla);
+         }*/
         for (var i = 0; i < arrayMascotas.length; i++) {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";

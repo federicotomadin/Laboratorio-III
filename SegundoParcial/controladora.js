@@ -2,7 +2,7 @@
 /// <reference path="Animal.ts" />
 /// <reference path="Mascota.ts" />
 $(document).ready(function () {
-    Controladora.MostrarMascotas();
+    alert("Bienvenido al sistema");
     Controladora.CargarSelect();
 });
 var Controladora = /** @class */ (function () {
@@ -17,26 +17,26 @@ var Controladora = /** @class */ (function () {
         var MascotasStorage = localStorage.getItem("Mascotas");
         var arrayMascotas = Array();
         var ObjetoMascota = new clases.Mascota(id, nombre, edad, cantidad_patas, tipo);
-        if (MascotasStorage == null) {
-            console.log("esoty aca");
-            arrayMascotas = new Array();
-            arrayMascotas.push(ObjetoMascota);
-            localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
+        /*  if (MascotasStorage == null) {
+  
+              console.log("agregar");
+              arrayMascotas = new Array<clases.Mascota>();
+              arrayMascotas.push(ObjetoMascota);
+              localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
+  
+          }*/
+        //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
+        var index = $("#indexModificar").val();
+        arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        if (index !== "") {
+            var i = Number(index);
+            //  console.log("Mascota a modificar");
+            //console.log(arrayMascotas[i]);
+            arrayMascotas.splice(i, 1);
         }
-        else {
-            //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
-            var index = $("#indexModificar").val();
-            arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
-            if (index !== "") {
-                var i = Number(index);
-                console.log("Empleado a modificar");
-                console.log(arrayMascotas[i]);
-                arrayMascotas.splice(i, 1);
-            }
-            arrayMascotas.push(ObjetoMascota);
-            localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
-            Controladora.LimpiarForm();
-        }
+        arrayMascotas.push(ObjetoMascota);
+        localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
+        Controladora.LimpiarForm();
         Controladora.MostrarMascotas();
     };
     Controladora.LimpiarForm = function () {
@@ -62,37 +62,82 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarMascota(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarMascota(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
-        if ($("#chID").is(":checked")) {
-            var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
-                return (elemeto.id);
-            });
-            var stringTabla_1 = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
-            var valoresTable = "";
-            for (var i = 0; i < arrayMapMascotas.length; i++) {
-                valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-                valoresTabla += "</tr>";
-            }
-            $("#divTabla").html(stringTabla_1 + valoresTabla);
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    //------------------------------PROMEDIO --------------------------------------------------//
+    Controladora.PromedioPatas = function () {
+        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        var total = 0;
+        var suma = arrayMascotas.reduce(function (total, elemento) {
+            return total += elemento.cantidad_patas;
+        }, 0);
+        $("#promedio").html(String((suma / arrayMascotas.length)));
+    };
+    //----------------------------- CARGA SELECT --------------------------------------//
+    Controladora.CargarSelect = function () {
+        for (var i = 0; i < 6; i++) {
+            $("#Tipo").append(new Option(clases.Tipos[i]));
         }
-        /* if($("#chNombre").is(":checked"))
-         {
-            let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
-                    return   (elemeto.id);
-     
-             });
-          let stringTabla:string="<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Nombre</th><th>ACCION</th></tr></thead>";
-          let valoresTable="";
-          for(let i=0;i<arrayMapMascotas.length;i++)
-          {
-             valoresTabla += "<tr>";
-             valoresTabla += "<td>"+arrayMascotas[i].nombre+"</td>";
-             valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
-             valoresTabla += "</tr>";
-          }
-          $("#divTabla").html(stringTabla + valoresTabla);
-         }*/
+    };
+    //--------------------------------  FILTROS  -----------------------------------//
+    Controladora.FiltroColID = function () {
+        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
+            return (elemeto.id);
+        });
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
+        for (var i = 0; i < arrayMapMascotas.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    Controladora.FiltroColNombre = function () {
+        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
+            return (elemeto.nombre);
+        });
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Nombre</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
+        for (var i = 0; i < arrayMapMascotas.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMascotas[i].nombre + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    Controladora.FiltroColEdad = function () {
+        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
+            return (elemeto.edad);
+        });
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Edad</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
+        for (var i = 0; i < arrayMapMascotas.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMascotas[i].edad + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    Controladora.FiltroColCantidadPatas = function () {
+        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+        var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
+            return (elemeto.cantidad_patas);
+        });
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Cantidad de Patas</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
+        for (var i = 0; i < arrayMapMascotas.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMascotas[i].cantidad_patas + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
     Controladora.EliminarMascota = function (index) {
@@ -108,6 +153,7 @@ var Controladora = /** @class */ (function () {
         $("#Edad").val(arrayMascotas[index].edad);
         $("#CantidadPatas").val(arrayMascotas[index].cantidad_patas);
         $("#Tipo").val(arrayMascotas[index].tipo);
+        $("#indexModificar").val(index.toString());
     };
     Controladora.FiltrarPorTipo = function () {
         var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
@@ -127,19 +173,6 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "</tr>";
         }
         $("#divTabla").html(stringTabla + valoresTabla);
-    };
-    Controladora.PromedioPatas = function () {
-        var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
-        var total = 0;
-        var suma = arrayMascotas.reduce(function (total, elemento) {
-            return total += elemento.cantidad_patas;
-        }, 0);
-        $("#promedio").html(String((suma / arrayMascotas.length)));
-    };
-    Controladora.CargarSelect = function () {
-        for (var i = 0; i < 6; i++) {
-            $("#Tipo").append(new Option(clases.Tipos[i]));
-        }
     };
     return Controladora;
 }());

@@ -22,26 +22,30 @@ class Controladora
      let nombre=String($("#Nombre").val());
      let edad=Number($("#Edad").val());
      let tipo=String($("#Tipo").val());
-     let cantidad_patas=Number($("#cantidad_patas").val());
+     let cantidad_patas=Number($("#CantidadPatas").val());
      let MascotasStorage = localStorage.getItem("Mascotas");
      let arrayMascotas = Array<clases.Mascota>();
-     let ObjetoMascota:clases.Mascota=new clases.Mascota(id,nombre,edad,cantidad_patas,tipo);     
+     let ObjetoMascota:clases.Mascota=new clases.Mascota(id,nombre,edad,cantidad_patas,tipo); 
+     console.log("es");
      if(MascotasStorage == null)
      {
+         console.log("esoty aca");
          arrayMascotas = new Array<clases.Mascota>();
          arrayMascotas.push(ObjetoMascota);
          localStorage.setItem("Mascotas",JSON.stringify(arrayMascotas));
+       
      }
      else
      {
+
         //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
          let index:string = $("#indexModificar").val();
           arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
           if(index !== "")
         {
             let i:number = Number(index);
-        //    console.log("Empleado a modificar");
-          //  console.log(arrayMascotas[i]);
+           console.log("Empleado a modificar");
+         console.log(arrayMascotas[i]);
             arrayMascotas.splice(i,1);
 
         }          
@@ -65,14 +69,16 @@ public static LimpiarForm()
 }
 
 
-public static MostrarMascotas()
+public static MostrarMascotas():void
 {
+   
     let stringTabla : string;
-    stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>"+
+    stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>"+
     "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
-    
+  
     let valoresTabla = " ";
     let arrayMascotas :Array<clases.Mascota> = JSON.parse(localStorage.getItem("Mascotas"));
+  
     for(let i = 0;i<arrayMascotas.length;i++)
     {
         valoresTabla += "<tr>";
@@ -81,10 +87,12 @@ public static MostrarMascotas()
         valoresTabla += "<td>"+arrayMascotas[i].edad+"</td>";
         valoresTabla += "<td>"+arrayMascotas[i].cantidad_patas+"</td>";
         valoresTabla += "<td>"+arrayMascotas[i].tipo+"</td>";
-        valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
+        valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarMascota("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarMascota("+i+")'>Modificar</button>"+"</td>";
         valoresTabla += "</tr>";
     }
-   /* if($("#chID").is(":checked"))
+
+  
+    if($("#chID").is(":checked"))
     {
        let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
                return   (elemeto.id);
@@ -101,7 +109,7 @@ public static MostrarMascotas()
      }
      $("#divTabla").html(stringTabla + valoresTabla);
     }
-    if($("#chNombre").is(":checked"))
+   /* if($("#chNombre").is(":checked"))
     {
        let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
                return   (elemeto.id);
@@ -121,12 +129,10 @@ public static MostrarMascotas()
 
    
    
-
-  
     $("#divTabla").html(stringTabla + valoresTabla);
 }
 
-public static EliminarEmpleado(index:number):void{
+public static EliminarMascota(index:number):void{
    let arrayMascotas: Array<JSON>=JSON.parse(localStorage.getItem("Mascotas"));
    arrayMascotas.splice(index,1);
    localStorage.setItem("Mascotas",JSON.stringify(arrayMascotas));
@@ -134,7 +140,7 @@ public static EliminarEmpleado(index:number):void{
 
 }
 
-public static ModificarMascotas(index:number):void
+public static ModificarMascota(index:number):void
 { 
 let arrayMascotas: Array<clases.Mascota>=JSON.parse(localStorage.getItem("Mascotas"));
 $("#ID").val(arrayMascotas[index].id);
@@ -142,6 +148,7 @@ $("#Nombre").val(arrayMascotas[index].nombre);
 $("#Edad").val(arrayMascotas[index].edad);
 $("#CantidadPatas").val(arrayMascotas[index].cantidad_patas);
 $("#Tipo").val(arrayMascotas[index].tipo);
+$("#indexModificar").val(index.toString());
 
 }
 

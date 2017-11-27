@@ -13,11 +13,12 @@ var Controladora = /** @class */ (function () {
         var nombre = String($("#Nombre").val());
         var edad = Number($("#Edad").val());
         var tipo = String($("#Tipo").val());
-        var cantidad_patas = Number($("#cantidad_patas").val());
+        var cantidad_patas = Number($("#CantidadPatas").val());
         var MascotasStorage = localStorage.getItem("Mascotas");
         var arrayMascotas = Array();
         var ObjetoMascota = new clases.Mascota(id, nombre, edad, cantidad_patas, tipo);
         if (MascotasStorage == null) {
+            console.log("esoty aca");
             arrayMascotas = new Array();
             arrayMascotas.push(ObjetoMascota);
             localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
@@ -28,8 +29,8 @@ var Controladora = /** @class */ (function () {
             arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
             if (index !== "") {
                 var i = Number(index);
-                //    console.log("Empleado a modificar");
-                //  console.log(arrayMascotas[i]);
+                console.log("Empleado a modificar");
+                console.log(arrayMascotas[i]);
                 arrayMascotas.splice(i, 1);
             }
             arrayMascotas.push(ObjetoMascota);
@@ -47,29 +48,35 @@ var Controladora = /** @class */ (function () {
     };
     Controladora.MostrarMascotas = function () {
         var stringTabla;
-        stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
             "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
-        console.log("estoy aca");
         var valoresTabla = " ";
         var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
-        /* if($("#chID").is(":checked"))
-         {
-            let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
-                    return   (elemeto.id);
-     
-             });
-          let stringTabla:string="<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
-          let valoresTable="";
-          for(let i=0;i<arrayMapMascotas.length;i++)
-          {
-             valoresTabla += "<tr>";
-             valoresTabla += "<td>"+arrayMascotas[i].id+"</td>";
-             valoresTabla += "<td>"+"<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado("+i+")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado("+i+")'>Modificar</button>"+"</td>";
-             valoresTabla += "</tr>";
-          }
-          $("#divTabla").html(stringTabla + valoresTabla);
-         }
-         if($("#chNombre").is(":checked"))
+        for (var i = 0; i < arrayMascotas.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
+            valoresTabla += "<td>" + arrayMascotas[i].nombre + "</td>";
+            valoresTabla += "<td>" + arrayMascotas[i].edad + "</td>";
+            valoresTabla += "<td>" + arrayMascotas[i].cantidad_patas + "</td>";
+            valoresTabla += "<td>" + arrayMascotas[i].tipo + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarMascota(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarMascota(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
+        if ($("#chID").is(":checked")) {
+            var arrayMapMascotas = arrayMascotas.map(function (elemeto) {
+                return (elemeto.id);
+            });
+            var stringTabla_1 = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
+            var valoresTable = "";
+            for (var i = 0; i < arrayMapMascotas.length; i++) {
+                valoresTabla += "<tr>";
+                valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
+                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+                valoresTabla += "</tr>";
+            }
+            $("#divTabla").html(stringTabla_1 + valoresTabla);
+        }
+        /* if($("#chNombre").is(":checked"))
          {
             let arrayMapMascotas  = arrayMascotas.map(function(elemeto){
                     return   (elemeto.id);
@@ -86,25 +93,15 @@ var Controladora = /** @class */ (function () {
           }
           $("#divTabla").html(stringTabla + valoresTabla);
          }*/
-        for (var i = 0; i < arrayMascotas.length; i++) {
-            valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
-            valoresTabla += "<td>" + arrayMascotas[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayMascotas[i].edad + "</td>";
-            valoresTabla += "<td>" + arrayMascotas[i].cantidad_patas + "</td>";
-            valoresTabla += "<td>" + arrayMascotas[i].tipo + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-            valoresTabla += "</tr>";
-        }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
-    Controladora.EliminarEmpleado = function (index) {
+    Controladora.EliminarMascota = function (index) {
         var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
         arrayMascotas.splice(index, 1);
         localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
         Controladora.MostrarMascotas();
     };
-    Controladora.ModificarMascotas = function (index) {
+    Controladora.ModificarMascota = function (index) {
         var arrayMascotas = JSON.parse(localStorage.getItem("Mascotas"));
         $("#ID").val(arrayMascotas[index].id);
         $("#Nombre").val(arrayMascotas[index].nombre);

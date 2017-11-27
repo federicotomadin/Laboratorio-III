@@ -54,6 +54,7 @@ class Controladora {
           Controladora.MostrarMascotas();
     }
 
+
     public static LimpiarForm() {
         $("#ID").val("");
         $("#Nombre").val("");
@@ -143,7 +144,7 @@ class Controladora {
             for (let i = 0; i < arrayMapMascotas.length; i++) {
                 valoresTabla += "<tr>";
                 valoresTabla += "<td>" + arrayMascotas[i].id + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarMascota(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarMascota(" + i + ")'>Modificar</button>" + "</td>";
                 valoresTabla += "</tr>";
             }
             $("#divTabla").html(stringTabla + valoresTabla);

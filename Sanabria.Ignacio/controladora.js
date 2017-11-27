@@ -14,28 +14,35 @@ var Controladora = /** @class */ (function () {
     function Controladora() {
     }
     Controladora.AgregarEmpleado = function () {
+        //tomo los datos
         var nombre = $("#nombre").val();
         var apellido = $("#apellido").val();
         var horario = $("#horario").val();
         var edad = Number($("#edad").val());
         var legajo = Number($("#legajo").val());
+        //creo el localstorage Empleados
         var empleadosStorage = localStorage.getItem("Empleados");
+        //defino un array para guardar el bojeto
         var arrayEmpleados = Array();
+        //creo el objeto con las variables traidas el html
         var empleadoNuevo = new Empleado(nombre, apellido, edad, horario, legajo);
+        //si el lugar en el array esta vacio, si es que no lo estoy modificando, instancion un nuevo
+        //array y pusheo el objeto, despues lo mando al local storage como string en JSON 
+        //ese obeto convertido en array.
         if (empleadosStorage == null) {
             arrayEmpleados = new Array();
             arrayEmpleados.push(empleadoNuevo);
             localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
         }
         else {
+            //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
             var index = $("#indexModificar").val();
             arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
             if (index !== "") {
                 var i = Number(index);
-                console.log("Empleado a modificar");
-                console.log(arrayEmpleados[i]);
+                //    console.log("Empleado a modificar");
+                //  console.log(arrayEmpleados[i]);
                 arrayEmpleados.splice(i, 1);
-                localStorage.clear();
             }
             arrayEmpleados.push(empleadoNuevo);
             localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
@@ -124,7 +131,7 @@ var Controladora = /** @class */ (function () {
         console.log(promedio);
         var stringPromedio;
         stringPromedio = "<input type='text' value=" + promedio + " />";
-        $("#promedio").html(stringPromedio);
+        $("#promedio").html(String(promedio));
     };
     return Controladora;
 }());

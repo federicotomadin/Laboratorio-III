@@ -1,4 +1,4 @@
-class Persona
+ class Persona
 {
     public nombre : string;
     public apellido : string;

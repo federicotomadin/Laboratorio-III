@@ -18,14 +18,21 @@ $(document).ready(function(){
 class Controladora
 {
     public static AgregarEmpleado() : void{
+        //tomo los datos
         let nombre : string = $("#nombre").val();
         let apellido : string = $("#apellido").val();
         let horario : string = $("#horario").val();
         let edad : number = Number($("#edad").val());
         let legajo : number = Number($("#legajo").val());
+        //creo el localstorage Empleados
         let empleadosStorage = localStorage.getItem("Empleados");
+        //defino un array para guardar el bojeto
         let arrayEmpleados = Array<Empleado>();
+        //creo el objeto con las variables traidas el html
         let empleadoNuevo = new Empleado(nombre,apellido,edad,horario,legajo);
+        //si el lugar en el array esta vacio, si es que no lo estoy modificando, instancion un nuevo
+        //array y pusheo el objeto, despues lo mando al local storage como string en JSON 
+        //ese obeto convertido en array.
         if(empleadosStorage == null)
         {
             arrayEmpleados = new Array<Empleado>();
@@ -34,16 +41,17 @@ class Controladora
         }
         else
         {
+            //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
              let index:string = $("#indexModificar").val();
               arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
               if(index !== "")
             {
                 let i:number = Number(index);
-                console.log("Empleado a modificar");
-                console.log(arrayEmpleados[i]);
+            //    console.log("Empleado a modificar");
+              //  console.log(arrayEmpleados[i]);
                 arrayEmpleados.splice(i,1);
   
-                localStorage.clear();                
+                      
 
             }
             arrayEmpleados.push(empleadoNuevo);
@@ -67,7 +75,7 @@ class Controladora
          stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>NOMBRE</th>"+
          "<th>APELLIDO</th><th>EDAD</th><th>LEGAJO</th><th>HORARIO</th><th>ACCION</th></tr></thead>";
          let valoresTabla = " ";
-         let arrayEmpleados : Array<JSON> = JSON.parse(localStorage.getItem("Empleados"));
+         let arrayEmpleados :Array<Empleado> = JSON.parse(localStorage.getItem("Empleados"));
          for(let i = 0;i<arrayEmpleados.length;i++)
          {
              valoresTabla += "<tr>";
@@ -147,7 +155,7 @@ class Controladora
          console.log(promedio);
          let stringPromedio : string;
          stringPromedio = "<input type='text' value="+promedio+" />";
-         $("#promedio").html(stringPromedio);
+         $("#promedio").html(String(promedio));
     }
 
 

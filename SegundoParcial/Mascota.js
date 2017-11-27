@@ -14,13 +14,14 @@ var clases;
 (function (clases) {
     var Mascota = /** @class */ (function (_super) {
         __extends(Mascota, _super);
-        function Mascota(identidad, nom, ed, cantPatas) {
+        function Mascota(identidad, nom, ed, cantPatas, tip) {
             var _this = _super.call(this, nom, ed, cantPatas) || this;
             _this.id = identidad;
+            _this.tipo = tip;
             return _this;
         }
         Mascota.prototype.MascotaJson = function () {
-            var json = _super.prototype.AnimalJson.call(this) + ("" + this.id);
+            var json = _super.prototype.AnimalJson.call(this) + (this.id + "," + this.tipo);
             return json;
         };
         return Mascota;

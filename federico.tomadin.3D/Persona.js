@@ -6,8 +6,8 @@ var clases;
             this.nombre = nom;
             this.edad = ed;
         }
-        Persona.prototype.AnimalJson = function () {
-            return this.nombre + ", " + this.edad + ", " + this.cantidad_patas;
+        Persona.prototype.PersonaJson = function () {
+            return this.nombre + ", " + this.edad;
         };
         return Persona;
     }());

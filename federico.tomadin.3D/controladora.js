@@ -13,9 +13,11 @@ var Controladora = /** @class */ (function () {
         var nombre = String($("#Nombre").val());
         var edad = Number($("#Edad").val());
         var tipo = String($("#Tipo").val());
+        var foto = String($("#inputFileToLoad").val());
+        console.log(foto);
         var EmpleadoStorage = localStorage.getItem("Empleado");
         var arrayEmpleado = Array();
-        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo);
+        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto);
         if (EmpleadoStorage == null) {
             console.log("agregar");
             arrayEmpleado = new Array();
@@ -24,7 +26,7 @@ var Controladora = /** @class */ (function () {
         }
         //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
         var index = $("#indexModificar").val();
-        arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
+        arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
         if (index !== "") {
             var i = Number(index);
             //  console.log("Mascota a modificar");
@@ -36,8 +38,18 @@ var Controladora = /** @class */ (function () {
         Controladora.LimpiarForm();
         Controladora.MostrarEmpleado();
     };
-    Controladora.CargarFoto = function () {
-        var formData = new FormData($("#formulario"));
+    Controladora.encodeImageFileAsURL = function () {
+        var foto_string = null;
+        var filesSelected = document.getElementById("inputFileToLoad").files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function (fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result;
+                foto_string = srcData;
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
         /* let file_data = $('#file').val();
          let  FotoStorage = localStorage.getItem("foto");
 
@@ -70,10 +82,10 @@ var Controladora = /** @class */ (function () {
         $("#Edad").val("");
         $("#Tipo").val("perro");
     };
-    Controladora.MostrarEmpleado = function () {
+    Controladora.MostrarEmpleado = function (img) {
         var stringTabla;
         stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
         var valoresTabla = " ";
         var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
         for (var i = 0; i < arrayEmpleado.length; i++) {
@@ -82,6 +94,7 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
             valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
             valoresTabla += "<td>" + arrayEmpleado[i].tipo + "</td>";
+            valoresTabla += "<td>" + "<img src=" + img + ">" + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }

@@ -18,9 +18,9 @@ constructor(nom:string,ed:number)
 
 
 
-public AnimalJson():string
+public PersonaJson():string
 {
-    return `${this.nombre}, ${this.edad}, ${this.cantidad_patas}`;
+    return `${this.nombre}, ${this.edad}`;
 }
 
 

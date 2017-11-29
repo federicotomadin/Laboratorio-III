@@ -14,14 +14,15 @@ var clases;
 (function (clases) {
     var Empleado = /** @class */ (function (_super) {
         __extends(Empleado, _super);
-        function Empleado(identidad, nom, ed, tip) {
+        function Empleado(identidad, nom, ed, tip, foto) {
             var _this = _super.call(this, nom, ed) || this;
             _this.id = identidad;
             _this.tipo = tip;
+            _this.foto = foto;
             return _this;
         }
-        Empleado.prototype.MascotaJson = function () {
-            var json = _super.prototype.AnimalJson.call(this) + (this.id + "," + this.tipo);
+        Empleado.prototype.EmpleadoJson = function () {
+            var json = _super.prototype.PersonaJson.call(this) + (this.id + "," + this.tipo);
             return json;
         };
         return Empleado;

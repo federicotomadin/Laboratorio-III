@@ -1,16 +1,17 @@
-/// <reference path="Animal.ts" />
+/// <reference path="Persona.ts" />
 namespace clases
 {
     
- export class Mascota extends clases.Animal
+ export class Empleado extends clases.Persona
 {
    id:number;
    tipo:string;
+   foto:string
    
 
-   constructor(identidad:number,nom:string,ed:number,cantPatas:number,tip:string)
+   constructor(identidad:number,nom:string,ed:number,tip:string)
    {
-       super(nom,ed,cantPatas);
+       super(nom,ed);
        this.id=identidad;
        this.tipo=tip;
 

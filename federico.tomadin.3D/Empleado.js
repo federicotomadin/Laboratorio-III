@@ -9,22 +9,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/// <reference path="Animal.ts" />
+/// <reference path="Persona.ts" />
 var clases;
 (function (clases) {
-    var Mascota = /** @class */ (function (_super) {
-        __extends(Mascota, _super);
-        function Mascota(identidad, nom, ed, cantPatas, tip) {
-            var _this = _super.call(this, nom, ed, cantPatas) || this;
+    var Empleado = /** @class */ (function (_super) {
+        __extends(Empleado, _super);
+        function Empleado(identidad, nom, ed, tip) {
+            var _this = _super.call(this, nom, ed) || this;
             _this.id = identidad;
             _this.tipo = tip;
             return _this;
         }
-        Mascota.prototype.MascotaJson = function () {
+        Empleado.prototype.MascotaJson = function () {
             var json = _super.prototype.AnimalJson.call(this) + (this.id + "," + this.tipo);
             return json;
         };
-        return Mascota;
-    }(clases.Animal));
-    clases.Mascota = Mascota;
+        return Empleado;
+    }(clases.Persona));
+    clases.Empleado = Empleado;
 })(clases || (clases = {}));

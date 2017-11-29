@@ -11,8 +11,8 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
   
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="Animal.js"></script>
-    <script src="Mascota.js"></script>
+    <script src="Persona.js"></script>
+    <script src="Empleado.js"></script>
     <script src="enum.js"></script>
     <script src="controladora.js"></script>
 </head>
@@ -22,7 +22,7 @@
           <div class="container-fluid">
             <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
               <input type="hidden" id="indexModificar">
-              <h2>Ingrese los datos de la mascota</h2>
+              <h2>Ingrese los datos de la Empleado</h2>
               <br>
               <div class="form-group">
                 <div class="col-md-6">
@@ -40,11 +40,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-md-6">
-                  <input type="text" id="CantidadPatas" placeholder="CantidadPatas" /><input type="checkbox" class="chCantidadPatas" onchange="Controladora.FiltroColCantidadPatas()" />
-                </div>
-              </div>
-              <div class="form-group">
                 <label class="col-md-6 control-label">Tipo</label>
                 <div class="col-md-6">
                   <select name="Tipo" id="Tipo">
@@ -56,10 +51,17 @@
               <br>
               <div class="form-group">
                 <div class="col-md-6">
-                  <input type="button" id="CargarMascota" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarMascota()">
-                  <input type="button" value="Mostrar" id="MostrarMascota" class="btn btn-primary" onclick="Controladora.MostrarMascotas()">
+                  <input type="button" id="CargarEmpleado" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarEmpleado()">
+                  <input type="button" value="Mostrar" id="CargarFoto" class="btn btn-primary" onclick="Controladora.MostrarEmpleado()">
+                  <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
                   <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br>
-                  <input type="button" value="Promedio de Patas" id="PromedioPatas" class="btn btn-default" onclick="Controladora.PromedioPatas()">
+                  <input type="button" value="Cargar Foto" id="CargarFoto" class="btn btn-primary" onclick="Controladora.CargarFoto()">
+                  <form method="post" name="formulario" id="formulario" enctype="multipart/form-data">
+                    Subir imagen: <input type="file" id="file" name="file" accept="image/*">
+                    <div>
+                      <button>Submit</button>
+                    </div>
+                    <div id="respuesta"></div>
                   <div id="promedio"><br>
                   </div>
                 </div>

@@ -1,16 +1,15 @@
 "use strict";
 var clases;
 (function (clases) {
-    var Animal = /** @class */ (function () {
-        function Animal(nom, ed, cant) {
+    var Persona = /** @class */ (function () {
+        function Persona(nom, ed) {
             this.nombre = nom;
             this.edad = ed;
-            this.cantidad_patas = cant;
         }
-        Animal.prototype.AnimalJson = function () {
+        Persona.prototype.AnimalJson = function () {
             return this.nombre + ", " + this.edad + ", " + this.cantidad_patas;
         };
-        return Animal;
+        return Persona;
     }());
-    clases.Animal = Animal;
+    clases.Persona = Persona;
 })(clases || (clases = {}));

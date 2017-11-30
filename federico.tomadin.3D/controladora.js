@@ -5,6 +5,7 @@ $(document).ready(function () {
     alert("Bienvenido al sistema");
     Controladora.CargarSelect();
 });
+var preview = document.querySelector('img');
 var Controladora = /** @class */ (function () {
     function Controladora() {
     }
@@ -14,12 +15,11 @@ var Controladora = /** @class */ (function () {
         var edad = Number($("#Edad").val());
         var tipo = String($("#Tipo").val());
         var foto = String($("#inputFileToLoad").val());
-        console.log(foto);
         var EmpleadoStorage = localStorage.getItem("Empleado");
         var arrayEmpleado = Array();
         var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto);
         if (EmpleadoStorage == null) {
-            console.log("agregar");
+            //  console.log("agregar");
             arrayEmpleado = new Array();
             arrayEmpleado.push(ObjetoEmpleado);
             localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
@@ -38,18 +38,33 @@ var Controladora = /** @class */ (function () {
         Controladora.LimpiarForm();
         Controladora.MostrarEmpleado();
     };
-    Controladora.encodeImageFileAsURL = function () {
-        var foto_string = null;
-        var filesSelected = document.getElementById("inputFileToLoad").files;
-        if (filesSelected.length > 0) {
-            var fileToLoad = filesSelected[0];
-            var fileReader = new FileReader();
-            fileReader.onload = function (fileLoadedEvent) {
-                var srcData = fileLoadedEvent.target.result;
-                foto_string = srcData;
-            };
-            fileReader.readAsDataURL(fileToLoad);
+    Controladora.previewFile = function () {
+        preview = document.querySelector('img');
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            preview.src = reader.result;
+        };
+        if (file) {
+            reader.readAsDataURL(file);
         }
+        else {
+            preview.src = "";
+        }
+        /*  public static  encodeImageFileAsURL() {
+          
+                var filesSelected = $("#inputFileToLoad").files;
+                if (filesSelected.length > 0) {
+                    var fileToLoad = filesSelected[0];
+                    var fileReader = new FileReader();
+                    fileReader.onload = function(fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result;
+                    foto_string = srcData;
+                    }
+                    fileReader.readAsDataURL(fileToLoad);
+
+                   // console.log(fileToLoad)
+                }*/
         /* let file_data = $('#file').val();
          let  FotoStorage = localStorage.getItem("foto");
 
@@ -76,6 +91,45 @@ var Controladora = /** @class */ (function () {
         
     })*/
     };
+    /*  public static  encodeImageFileAsURL() {
+      
+            var filesSelected = $("#inputFileToLoad").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result;
+                foto_string = srcData;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+
+               // console.log(fileToLoad)
+            }*/
+    /* let file_data = $('#file').val();
+     let  FotoStorage = localStorage.getItem("foto");
+
+     localStorage.setItem("foto", JSON.stringify(file_data));
+
+     localStorage.getItem('foto');
+     let variable='<img src="file_data">';
+     
+   console.log(file_data);
+     $('#respuesta').html('<img src='+ file_data + '/>');
+     */
+    /*$('#file').change(function() {
+        
+                    var file = (this.files[0].name).toString();
+        
+                    $('#respuesta').empty().text(file);
+        
+                    portrait_uploader.reader.onload = function(e)
+                    {
+                        $('#respuesta').attr('src', e.target.result);
+                    }
+        
+ 
+    
+})*/
     Controladora.LimpiarForm = function () {
         $("#ID").val("");
         $("#Nombre").val("");

@@ -9,9 +9,11 @@ $(document).ready(function () {
     
         alert("Bienvenido al sistema");
         Controladora.CargarSelect();
+       
     });
-    
-    
+
+ 
+    var preview = document.querySelector('img');
 class Controladora 
     {
        
@@ -22,14 +24,12 @@ class Controladora
                     let edad = Number($("#Edad").val());
                     let tipo = String($("#Tipo").val());
                     let foto= String($("#inputFileToLoad").val());
-
-                    console.log(foto);
                     let EmpleadoStorage = localStorage.getItem("Empleado");
                     let arrayEmpleado = Array<clases.Empleado>();
                     let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto);
                     if (EmpleadoStorage == null) {
             
-                        console.log("agregar");
+                      //  console.log("agregar");
                         arrayEmpleado = new Array<clases.Empleado>();
                         arrayEmpleado.push(ObjetoEmpleado);
                         localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
@@ -58,9 +58,31 @@ class Controladora
                 }
 
 
-              public static  encodeImageFileAsURL() {
-                let foto_string:string|null = null;
-                    var filesSelected = document.getElementById("inputFileToLoad").files;
+
+                public static previewFile() {
+                     preview = document.querySelector('img');
+                    var file    = document.querySelector('input[type=file]').files[0];
+                    var reader  = new FileReader();
+                      
+                    reader.onload = function () {
+                        preview.src = reader.result;
+                      }
+
+                      if (file) {
+                        reader.readAsDataURL(file);
+                      } else {
+                        preview.src = "";
+                      }
+
+                    console.log(preview)
+                    }
+
+
+
+
+            /*  public static  encodeImageFileAsURL() {
+              
+                    var filesSelected = $("#inputFileToLoad").files;
                     if (filesSelected.length > 0) {
                         var fileToLoad = filesSelected[0];
                         var fileReader = new FileReader();
@@ -69,7 +91,9 @@ class Controladora
                         foto_string = srcData;
                         }
                         fileReader.readAsDataURL(fileToLoad);
-                    }
+
+                       // console.log(fileToLoad)
+                    }*/
 
                    /* let file_data = $('#file').val();
                     let  FotoStorage = localStorage.getItem("foto");
@@ -98,7 +122,7 @@ class Controladora
                  
                     
                 })*/
-            }   
+             
             
             
                 public static LimpiarForm() {
@@ -109,7 +133,7 @@ class Controladora
                 }
             
             
-                public static MostrarEmpleado(img:string): void {
+                public static MostrarEmpleado(): void {
             
                     let stringTabla: string;
                     stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
@@ -124,9 +148,10 @@ class Controladora
                         valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
                         valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
                         valoresTabla += "<td>" + arrayEmpleado[i].tipo + "</td>";
-                        valoresTabla += "<td>" + "<img src="+ img +">"+ "</td>";
+                        valoresTabla += "<td>" + "<img src='"+ Image + "' height='50' alt=''></td>";
                         valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
                         valoresTabla += "</tr>";
+                       
                     }
             
                     $("#divTabla").html(stringTabla + valoresTabla);

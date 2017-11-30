@@ -40,6 +40,10 @@
                 </div>
               </div>
               <div class="form-group">
+                <input id="inputFileToLoad" type="file" onchange="Controladora.previewFile()" />
+                
+               </div>
+              <div class="form-group">
                 <label class="col-md-6 control-label">Tipo</label>
                 <div class="col-md-6">
                   <select name="Tipo" id="Tipo">
@@ -56,9 +60,7 @@
                   <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
                   <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br>
                   <input type="button" value="Cargar Foto" id="CargarFoto" class="btn btn-primary" onclick="Controladora.CargarFoto()">
-                  <div class="form-group">
-                    <input id="inputFileToLoad" type="file" onchange="Controladora.encodeImageFileAsURL();" />
-                   </div>
+                 
                     <div id="respuesta"></div>
                   <div id="promedio"><br>
                   </div>

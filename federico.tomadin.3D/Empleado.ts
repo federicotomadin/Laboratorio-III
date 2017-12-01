@@ -6,10 +6,10 @@ namespace clases
 {
    id:number;
    tipo:string;
-   foto:string
+   foto:string|null
    
 
-   constructor(identidad:number,nom:string,ed:number,tip:string,foto:string)
+   constructor(identidad:number,nom:string,ed:number,tip:string,foto:string|null)
    {
        super(nom,ed);
        this.id=identidad;

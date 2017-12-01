@@ -9,24 +9,26 @@ $(document).ready(function () {
     
         alert("Bienvenido al sistema");
         Controladora.CargarSelect();
-       
+
+ 
+        
     });
 
  
-    var preview = document.querySelector('img');
-class Controladora 
-    {
-       
+ var foto_string:string|null=null;
+ class Controladora 
+    
+{
+
         public static AgregarEmpleado() {
             
                     let id = Number($("#ID").val());
                     let nombre = String($("#Nombre").val());
                     let edad = Number($("#Edad").val());
-                    let tipo = String($("#Tipo").val());
-                    let foto= String($("#inputFileToLoad").val());
+                    let tipo = String($("#Tipo").val());                
                     let EmpleadoStorage = localStorage.getItem("Empleado");
                     let arrayEmpleado = Array<clases.Empleado>();
-                    let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto);
+                    let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
                     if (EmpleadoStorage == null) {
             
                       //  console.log("agregar");
@@ -58,42 +60,21 @@ class Controladora
                 }
 
 
-
-                public static previewFile() {
-                     preview = document.querySelector('img');
-                    var file    = document.querySelector('input[type=file]').files[0];
-                    var reader  = new FileReader();
-                      
-                    reader.onload = function () {
-                        preview.src = reader.result;
-                      }
-
-                      if (file) {
-                        reader.readAsDataURL(file);
-                      } else {
-                        preview.src = "";
-                      }
-
-                    console.log(preview)
-                    }
-
-
-
-
-            /*  public static  encodeImageFileAsURL() {
-              
-                    var filesSelected = $("#inputFileToLoad").files;
+                  public static  encodeImageFileAsURL() {
+                   
+                    var filesSelected = document.getElementById("inputFileToLoad").files;
                     if (filesSelected.length > 0) {
-                        var fileToLoad = filesSelected[0];
+                        var fileToLoad = filesSelected[0];                  
                         var fileReader = new FileReader();
                         fileReader.onload = function(fileLoadedEvent) {
-                        var srcData = fileLoadedEvent.target.result;
+                        var srcData = fileLoadedEvent.target.result;                 
                         foto_string = srcData;
+                      
                         }
                         fileReader.readAsDataURL(fileToLoad);
-
-                       // console.log(fileToLoad)
-                    }*/
+                       
+                
+                    }
 
                    /* let file_data = $('#file').val();
                     let  FotoStorage = localStorage.getItem("foto");
@@ -122,7 +103,7 @@ class Controladora
                  
                     
                 })*/
-             
+            }
             
             
                 public static LimpiarForm() {
@@ -130,11 +111,11 @@ class Controladora
                     $("#Nombre").val("");
                     $("#Edad").val("");
                     $("#Tipo").val("perro");
+                    $("#foto").val("");
                 }
             
             
                 public static MostrarEmpleado(): void {
-            
                     let stringTabla: string;
                     stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
                         "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
@@ -148,7 +129,7 @@ class Controladora
                         valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
                         valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
                         valoresTabla += "<td>" + arrayEmpleado[i].tipo + "</td>";
-                        valoresTabla += "<td>" + "<img src='"+ Image + "' height='50' alt=''></td>";
+                        valoresTabla += "<td>" + "<img src='"+ arrayEmpleado[i].foto + "' height='50' alt=''></td>";
                         valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
                         valoresTabla += "</tr>";
                        
@@ -269,6 +250,7 @@ class Controladora
                         $("#Nombre").val(arrayEmpleado[index].nombre);
                         $("#Edad").val(arrayEmpleado[index].edad);
                         $("#Tipo").val(arrayEmpleado[index].tipo);
+                        $("#foto").val(arrayEmpleado[index].foto);
                         $("#indexModificar").val(index.toString());
                     }
                 

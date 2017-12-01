@@ -1,87 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Segundo Parcial</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-  
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="Persona.js"></script>
-    <script src="Empleado.js"></script>
-    <script src="enum.js"></script>
-    <script src="controladora.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Segundo Parcial</title>
+
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="Persona.js"></script>
+  <script src="Empleado.js"></script>
+  <script src="enum.js"></script>
+  <script src="controladora.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="row responsive-utilities-test visible-on">
-          <div class="container-fluid">
-            <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
-              <input type="hidden" id="indexModificar">
-              <h2>Ingrese los datos de la Empleado</h2>
-              <br>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <input type="text" id="ID" placeholder="ID" /><input type="checkbox" class="chID" onchange="Controladora.FiltroColID()"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <input type="text" id="Nombre" placeholder="Nombre" /><input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()" />
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <input type="text" id="Edad" placeholder="Edad" /><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()" />
-                </div>
-              </div>
-              <div class="form-group">
-                <input id="inputFileToLoad" type="file" onchange="Controladora.previewFile()" />
-                
-               </div>
-              <div class="form-group">
-                <label class="col-md-6 control-label">Tipo</label>
-                <div class="col-md-6">
-                  <select name="Tipo" id="Tipo">
-    
-    
-                  </select>
-                </div>
-              </div>
-              <br>
-              <div class="form-group">
-                <div class="col-md-6">
-                  <input type="button" id="CargarEmpleado" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarEmpleado()">
-                  <input type="button" value="Mostrar" id="CargarFoto" class="btn btn-primary" onclick="Controladora.MostrarEmpleado()">
-                  <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
-                  <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br>
-                  <input type="button" value="Cargar Foto" id="CargarFoto" class="btn btn-primary" onclick="Controladora.CargarFoto()">
-                 
-                    <div id="respuesta"></div>
-                  <div id="promedio"><br>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--cierre de la columna-->
-    
-             <!--Comienza la tabla-->
-            <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:lavenderblush">
-              <div id="divTabla">
-             tabla aqui..
-              </div>
-            </div>
-        
+  <div class="container">
+    <div class="container-fluid">
+      <div class="row responsive-utilities-test visible-on">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Laboratorio III</a>
           </div>
-          <!--cierre del conteiner-fluid-->
+
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-left">
+              <li>
+                <a href="#">Mostrar</a>
+              </li>
+              <li>
+                <a href="#inscripcion">Formulario</a>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Ver
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#" data-toggle="modal" data-target="#myModal">Promedio</a>
+                  </li>
+                  <li>
+                      <a href="#">Filtrar</a>
+                    </li>
+                    <li>
+                      <a href="#">Solo Nombre y Apellido</a>
+                    </li>
+                </ul>
+                  <!-- Modal -->
+                  
+                  <div id="myModal" data-backdrop="false" class="modal "  >
+                    <div class="modal-dialog modal-xs">
+
+                      <!-- Modal content-->
+                    
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Filtrar</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="sel1">Horario</label>
+                                <select class="form-control" id="sel1">
+                                  <option>Mañana</option>
+                                  <option>Tarde</option>
+                                  <option>Noche</option>
+                                </select>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger btn-md addnewrow pull-left 	glyphicon glyphicon-remove"  data-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-success btn-md"  data-dismiss="modal">Filtrar</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+              
+
+               
+              </li>
+          </div>
+        </nav>
+
+
+
+
+        <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
+          <input type="hidden" id="indexModificar">
+          <h2>Ingrese los datos de la Empleado</h2>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6">
+              <input type="text" id="ID" placeholder="ID" /> <input type="checkbox" class="chID" onchange="Controladora.FiltroColID()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6">
+              <input type="text" id="Nombre" placeholder="Nombre" />
+              <input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6">
+              <input type="text" id="Edad" placeholder="Edad" /><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <input id="inputFileToLoad" type="file" onchange="Controladora.encodeImageFileAsURL()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label">Tipo</label>
+            <div class="col-md-6">
+              <select name="Tipo" id="Tipo">
+
+
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-6">
+              <input type="button" id="CargarEmpleado" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarEmpleado()">
+              <input type="button" value="Mostrar" id="CargarFoto" class="btn btn-primary" onclick="Controladora.MostrarEmpleado()">
+              <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
+              <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()">
+              <br>
+              <input type="button" value="Cargar Foto" id="CargarFoto" class="btn btn-primary" onclick="Controladora.CargarFoto()">
+
+              <div id="respuesta"></div>
+              <div id="promedio">
+                <br>
+              </div>
+            </div>
+          </div>
         </div>
-        <!--cierre del responsive-->
-    
+        <!--cierre de la columna-->
+
+        <!--Comienza la tabla-->
+        <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:lavenderblush">
+          <div id="divTabla">
+            tabla aqui..
+          </div>
+        </div>
+
       </div>
-      <!--cierre del conteiner-->
+      <!--cierre del conteiner-fluid-->
+    </div>
+    <!--cierre del responsive-->
+
+  </div>
+  <!--cierre del conteiner-->
 </body>
+
 </html>

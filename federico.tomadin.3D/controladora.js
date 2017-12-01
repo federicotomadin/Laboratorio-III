@@ -5,7 +5,7 @@ $(document).ready(function () {
     alert("Bienvenido al sistema");
     Controladora.CargarSelect();
 });
-var preview = document.querySelector('img');
+var foto_string = null;
 var Controladora = /** @class */ (function () {
     function Controladora() {
     }
@@ -14,10 +14,9 @@ var Controladora = /** @class */ (function () {
         var nombre = String($("#Nombre").val());
         var edad = Number($("#Edad").val());
         var tipo = String($("#Tipo").val());
-        var foto = String($("#inputFileToLoad").val());
         var EmpleadoStorage = localStorage.getItem("Empleado");
         var arrayEmpleado = Array();
-        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto);
+        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto_string);
         if (EmpleadoStorage == null) {
             //  console.log("agregar");
             arrayEmpleado = new Array();
@@ -38,33 +37,17 @@ var Controladora = /** @class */ (function () {
         Controladora.LimpiarForm();
         Controladora.MostrarEmpleado();
     };
-    Controladora.previewFile = function () {
-        preview = document.querySelector('img');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
-        reader.onload = function () {
-            preview.src = reader.result;
-        };
-        if (file) {
-            reader.readAsDataURL(file);
+    Controladora.encodeImageFileAsURL = function () {
+        var filesSelected = document.getElementById("inputFileToLoad").files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function (fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result;
+                foto_string = srcData;
+            };
+            fileReader.readAsDataURL(fileToLoad);
         }
-        else {
-            preview.src = "";
-        }
-        /*  public static  encodeImageFileAsURL() {
-          
-                var filesSelected = $("#inputFileToLoad").files;
-                if (filesSelected.length > 0) {
-                    var fileToLoad = filesSelected[0];
-                    var fileReader = new FileReader();
-                    fileReader.onload = function(fileLoadedEvent) {
-                    var srcData = fileLoadedEvent.target.result;
-                    foto_string = srcData;
-                    }
-                    fileReader.readAsDataURL(fileToLoad);
-
-                   // console.log(fileToLoad)
-                }*/
         /* let file_data = $('#file').val();
          let  FotoStorage = localStorage.getItem("foto");
 
@@ -91,52 +74,14 @@ var Controladora = /** @class */ (function () {
         
     })*/
     };
-    /*  public static  encodeImageFileAsURL() {
-      
-            var filesSelected = $("#inputFileToLoad").files;
-            if (filesSelected.length > 0) {
-                var fileToLoad = filesSelected[0];
-                var fileReader = new FileReader();
-                fileReader.onload = function(fileLoadedEvent) {
-                var srcData = fileLoadedEvent.target.result;
-                foto_string = srcData;
-                }
-                fileReader.readAsDataURL(fileToLoad);
-
-               // console.log(fileToLoad)
-            }*/
-    /* let file_data = $('#file').val();
-     let  FotoStorage = localStorage.getItem("foto");
-
-     localStorage.setItem("foto", JSON.stringify(file_data));
-
-     localStorage.getItem('foto');
-     let variable='<img src="file_data">';
-     
-   console.log(file_data);
-     $('#respuesta').html('<img src='+ file_data + '/>');
-     */
-    /*$('#file').change(function() {
-        
-                    var file = (this.files[0].name).toString();
-        
-                    $('#respuesta').empty().text(file);
-        
-                    portrait_uploader.reader.onload = function(e)
-                    {
-                        $('#respuesta').attr('src', e.target.result);
-                    }
-        
- 
-    
-})*/
     Controladora.LimpiarForm = function () {
         $("#ID").val("");
         $("#Nombre").val("");
         $("#Edad").val("");
         $("#Tipo").val("perro");
+        $("#foto").val("");
     };
-    Controladora.MostrarEmpleado = function (img) {
+    Controladora.MostrarEmpleado = function () {
         var stringTabla;
         stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
             "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
@@ -148,7 +93,7 @@ var Controladora = /** @class */ (function () {
             valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
             valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
             valoresTabla += "<td>" + arrayEmpleado[i].tipo + "</td>";
-            valoresTabla += "<td>" + "<img src=" + img + ">" + "</td>";
+            valoresTabla += "<td>" + "<img src='" + arrayEmpleado[i].foto + "' height='50' alt=''></td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
@@ -227,6 +172,7 @@ var Controladora = /** @class */ (function () {
         $("#Nombre").val(arrayEmpleado[index].nombre);
         $("#Edad").val(arrayEmpleado[index].edad);
         $("#Tipo").val(arrayEmpleado[index].tipo);
+        $("#foto").val(arrayEmpleado[index].foto);
         $("#indexModificar").val(index.toString());
     };
     Controladora.FiltrarPorTipo = function () {

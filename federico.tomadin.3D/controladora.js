@@ -166,13 +166,14 @@ var Controladora = /** @class */ (function () {
         localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
         Controladora.MostrarEmpleado();
     };
-    Controladora.ModificarMascota = function (index) {
+    Controladora.ModificarEmpleado = function (index) {
         var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
+        console.log(arrayEmpleado);
         $("#ID").val(arrayEmpleado[index].id);
         $("#Nombre").val(arrayEmpleado[index].nombre);
         $("#Edad").val(arrayEmpleado[index].edad);
         $("#Tipo").val(arrayEmpleado[index].tipo);
-        $("#foto").val(arrayEmpleado[index].foto);
+        // $("#foto").val(arrayEmpleado[index].foto);
         $("#indexModificar").val(index.toString());
     };
     Controladora.FiltrarPorTipo = function () {

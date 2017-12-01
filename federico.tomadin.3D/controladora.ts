@@ -246,13 +246,15 @@ $(document).ready(function () {
                 
                     }
                 
-                    public static ModificarMascota(index: number): void {
+                    public static ModificarEmpleado(index: number): void {
                         let arrayEmpleado: Array<clases.Empleado> = JSON.parse(localStorage.getItem("Empleado"));
+
+                        console.log(arrayEmpleado);
                         $("#ID").val(arrayEmpleado[index].id);
                         $("#Nombre").val(arrayEmpleado[index].nombre);
                         $("#Edad").val(arrayEmpleado[index].edad);
                         $("#Tipo").val(arrayEmpleado[index].tipo);
-                        $("#foto").val(arrayEmpleado[index].foto);
+                       // $("#foto").val(arrayEmpleado[index].foto);
                         $("#indexModificar").val(index.toString());
                     }
                 

@@ -176,19 +176,24 @@ var Controladora = /** @class */ (function () {
         $("#indexModificar").val(index.toString());
     };
     Controladora.FiltrarPorTipo = function () {
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>ACCION</th></tr></thead>";
-        var valoresTabla = "";
         var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
         var EmpleadoFiltradas = arrayEmpleado.filter(function (elemento) {
-            return elemento.tipo == $("#Tipo").val();
+            return elemento.tipo == $("#Tipo_Modal").val();
         });
+        EmpleadoFiltradas.map(function (user) {
+            return { id: user.id, nombre: user.nombre, edad: user.edad, tipo: user.tipo, foto: user.foto };
+        });
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
+            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
         for (var i = 0; i < EmpleadoFiltradas.length; i++) {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].id + "</td>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].nombre + "</td>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].edad + "</td>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].tipo + "</td>";
+            valoresTabla += "<td>" + "<img src='" + EmpleadoFiltradas[i].foto + "' height='50' alt=''></td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
         $("#divTabla").html(stringTabla + valoresTabla);

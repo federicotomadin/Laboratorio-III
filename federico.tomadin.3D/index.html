@@ -48,10 +48,10 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal">Promedio</a>
+                    <a href="#" data-toggle="modal" data-target="#myModal">Filtrar</a>
                   </li>
                   <li>
-                      <a href="#">Filtrar</a>
+                      <a href="#">Promedio</a>
                     </li>
                     <li>
                       <a href="#">Solo Nombre y Apellido</a>
@@ -71,17 +71,18 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="sel1">Horario</label>
-                                <select class="form-control" id="sel1">
-                                  <option>Mañana</option>
-                                  <option>Tarde</option>
-                                  <option>Noche</option>
+                                <label for="Tipo_Modal">Horario</label>
+                                <select class="form-control" id="Tipo_Modal">
+                                  <option>rubio</option>
+                                  <option>morocho</option>
+                                  <option>pelirrojo</option>
+                                  <option>castaño</option>
                                 </select>
                               </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger btn-md addnewrow pull-left 	glyphicon glyphicon-remove"  data-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-success btn-md"  data-dismiss="modal">Filtrar</button>
+                          <button type="button" class="btn btn-success btn-md" onclick="Controladora.FiltrarPorTipo()" data-dismiss="modal">Filtrar</button>
                         </div>
                       </div>
 
@@ -92,7 +93,7 @@
                
               </li>
           </div>
-        </nav>
+        </nav><br><br><br>
 
 
 
@@ -139,7 +140,6 @@
               <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
               <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()">
               <br>
-              <input type="button" value="Cargar Foto" id="CargarFoto" class="btn btn-primary" onclick="Controladora.CargarFoto()">
 
               <div id="respuesta"></div>
               <div id="promedio">

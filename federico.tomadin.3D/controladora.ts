@@ -123,6 +123,8 @@ $(document).ready(function () {
                     let valoresTabla = " ";
                     let arrayEmpleado: Array<clases.Empleado> = JSON.parse(localStorage.getItem("Empleado"));
             
+
+               
                     for (let i = 0; i < arrayEmpleado.length; i++) {
                         valoresTabla += "<tr>";
                         valoresTabla += "<td>" + arrayEmpleado[i].id + "</td>";
@@ -256,14 +258,23 @@ $(document).ready(function () {
                 
                 
                     public static FiltrarPorTipo() {
-                        let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
-                            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>ACCION</th></tr></thead>";
-                        let valoresTabla = "";
+                       
                         let arrayEmpleado: Array<clases.Empleado> = JSON.parse(localStorage.getItem("Empleado"));
                         let EmpleadoFiltradas: Array<clases.Empleado> = arrayEmpleado.filter(function (elemento) {
-                
-                            return elemento.tipo == $("#Tipo").val();
+
+                           
+                 
+                            return elemento.tipo == $("#Tipo_Modal").val();
+                        
                         })
+                        EmpleadoFiltradas.map(function(user){
+                            return {id: user.id, nombre: user.nombre, edad: user.edad, tipo: user.tipo, foto:user.foto}
+                      
+                        })
+
+                        let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
+                        "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
+                    let valoresTabla = "";
                 
                         for (let i = 0; i < EmpleadoFiltradas.length; i++) {
                             valoresTabla += "<tr>";
@@ -271,6 +282,8 @@ $(document).ready(function () {
                             valoresTabla += "<td>" + EmpleadoFiltradas[i].nombre + "</td>";
                             valoresTabla += "<td>" + EmpleadoFiltradas[i].edad + "</td>";
                             valoresTabla += "<td>" + EmpleadoFiltradas[i].tipo + "</td>";
+                            valoresTabla += "<td>" + "<img src='"+ EmpleadoFiltradas[i].foto + "' height='50' alt=''></td>";
+                            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";                            
                             valoresTabla += "</tr>";
                         }
                         $("#divTabla").html(stringTabla + valoresTabla);

@@ -9,7 +9,7 @@ $(document).ready(function () {
     
         alert("Bienvenido al sistema");
         Controladora.CargarSelect();
-
+        Controladora.MostrarEmpleado();
  
         
     });
@@ -37,7 +37,7 @@ $(document).ready(function () {
                   
                     let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
                     ObjetoEmpleado.id=0;
-                  let  variable:string= String(ObjetoEmpleado.id);
+                    let  variable:string|null= String(ObjetoEmpleado.id);
                     localStorage.setItem("Indice",variable)
                     arrayEmpleado = new Array<clases.Empleado>();
                     arrayEmpleado.push(ObjetoEmpleado);
@@ -51,7 +51,7 @@ $(document).ready(function () {
         
                     //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
                     let index = $("#indexModificar").val();
-                    arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
+                    arrayEmpleado= JSON.parse(localStorage.getItem('Empleado'));
                     if (index !== "") {
                         let i: number = Number(index);
                         let aux=Number(arrayEmpleado[index].id);
@@ -110,6 +110,18 @@ $(document).ready(function () {
          Controladora.MostrarEmpleado();
                  
             }
+
+
+            public static funcionDeComparacion(a:number, b:number) {
+                if (a<b) {
+                  return -1;
+                }
+                if (a>b) {
+                  return 1;
+                }
+                // a debe ser igual b
+                return 0;
+              }
 
                 
 

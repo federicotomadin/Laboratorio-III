@@ -4,7 +4,7 @@ namespace clases
     
  export class Empleado extends clases.Persona
 {
-   id:number;
+   id:any;
    tipo:string;
    foto:string|null
    

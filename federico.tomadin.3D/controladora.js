@@ -4,6 +4,7 @@
 $(document).ready(function () {
     alert("Bienvenido al sistema");
     Controladora.CargarSelect();
+    Controladora.MostrarEmpleado();
 });
 var foto_string = null;
 var Controladora = /** @class */ (function () {
@@ -75,6 +76,16 @@ var Controladora = /** @class */ (function () {
         localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
         Controladora.LimpiarForm();
         Controladora.MostrarEmpleado();
+    };
+    Controladora.funcionDeComparacion = function (a, b) {
+        if (a < b) {
+            return -1;
+        }
+        if (a > b) {
+            return 1;
+        }
+        // a debe ser igual b
+        return 0;
     };
     Controladora.encodeImageFileAsURL = function () {
         var filesSelected = document.getElementById("inputFileToLoad").files;

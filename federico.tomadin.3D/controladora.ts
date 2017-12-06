@@ -20,44 +20,98 @@ $(document).ready(function () {
     
 {
 
-        public static AgregarEmpleado() {
-            
-                    let id = Number($("#ID").val());
-                    let nombre = String($("#Nombre").val());
-                    let edad = Number($("#Edad").val());
-                    let tipo = String($("#Tipo").val());                
-                    let EmpleadoStorage = localStorage.getItem("Empleado");
-                    let arrayEmpleado = Array<clases.Empleado>();
+    public static AgregarEmpleado() {
+        
+                let id = Number($("#ID").val());
+                let nombre = String($("#Nombre").val());
+                let edad = Number($("#Edad").val());
+                let tipo = String($("#Tipo").val());          
+                let IndiceStorage = localStorage.getItem("Indice");
+                let arrayIndice = Array<number>();   
+                let EmpleadoStorage = localStorage.getItem("Empleado");
+                let arrayEmpleado = Array<clases.Empleado>();
+               // let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
+                if (EmpleadoStorage == null) {
+        
+                  //  console.log("agregar");
+                  
                     let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
-                    if (EmpleadoStorage == null) {
-            
-                      //  console.log("agregar");
-                        arrayEmpleado = new Array<clases.Empleado>();
-                        arrayEmpleado.push(ObjetoEmpleado);
-                        localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
-            
+                    ObjetoEmpleado.id=0;
+                  let  variable:string= String(ObjetoEmpleado.id);
+                    localStorage.setItem("Indice",variable)
+                    arrayEmpleado = new Array<clases.Empleado>();
+                    arrayEmpleado.push(ObjetoEmpleado);
+                    localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
+                    Controladora.MostrarEmpleado();
+                    Controladora.LimpiarForm();
+                    return;
+        
+                }
+              
+        
+                    //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
+                    let index = $("#indexModificar").val();
+                    arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
+                    if (index !== "") {
+                        let i: number = Number(index);
+                        let aux=Number(arrayEmpleado[index].id);
+                        let paraEnum= new Array<number>();
+                        let ObjetoEmpleado: clases.Empleado = new clases.Empleado(aux, nombre, edad, tipo,foto_string);
+                      
+                      //  console.log("Mascota a modificar");
+                        //console.log(arrayMascotas[i]);
+                        arrayEmpleado.splice(i, 1);
+                    arrayEmpleado.push(ObjetoEmpleado);
+
+                    //guardo los id en un array numerico para ordenarlo
+                    for(let i=0;i<arrayEmpleado.length;i++)
+                    {
+                        paraEnum.push(arrayEmpleado[i].id);
+                    }
+
+                    paraEnum.sort(Controladora.funcionDeComparacion);
+
+                    //creo un array auxiliar y voy comparando cada enum con el 
+                    //elemento del array
+                   let arrayEmpleado2 = new Array<clases.Empleado>();
+                    for(let i=0;i<paraEnum.length;i++)
+                    {
+                        for(let j=0;j<arrayEmpleado.length;j++)
+                        {
+                         if(paraEnum[i]==arrayEmpleado[j].id)
+                         {
+                            arrayEmpleado2.push(arrayEmpleado[j])
+                         }
+                        }
                     }
                   
-            
-                        //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
-                        let index = $("#indexModificar").val();
-                        arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
-                        if (index !== "") {
-                            let i: number = Number(index);
-                          //  console.log("Mascota a modificar");
-                            //console.log(arrayMascotas[i]);
-                            arrayEmpleado.splice(i, 1);
-            
-                        }
-            
-            
-                        arrayEmpleado.push(ObjetoEmpleado);
-                        localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
-                        Controladora.LimpiarForm();
-                    
-            
-                      Controladora.MostrarEmpleado();
-                }
+
+                    localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado2));
+                    Controladora.LimpiarForm();
+                    Controladora.MostrarEmpleado();
+                    return;
+
+                
+                    }
+
+
+    
+                let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
+                arrayIndice = new  Array<number>(); 
+                arrayIndice=JSON.parse(localStorage.getItem("Indice"));               
+                arrayIndice.push(6);
+                localStorage.setItem("Indice",JSON.stringify(arrayIndice));
+                arrayIndice=JSON.parse(localStorage.getItem("Indice"));   
+                ObjetoEmpleado.id=arrayIndice.length;                     
+                arrayEmpleado.push(ObjetoEmpleado);
+                localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
+                Controladora.LimpiarForm();
+                
+         Controladora.MostrarEmpleado();
+                 
+            }
+
+                
 
 
                   public static  encodeImageFileAsURL() {

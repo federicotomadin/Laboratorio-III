@@ -14,24 +14,63 @@ var Controladora = /** @class */ (function () {
         var nombre = String($("#Nombre").val());
         var edad = Number($("#Edad").val());
         var tipo = String($("#Tipo").val());
+        var IndiceStorage = localStorage.getItem("Indice");
+        var arrayIndice = Array();
         var EmpleadoStorage = localStorage.getItem("Empleado");
         var arrayEmpleado = Array();
-        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto_string);
+        // let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
         if (EmpleadoStorage == null) {
             //  console.log("agregar");
+            var ObjetoEmpleado_1 = new clases.Empleado(id, nombre, edad, tipo, foto_string);
+            ObjetoEmpleado_1.id = 0;
+            var variable = String(ObjetoEmpleado_1.id);
+            localStorage.setItem("Indice", variable);
             arrayEmpleado = new Array();
-            arrayEmpleado.push(ObjetoEmpleado);
+            arrayEmpleado.push(ObjetoEmpleado_1);
             localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
+            Controladora.MostrarEmpleado();
+            Controladora.LimpiarForm();
+            return;
         }
         //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
         var index = $("#indexModificar").val();
         arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
         if (index !== "") {
             var i = Number(index);
+            var aux = Number(arrayEmpleado[index].id);
+            var paraEnum = new Array();
+            var ObjetoEmpleado_2 = new clases.Empleado(aux, nombre, edad, tipo, foto_string);
             //  console.log("Mascota a modificar");
             //console.log(arrayMascotas[i]);
             arrayEmpleado.splice(i, 1);
+            arrayEmpleado.push(ObjetoEmpleado_2);
+            //guardo los id en un array numerico para ordenarlo
+            for (var i_1 = 0; i_1 < arrayEmpleado.length; i_1++) {
+                paraEnum.push(arrayEmpleado[i_1].id);
+            }
+            paraEnum.sort(Controladora.funcionDeComparacion);
+            //creo un array auxiliar y voy comparando cada enum con el 
+            //elemento del array
+            var arrayEmpleado2 = new Array();
+            for (var i_2 = 0; i_2 < paraEnum.length; i_2++) {
+                for (var j = 0; j < arrayEmpleado.length; j++) {
+                    if (paraEnum[i_2] == arrayEmpleado[j].id) {
+                        arrayEmpleado2.push(arrayEmpleado[j]);
+                    }
+                }
+            }
+            localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado2));
+            Controladora.LimpiarForm();
+            Controladora.MostrarEmpleado();
+            return;
         }
+        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto_string);
+        arrayIndice = new Array();
+        arrayIndice = JSON.parse(localStorage.getItem("Indice"));
+        arrayIndice.push(6);
+        localStorage.setItem("Indice", JSON.stringify(arrayIndice));
+        arrayIndice = JSON.parse(localStorage.getItem("Indice"));
+        ObjetoEmpleado.id = arrayIndice.length;
         arrayEmpleado.push(ObjetoEmpleado);
         localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
         Controladora.LimpiarForm();

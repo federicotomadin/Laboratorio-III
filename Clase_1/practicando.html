@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <script type="text/javascript">
+        
+        function saludar()
+        {               
+            var nombre= document.getElementById('nombre').value;
+            var contra=document.getElementById('contraseña').value;   
+            
+            if(nombre=="" && contra=="")
+            {
+            alert("tiene que cargar un usuario")
+            }
+            else 
+            {
+
+            alert($('nombre').value + " " + contra);            
+            }
+
+          
+        } 
+        
+        function $(id)
+        {
+           
+           return document.getElementById(id)
+        }
+        </script>        
+    <title>Probando</title>
+</head>
+<body>
+
+<form action="" method="GET">
+    <label for="nombre">Usuario</label><br>
+    <input type="text" name="Nombre"  placeholder="Ingrese el Nombre" id="nombre"><br><br>
+    <label for="contraseña">Constraseña</label><br>
+    <input type="password" name="Contraseña" placeholder="Ingrese la contrasña", id="contraseña"><br><br>
+
+    <input type="checkbox" name="chkRecordarContra" id="chkRecordar" value="1" checked>
+    <label for="">Recordar Contraseña</label><br><br>
+
+    <input type="button" name="Enviar" id="enviarDatos" value="Enviar" onclick="saludar()">
+    
+</form>  
+</body>
+
+</html>

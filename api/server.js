@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var noticias = [{"tema":"CSS","titulo":"Nuevos CSS3","noticia":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tortor et ex viverra ullamcorper. Vivamus at lacinia quam. Aliquam a laoreet dui. In hac habitasse platea dictumst. Aliquam nec molestie magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi tincidunt efficitur justo, at pulvinar arcu lobortis sit amet. Integer vel enim vitae urna dictum efficitur. Quisque nunc arcu, gravida sit amet elementum eu, tempor at libero. Vivamus in vulputate purus. Nunc quis dolor sed dui commodo malesuada ac in diam. Vestibulum sit amet eros accumsan, suscipit ex eget, rhoncus lorem.","fecha":"12/05/2018 17:26"},{"tema":"HTML","titulo":"Nuevos HTML5","noticia":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tortor et ex viverra ullamcorper. Vivamus at lacinia quam. Aliquam a laoreet dui. In hac habitasse platea dictumst. Aliquam nec molestie magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi tincidunt efficitur justo, at pulvinar arcu lobortis sit amet. Integer vel enim vitae urna dictum efficitur. Quisque nunc arcu, gravida sit amet elementum eu, tempor at libero. Vivamus in vulputate purus. Nunc quis dolor sed dui commodo malesuada ac in diam. Vestibulum sit amet eros accumsan, suscipit ex eget, rhoncus lorem.","fecha":"12/05/2018 17:30:02"}];
 app.get("/login",function(req,res){
     
-    res.send("ok");
+    res.send("ok computer");
 });
 
 app.get("/loginUsuario",function(req,res){

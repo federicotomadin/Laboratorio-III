@@ -170,9 +170,8 @@ function CargarTabla(objPersonas){
     
     //Funcio para limpiar la tabla
     function LimpiarTabla(){
-        var tCuerpo = document.getElementById("tCuerpo");
-        tCuerpo.innerHTML = "";
-    }
+        var tCuerpo = document.getElementById("tCuerpo").innerHTML="";
+            }
 
 
     /*############################### ELIMINAR ################################################*/

@@ -37,10 +37,11 @@ app.post("/loginUsuario",function(req,res){
             return;
         }
         res.send("Debe ingresar Usuario y Contraseña");
-    },5000);
+    },3000);
     
 });
 
 app.listen(3000,function(){
     console.log("Api en el puerto 3000");
 });
+

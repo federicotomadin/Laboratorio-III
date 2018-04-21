@@ -4,21 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="probandoCodigo.js"></script>
+  
     <title></title>
 <script>
 
-var httpReq=new XMLHttpRequest();
-httpReq.
+function loginUsuario(){
+   
+    usuario= document.getElementById("lbl").value;
+    pass = document.getElementById("lbl2").value;
+    document.getElementById("spinner").hidden=false;
 
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = gestionarRespuesta;
+    xhr.open('POST', "http://localhost:3000/loginUsuario", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var data = "usr=" + usuario + "&" + "pass=" + pass;
+    xhr.send(data);
+    
+}
 
+function gestionarRespuesta()
+{
+    var div = document.getElementById('respuesta');
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+            
+            if(xhr.responseText=="true")
+            {
+            //Llamo asincronicamente a traer todos las personas del servidor
+            document.getElementById("spinner").hidden=true
+            div.innerHTML="ha ingresado correctamente";
+           
+            }
+            else
+            {
+          
+            document.getElementById("spinner").hidden=true
+            div.innerHTML="volve a loguearte";
+            }
+        }
+    
+    
+        else {
+
+            div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
+           
+        }
+    }
+ }
 
 </script>
 
 </head>
 <body>
-    <input type="number" name="" id="lbl">
-    <input type="number" name="" id="lbl2">
-    <button id="btnSumar">Sumar</button>
+    <input type="text" name="" placeholder="ingrese usuario" id="lbl">
+    <input type="text" name="" placeholder="ingrese password" id="lbl2">
+    <button id="btnSumar" onclick="loginUsuario()" src="spinner.gif">Ingresar</button>
+    <input type="image" src="spinner.gif" id="spinner" hidden>
+
+    
+<div id="respuesta"></div>
+
 </body>
+
 </html>

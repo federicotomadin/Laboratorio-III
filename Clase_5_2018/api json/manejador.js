@@ -2,21 +2,28 @@
 
 var xhr;
 
+
 /*########################################### AGREGAR ############################################*/
 
 
 window.onload = function()
 {
      //Boton guardar
-     var btnGuardar = document.getElementById("btnEnviar");
+     var btnEnviar = document.getElementById("btnEnviar");
      //Seteo un evento al btnGuardar
-     btnGuardar.addEventListener('click',function(){
+     btnEnviar.addEventListener('click',function(){
          AgregarPersona();        
      })
-
-
+    
     //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
     TraerPersonas();
+
+    //localStorage.getItem(personas)
+    var json= JSON.parse( '{"nombre" : "matias" }' );
+    localStorage.setItem('personas', JSON.stringify(json));
+
+ 
+
     
 }
 
@@ -38,6 +45,8 @@ function gestionarRespuestaTraerPersonas() {
         if (xhr.status == 200) {
             //Si esta todo bien, guardo la respuesta del server
             var objPersonas = JSON.parse(xhr.responseText);
+
+    localStorage.setItem({'Nombre' : json.stringify(objPersonas.nombre)}, JSON.stringify(objPersonas.apellido) );
             //llamo a mi función que dibujará la tabla.
             CargarTabla(objPersonas);
             
@@ -88,14 +97,18 @@ function AgregarPersona()
    var telefono=document.getElementById("txtTelefono").value;
    var fecha=document.getElementById("txtFecha").value;
 
-   var persona = {"Nombre" : nombre, "Apellido" : apellido, "telefono" : telefono, "Fecha" : fecha}
+   var persona = {"nombre" : nombre, "apellido" : apellido, "telefono" : telefono, "fecha" : fecha}
 
 
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = gestionarRespuestaNuevaPersona;
+  
     xhr.open('POST',"http://localhost:3000/nuevaPersona", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    
 
     var data = JSON.stringify(persona);
+ 
     xhr.send(data);
 }
 

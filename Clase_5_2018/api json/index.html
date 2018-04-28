@@ -6,28 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="manejador.js"></script>
     <link rel="stylesheet" href="estilos.css">
-    <title>Document</title>
+    <title>Personas</title>
 </head>
 <body>
 
-    <input class="CajaTexto" type="text" name="NombreName"  placeholder="Ingrese el nombre" id="txtNombre" >.<br>
-    <input class="CajaTexto" type="text" name="ApellidoName"  placeholder="Ingrese el apellido" id="txtApellido">.<br>
-    <input type="button" name="Ingresar" id="btnIngresar" value="Enviar">.<br>
 
     <div id="respuesta" class="alert alert-primary"></div>
     
-    <h5>Lista de Personas</h5>
+    
+     <input type="text" id="txtNombre" placeholder="Nombre"><br>
+     <br>
+     <input type="text" id="txtApellido" placeholder="Apellido"><br>
+     <br>
+     <input type="number" id="txtTelefono" placeholder="Telefono"><br>
+     <br>
+     <input type="date" id="txtFecha" placeholder="dd/mm/aaaa"><br>
+     <br>
+     <input type="button"  id="btnEnviar" value="Enviar">.<br>
+     <br>
+
+
+    <h1>Lista de Personas</h1>
     <table id="Lista" class="table">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Fecha</th>
+                <th>Telefono</th>
                 <th>Accion</th>
             </tr>
         </thead>   
         <tbody id="tCuerpo">        
         </tbody>
-        <div id="respuesta"></div>
     </table>   
 </div>
 

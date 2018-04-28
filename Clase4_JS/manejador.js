@@ -43,7 +43,7 @@ function gestionarRespuestaGuardarServer() {
 
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-            div.innerHTML = responseText;
+            div.innerHTML = xhr.responseText;
             //si esta todo bien refresco la lista de personas
             TraerPersonas();
         } else {
@@ -122,13 +122,13 @@ function TraerPersonas(){
     //Voy por GET a buscar a las personas
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = gestionarRespuestaTraerPersonas;
-    xhr.open('GET','traerpersonas', true);
+    xhr.open('GET',"http://localhost:3000/traerpersonas", true);
     xhr.send();
 }
 //Respuesta al TraerPersonas
 function gestionarRespuestaTraerPersonas() {
 
-    var div = document.getElementById('Respuesta');
+    var div = document.getElementById('respuesta');
 
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {

@@ -1,0 +1,35 @@
+
+table
+{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 3px;
+   
+}
+th
+{
+    background-color: cyan;
+}
+
+h1{
+    text-align: center;
+    color: red;
+}
+
+td, th {
+  
+    text-align: center;
+    padding: 8px;
+}
+
+body
+{
+    background-image: url("");
+}
+
+div
+{
+    color: red;
+    text-align: center;
+}

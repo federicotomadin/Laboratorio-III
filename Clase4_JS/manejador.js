@@ -23,15 +23,14 @@ function GuardarServer() {
         xhr = new XMLHttpRequest();
         xhr.onreadystatechange = gestionarRespuestaGuardarServer;
         xhr.open('POST', "http://localhost:3000/agregarpersona", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Content-type", "application/json");
 
         //Objeto transformando a JSON
-        var data = "persona=" + JSON.stringify(persona);
+        var data = "personas=" + JSON.stringify(persona);
+        alert(data);
 
         xhr.send(data);
-    } else {
-        alert("Falta cargar datos.");
-    }
+    } 
 
 }
 
@@ -43,6 +42,7 @@ function gestionarRespuestaGuardarServer() {
 
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
+            alert(xhr.responseText);
             div.innerHTML = xhr.responseText;
             //si esta todo bien refresco la lista de personas
             TraerPersonas();
@@ -246,18 +246,18 @@ function gestionarRespuestaTraerPersona(){
 window.onload = function()
 {
     //Boton guardar
-    var btnGuardar = document.getElementById("btnGuardar");
+    var btnGuardar = document.getElementById("btnIngresar");
     //Seteo un evento al btnGuardar
     btnGuardar.addEventListener('click',function(){
         GuardarServer();        
     })
 
     //Boton modificar
-    var btnModificar = document.getElementById("btnModificar");
+  /*  var btnModificar = document.getElementById("btnModificar");
     //Seteo un evento al btnModificar
     btnModificar.addEventListener('click', function () {
         ModificarServer();
-    })
+    })*/
 
     //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
     TraerPersonas();
@@ -270,14 +270,17 @@ function ValidarDatos(nombre, apellido) {
 
     if (nombre == '' && apellido == '') {
 
-        document.getElementById("txtNombre").style.border = "red";
-        document.getElementById("txtApellido").style.border = "red";
+        document.getElementById("txtNombre").style.borderColor = 'red';
+        document.getElementById("txtApellido").style.borderColor = 'red';
+        alert("falta cargar el apellido y nombre");
         return false;
     } else if (nombre == '') {
-        document.getElementById("txtNombre").style.border = "red";
+        document.getElementById("txtNombre").style.borderColor= "red";
+        alert("falta cargar el nombre");
         return false;
     } else if (apellido == '') {
-        document.getElementById("txtApellido").style.border = "red";
+        document.getElementById("txtApellido").style.borderColor = 'red';
+        alert("falta cargar el apellido");
         return false;
 
     }

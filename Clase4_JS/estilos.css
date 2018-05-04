@@ -19,8 +19,20 @@ tr:nth-child(even) {
 
 .CajaTexto
 {
-     border: 3px double black;
+     border: 3px solid black;
     
 }
+
+.encabezado
+{
+    text-align: center;
+}
+
+h3
+{
+    text-align: center;
+}
+
+
 
 

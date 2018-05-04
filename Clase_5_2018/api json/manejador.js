@@ -9,34 +9,6 @@ var restoredPersonas;
 /*########################################### AGREGAR ############################################*/
 
 
-window.onload = function()
-{
-     //Boton guardar
-     var btnEnviar = document.getElementById("btnEnviar");
-     //Seteo un evento al btnGuardar
-     btnEnviar.addEventListener('click',function(){
-         AgregarPersona();        
-     })
-    
-    //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
-
-    var mydata = JSON.parse(data);
-    localStorage.setItem('personas', JSON.stringify(mydata));
-
-    restoredPersonas = JSON.parse(localStorage.getItem('personas'));
-    CargarTabla(restoredPersonas);
-    //TraerPersonas();
-
-    //for(i = 0; i < restoredPersonas.length; i++ ){
-
-    //}
-
-    //localStorage.getItem(personas)
-   // var json= JSON.parse( '{"nombre" : "matias" }' );
-  //  localStorage.setItem('personas', JSON.stringify(json));
- 
-}
-
 //Metodo para guardar en el servidor
 function GuardarServer() {
 
@@ -49,14 +21,13 @@ function GuardarServer() {
 
     if(ValidarDatos(nombre,apellido))
     {
-        var persona = {  "nombre": nombre, "apellido": apellido, "fecha": telefono, "telefono": fecha };
+     var persona = {  "nombre": nombre, "apellido": apellido, "fecha": telefono, "telefono": fecha };
 
 
 
 
     }
-
-
+}
 
 //Traigo la lista de personas por GET para luego armar la tabla
 function TraerPersonas(){
@@ -113,8 +84,9 @@ function CargarTabla(restoredPersonas){
 function EliminarPersona(indice)
 {
   objJSON = JSON.stringify(restoredPersonas);
-  var persona= objJSON[indice].telefono;
-  localStorage.removeItem(JSON.parse('perosnas', persona));
+  alert(JSON.stringify(restoredPersonas[indice]));
+  localStorage.removeItem(JSON.stringify(restoredPersonas[indice]));
+  CargarTabla(restoredPersonas); 
 }
 
 
@@ -183,6 +155,41 @@ function ValidarDatos(nombre, apellido) {
 
 }
 
+window.onload = function()
+{
+     //Boton guardar
+     var btnEnviar = document.getElementById("btnEnviar");
+     //Seteo un evento al btnGuardar
+     btnEnviar.addEventListener('click',function(){
+         AgregarPersona();   
+        })  
+
+    /* var btnEliminar = document.getElementById("btnEliminar");
+     btnEliminar.addEventListener('click', function(){
+         EliminarPersona(indice);
+     })     */
+    
+    //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
+
+    var mydata = JSON.parse(data);
+    localStorage.setItem('personas', JSON.stringify(mydata));
+
+    restoredPersonas = JSON.parse(localStorage.getItem('personas'));
+    CargarTabla(restoredPersonas);
+    //TraerPersonas();
+
+    //for(i = 0; i < restoredPersonas.length; i++ ){
+
+    //}
+
+    //localStorage.getItem(personas)
+   // var json= JSON.parse( '{"nombre" : "matias" }' );
+  //  localStorage.setItem('personas', JSON.stringify(json));
+ 
+}
+
+
+
 
    var data = `[{"nombre":"Chiquia","apellido":"Baptist","fecha":"1979/04/07","telefono":"4923023102"},
    {"nombre":"Annissa","apellido":"Kleinlerer","fecha":"1987/11/18","telefono":"6793823280"},
@@ -233,5 +240,4 @@ function ValidarDatos(nombre, apellido) {
    {"nombre":"Clayton","apellido":"Klagge","fecha":"1985/12/14","telefono":"5777413777"},
    {"nombre":"Laird","apellido":"McCauley","fecha":"1981/07/17","telefono":"8841425134"},
    {"nombre":"Cory","apellido":"Dunthorn","fecha":"1972/09/19","telefono":"4182392935"},
-   {"nombre":"Evangelina","apellido":"Preon","fecha":"1987/09/24","telefono":"7715261955"}]`;
-
+   {"nombre":"Evangelina","apellido":"Preon","fecha":"1987/09/24","telefono":"7715261955"}]`

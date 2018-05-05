@@ -2,7 +2,7 @@
 
 var xhr;
 var restoredPersonas;
-
+var personaGlobal;
 
 
 
@@ -44,12 +44,11 @@ function gestionarRespuestaTraerPersonas() {
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
             //Si esta todo bien, guardo la respuesta del server
-            var objPersonas = JSON.parse(xhr.responseText);
-
+            var restoredPersonas = JSON.parse(xhr.responseText);
 
           // localStorage.setItem({'Nombre' : json.stringify(objPersonas.nombre)}, JSON.stringify(objPersonas.apellido) );
             //llamo a mi función que dibujará la tabla.
-            CargarTabla(objPersonas);
+            CargarTabla(restoredPersonas);
             
         }
         else {
@@ -83,10 +82,10 @@ function CargarTabla(restoredPersonas){
 
 function EliminarPersona(indice)
 {
-  objJSON = JSON.stringify(restoredPersonas);
-  alert(JSON.stringify(restoredPersonas[indice]));
-  localStorage.removeItem(JSON.stringify(restoredPersonas[indice]));
-  CargarTabla(restoredPersonas); 
+  restoredPersonas.splice(indice,1);
+  CargarTabla(restoredPersonas);
+  //TraerPersonas();
+  
 }
 
 
@@ -111,7 +110,7 @@ function AgregarPersona()
     xhr.open('POST',"http://localhost:3000/nuevaPersona", true);
     xhr.setRequestHeader("Content-type", "application/json");
     var data = JSON.stringify(persona);
- 
+    localStorage.setItem('personas', JSON.stringify(data));
     xhr.send(data);
 }
 
@@ -123,7 +122,11 @@ function gestionarRespuestaNuevaPersona()
             if (xhr.status == 200) {
                 div.innerHTML = xhr.responseText;
                 //si esta todo bien refresco la lista de personas
+                            
+               // localStorage.setItem('personas', JSON.stringify());
                 TraerPersonas();
+             
+                         
             } else {
     
                 div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;

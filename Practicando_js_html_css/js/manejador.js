@@ -210,6 +210,7 @@ function TraerPersona(indice) {
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = gestionarRespuestaTraerPersona;
     xhr.open('GET', 'traerpersona?indice='+indice, true);
+    alert(indice);
     xhr.send();
 }
 
@@ -252,11 +253,11 @@ window.onload = function()
     })
 
     //Boton modificar
-    var btnModificar = document.getElementById("btnModificar");
+  /*  var btnModificar = document.getElementById("btnModificar");
     //Seteo un evento al btnModificar
     btnModificar.addEventListener('click', function () {
         ModificarServer();
-    })
+    })*/
 
     //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
     TraerPersonas();

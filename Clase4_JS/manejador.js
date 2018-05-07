@@ -1,6 +1,8 @@
 //HTTP
 
 var xhr;
+var PersonasGlobal;
+var IndiceGlobal;
 
 /*########################################### AGREGAR ############################################*/
 
@@ -17,18 +19,16 @@ function GuardarServer() {
         var persona = {  "nombre": nombre, "apellido": apellido };
 
         /*otra opcion*/
-        //var data = "nombre=" + encodeURIComponent(nombre) + "&apellido=" + encodeURIComponent(apellido);
+        var data = "nombre=" + encodeURIComponent(nombre) + "&apellido=" + encodeURIComponent(apellido);
 
 
         xhr = new XMLHttpRequest();
         xhr.onreadystatechange = gestionarRespuestaGuardarServer;
         xhr.open('POST', "http://localhost:3000/agregarpersona", true);
-        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         //Objeto transformando a JSON
-        var data = "personas=" + JSON.stringify(persona);
-        alert(data);
-
+       // var data = "personas=" + JSON.stringify(persona);
         xhr.send(data);
     } 
 
@@ -42,7 +42,6 @@ function gestionarRespuestaGuardarServer() {
 
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-            alert(xhr.responseText);
             div.innerHTML = xhr.responseText;
             //si esta todo bien refresco la lista de personas
             TraerPersonas();
@@ -66,7 +65,6 @@ function ModificarServer() {
         var apellido = document.getElementById('txtApellido').value;
     
         var indice = document.getElementById('hdIndice').value;
-    
         if (ValidarDatos(nombre, apellido)) {
             //Guardo en un objeto persona - para JSON
             var persona = { "nombre": nombre, "apellido": apellido };
@@ -75,10 +73,8 @@ function ModificarServer() {
             xhr.onreadystatechange = gestionarRespuestaModificarServer;
             xhr.open('POST', "http://localhost:3000/modificarpersona", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    
-            //Objeto transformando a JSON
-            var data = "persona=" + encodeURIComponent(JSON.stringify(persona)) + "&indice=" + encodeURIComponent(indice);
-        
+            //Objeto transformando a JSON   
+            var data = "persona=" + encodeURIComponent(JSON.stringify(persona)) + "&indice=" + encodeURIComponent(IndiceGlobal);
             xhr.send(data);
         }else{
             alert("Faltan cargar datos");
@@ -87,13 +83,13 @@ function ModificarServer() {
     }
 
 //respuesta al modificar server
-function gestionarRespeustaModificarServer()
+function gestionarRespuestaModificarServer()
 {
     var div = document.getElementById('respuesta');
     
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                div.innerHTML = responseText;
+                div.innerHTML = xhr.responseText;
                 //si esta todo bien refresco la lista de personas
                 TraerPersonas();
                 //Limpio las caja de texo y el indice
@@ -102,7 +98,10 @@ function gestionarRespeustaModificarServer()
                 document.getElementById('txtApellido').value = "";
                 //Vuelvo los botones como estaban
                 //Regla de botones
-                document.getElementById("btnGuardar").style.display = "block";
+              
+                document.getElementById("btnIngresar").style.display = "block";
+                //document.getElementById("btnIngresar").style.align= "center";
+               
                 document.getElementById("btnModificar").style.display = "none";
             } else {
     
@@ -133,7 +132,10 @@ function gestionarRespuestaTraerPersonas() {
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
             //Si esta todo bien, guardo la respuesta del server
+            var PersonasGlobal = JSON.parse(xhr.responseText);
+            localStorage.setItem('personas',JSON.stringify(PersonasGlobal));
             var objPersonas = JSON.parse(xhr.responseText);
+         
             //llamo a mi función que dibujará la tabla.
             CargarTabla(objPersonas);
             
@@ -187,7 +189,7 @@ function EliminarPersona(indice){
 
 function gestionarRespuestaEliminarServer(){
 
-    var div = document.getElementById('Respuesta');
+    var div = document.getElementById('respuesta');
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
             div.innerHTML = xhr.responseText;
@@ -205,26 +207,29 @@ function gestionarRespuestaEliminarServer(){
 
 //Busco la persona en el server por su indice
 function TraerPersona(indice) {
-    //Guardo el indice en un campo hidden  
-    document.getElementById('hdIndice').value = indice;
-    //Voy por GET a buscar a la persona
-    xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = gestionarRespuestaTraerPersona;
-    xhr.open('GET', 'traerpersona?indice='+indice, true);
-    xhr.send();
+  var objetoJSON= JSON.parse(localStorage.getItem('personas'));
+  IndiceGlobal= indice;
+
+  document.getElementById('txtNombre').value =objetoJSON[indice].nombre;
+  document.getElementById('txtApellido').value = objetoJSON[indice].apellido;
+
+  document.getElementById("btnIngresar").style.display = "none";
+  document.getElementById("btnModificar").style.display = "block";
+
 }
 
 //Respuesta cuando trae ala persona
 //Coloco los valores del obj en los campos
 //Reglas de botones
-function gestionarRespuestaTraerPersona(){
+/*function gestionarRespuestaTraerPersona(){
 
-    var div = document.getElementById('Respuesta');
-
+    var div = document.getElementById('respuesta');
+  
     if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-
+            alert(xhr.responseText);
             var persona = JSON.parse(xhr.responseText);
+            alert(persona);
            
             //coloco el valor del objeto en los campos de HTML
             document.getElementById('txtNombre').value = persona.nombre;
@@ -239,7 +244,7 @@ function gestionarRespuestaTraerPersona(){
             div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
         }
     }
-}
+}*/
 
 
 /*############################## ONLOAD #####################################################*/
@@ -253,15 +258,14 @@ window.onload = function()
     })
 
     //Boton modificar
-  /*  var btnModificar = document.getElementById("btnModificar");
+  var btnModificar = document.getElementById("btnModificar");
     //Seteo un evento al btnModificar
     btnModificar.addEventListener('click', function () {
-        ModificarServer();
-    })*/
+       ModificarServer();
+    })
 
     //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
     TraerPersonas();
-    
 }
 
 

@@ -7,9 +7,14 @@ function ValidarUsuario() {
     var email = document.getElementById('txtEmail').value;
     var contrasenia = document.getElementById('txtContrasenia').value;
 
-   
+     spinner.innerHTML="<img src='spinner.gif'>";
+    //spinner.innerHTML="<img src='spinner.gif'>"
+
+    
+  
       
         var persona = {  "usr": email, "pass": contrasenia };
+        
 
         /*otra opcion*/
         //var data = "nombre=" + encodeURIComponent(nombre) + "&apellido=" + encodeURIComponent(apellido);
@@ -19,10 +24,13 @@ function ValidarUsuario() {
         xhr.onreadystatechange = gestionarValidarUsuario;
         xhr.open('POST', "http://localhost:3000/loginUsuario", true);
         xhr.setRequestHeader("Content-type", "application/json");
+        
+     
+       
 
         //Objeto transformando a JSON
        // var data = "personas=" + JSON.stringify(persona);
-       
+      
         xhr.send(JSON.stringify(persona));
        
     } 
@@ -30,18 +38,18 @@ function ValidarUsuario() {
 function gestionarValidarUsuario() {
 
     var div = document.getElementById('respuesta');
-
+    
     if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
+        if (xhr.status == 200) {   
+            spinner.hidden=true;      
+           
             div.innerHTML = xhr.responseText;
             if(xhr.responseText === 'true')
-            {
-                alert("entro aca");
+            {               
                 window.location.replace("file:///C:/Users/sam/Desktop/Laboratorio-III/Primer_Parcial_2008/index.html");
-                return;
-                
+                return;                
             }      
-            alert("no entro");
+           
           
         } else {
 
@@ -60,6 +68,9 @@ window.onload = function()
     btnIngresar.addEventListener('click',function(){
       ValidarUsuario();      
     })
+
+    var spinner= document.getElementById('spinner');
+   
 
   
 }

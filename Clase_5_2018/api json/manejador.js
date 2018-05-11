@@ -174,8 +174,8 @@ window.onload = function()
     
     //Cuando carga la pagina TRAIGO TODAS LAS PERSONAS
 
-    var mydata = JSON.parse(data);
-    localStorage.setItem('personas', JSON.stringify(mydata));
+    //var mydata = JSON.parse(data);
+    localStorage.setItem('personas', data);
 
     restoredPersonas = JSON.parse(localStorage.getItem('personas'));
     CargarTabla(restoredPersonas);

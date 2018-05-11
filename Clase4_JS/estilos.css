@@ -7,11 +7,19 @@ table
     border: 2px;
 }
 
-td, th {
+th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
+    background-color: coral;
 }
+
+td
+{
+    padding: 8px;
+    border: 1px solid #dddddd;
+}
+
 
 tr:nth-child(even) {
     background-color: #dddddd;
@@ -26,11 +34,24 @@ tr:nth-child(even) {
 .encabezado
 {
     text-align: center;
+    background: lightblue url("fondo.jpg") no-repeat fixed center; 
 }
 
 h3
 {
     text-align: center;
+}
+h1 
+{
+    text-align: center;
+    color: blue;
+
+}
+
+.botones
+{
+   margin-left: auto;
+   margin-right: auto;
 }
 
 

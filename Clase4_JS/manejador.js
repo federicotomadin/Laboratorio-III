@@ -165,8 +165,8 @@ function CargarTabla(objPersonas){
             tCuerpo.innerHTML = tCuerpo.innerHTML +
                 "<td>" + objPersonas[i].nombre + "</td>" +
                 "<td>" + objPersonas[i].apellido + "</td>" +
-                "<td><input id='btnModificar' class='btn btn-primary' type='button' value='Modificar' onclick='TraerPersona(" + i + ");'/>"+
-                "<input id='btnEliminar' class='btn btn-danger' type='button' value='Eliminar' onclick='EliminarPersona(" + i +");'/></td>"; 
+                "<td style= 'text-align:center; width: 25%;'><input id='btnModificar' class='botones' type='button' value='Modificar' onclick='TraerPersona(" + i + ");'/>"+
+                "<input id='btnEliminar' class='botones' type='button' value='Eliminar' onclick='EliminarPersona(" + i +");'/></td>"; 
         }
     }
     

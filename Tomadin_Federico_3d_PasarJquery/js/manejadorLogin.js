@@ -1,6 +1,7 @@
 
 var emailGlobal;
 
+
 function ValidarUsuario() {
 
     //Tomo los valores del HTML
@@ -31,7 +32,8 @@ function ValidarUsuario() {
 
         //Objeto transformando a JSON
        // var data = "personas=" + JSON.stringify(persona);
-      
+        spinner.innerHTML="<img src='spinner.gif'>";
+        spinner.hidden=false;
         xhr.send(JSON.stringify(persona));
        
     } 
@@ -41,13 +43,12 @@ function gestionarValidarUsuario() {
     var div = document.getElementById('respuesta');
     
     if (xhr.readyState == 4) {
-        if (xhr.status == 200) {   
-            //spinner.hidden=true;      
-            var respuesta=(JSON.parse(xhr.responseText)); 
-            alert(respuesta.type) ;         
+        if (xhr.status == 200) {        
+            var respuesta=(JSON.parse(xhr.responseText));     
+            spinner.hidden=true;       
             if(respuesta.type === 'error')
             { 
-              
+                spinner.hidden=true;
                 div.innerHTML="Debe ingresar un email y un password valido";
                 document.getElementById("txtEmail").style.borderColor = 'red';
                 document.getElementById("txtContrasenia").style.borderColor = 'red';           
@@ -59,7 +60,7 @@ function gestionarValidarUsuario() {
               
                 localStorage.setItem('usuario',respuesta.type );
                 localStorage.setItem('email', emailGlobal);
-                window.location.replace("file:///C:/Users/alumno/Desktop/Laboratorio-III/Tomadin_Federico_3d/index.html");
+                window.location.replace("index.html");
             }         
           
         } else {
@@ -77,6 +78,10 @@ window.onload = function()
     btnIngresar.addEventListener('click',function(){
       ValidarUsuario();      
     })
+
+    var spinner= document.getElementById('spinner');
+
+
 
    // var spinner= document.getElementById('spinner');
    

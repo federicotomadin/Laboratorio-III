@@ -156,7 +156,7 @@ window.onload = function()
             Cerrar();   
            }) 
 
- var spinner= document.getElementById('spinner').innerHTML="<img src='spinner.gif'>";
+    var spinner= document.getElementById('spinner').innerHTML="<img src='spinner.gif'>";
     
     var usuario = localStorage.getItem('usuario');
   
@@ -167,6 +167,7 @@ window.onload = function()
         return;
     }
 
+    TraerPersonas();
     document.getElementById('contenedor').hidden=true;
    
 

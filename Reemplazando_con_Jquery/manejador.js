@@ -24,7 +24,11 @@ function GuardarServer(){
             type: "post",
             dataType: "html",
             data: persona,
-            success:gestionarRespuestaGuardarServer,
+            success:function(result)
+            {
+                TraerPersonas();
+
+            },
             cache: false,
             error:function(jqXHR, textStatus, textError){ alert("error!!" + textStatus + textError)},
             contentType: false,
@@ -47,25 +51,7 @@ function GuardarServer(){
     
 }
 //Respuesta al GuardarServer
-function gestionarRespuestaGuardarServer(respuesta) {
 
-    var div = $('#respuesta');
-
-            div.innerHTML = respuesta; //SUCCESS function(responsText)
-            //Como esta todo bien, llamo asinconicamente a traer todos las personas del servidor
-            TraerPersonas();
-        
-     
-
-            div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
-        }
-    }
-   
-
-        div.innerHTML = '<span>Algo pasa que sale por aca</span>';
-    }
-
-}
 
 /*########################################### MODIFICAR ############################################*/
 

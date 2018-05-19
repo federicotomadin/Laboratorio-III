@@ -120,7 +120,9 @@ function gestionarRespuestaNuevaPersona()
     
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                div.innerHTML = xhr.responseText;
+                div.innerHTML = JSON.stringify(xhr.responseText);
+                var variable= xhr.responseText;
+               
                 //si esta todo bien refresco la lista de personas
                             
                // localStorage.setItem('personas', JSON.stringify());

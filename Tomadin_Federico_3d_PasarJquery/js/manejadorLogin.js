@@ -39,10 +39,9 @@ function ValidarUsuario() {
        
 $(document).ready(function()
 {
-    $('#btnIngresar').click(function()
-    {
-        ValidarUsuario();   
-    });
+    $('#btnIngresar').click(ValidarUsuario);
+
+
 
   $('#spinner').html("<img src='spinner.gif'>").hide();
    

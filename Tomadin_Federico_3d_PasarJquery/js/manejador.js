@@ -22,36 +22,98 @@ function TraerPersonas(){
 
 }
 
+function Agregar()
+{
+    var id= JSON.parse(localStorage.getItem('personas')).length+1;
+    localStorage.setItem('id',JSON.stringify(id));
+  
+  
+  
+    var legajo=$('#txtLegajoContenedor').val();
+    var nombre= $('#txtNombreContenedor').val();
+    var materia=$('#txtMateriaContenedor').val();
+    var nota=$('#txtNotaContenedor').val();
+
+    var alumno = { "id": parseInt(id), "legajo": legajo,
+        "nombre": nombre, "materia": materia,
+        "nota":  nota};
+
+    localStorage.setItem('personas',JSON.stringify(alumno));
+
+    alert(JSON.stringify(alumno));
+
+        $('#spinner').show();
+        $.ajax({
+        url: 'http://localhost:3000/agregarNota',
+        data: alumno,
+        method: 'post',
+        beforeSend: function(){
+            $('#spinner').show();
+        },
+        dataType: 'json',
+        success: function(response)
+        {     
+         alert("estoy dentro de Agregar");    
+        TraerPersonas();
+        $('#txtLegajoContenedor').val('');
+        $('#txtNombreContenedor').val('');
+        $('#txtMateriaContenedor').val('');
+        $('#txtNotaContenedor').val('');
+        $('#spinner').hide();
+        }
+
+        })
+        
+        $('#vgVentana').hide();
+}
+
 function Guardar() {
     
-        //Tomo los valores del HTML
         var id= localStorage.getItem('id');
-
-        var alumno = { "id": id, "legajo": $('#txtLegajo').val(),
-        "nombre": $('#txtNombre').val(), "materia": $('#txtMateria').val(),
-        "nota":  $('#txtNota').val()};
-   
+        
+        var legajo=$('#txtLegajo').val();
+        var nombre= $('#txtNombre').val();
+        var materia=$('#txtMateria').val();
+        var nota=$('#txtNota').val();
+ 
+        var alumno = { "id": id, "legajo": legajo,
+        "nombre": nombre, "materia": materia,
+        "nota":  nota};
+         
         var indice = $('#hdIndice').val();
+     
+
+      /*  if(indice=='')
+        {
+            indice=arreglo.length;
+            var alumno = { "id": indice+1, "legajo": legajo,
+        "nombre": nombre, "materia": materia,
+        "nota":  nota};
+        }*/
+
     
         $('#spinner').show();
         $.ajax({
         url: 'http://localhost:3000/editarNota',
         data: alumno,
         method: 'post',
+        beforeSend: function(){
+            $('#spinner').show();
+        },
         dataType: 'json',
         success: function(response)
-        { 
+        {         
         TraerPersonas();
-        $('#hdLegajo').val() = "";
-        $('#txtNombre').val() = "";
-        $('#txtMateria').val() = "";
-        $('#txtNota').val() = "";
+        $('#txtLegajoContenedor').val('');
+        $('#txtNombreContenedor').val('');
+        $('#txtMateriaContenedor').val('');
+        $('#txtNotaContenedor').val('');
         $('#spinner').hide();
         }
 
         })
         
-        $('.vgVentana').hide();
+        $('#vgVentana').hide();
            
     }
 
@@ -65,7 +127,8 @@ function TraerPersona(indice) {
     $('#txtMateria').val(objetoJSON[indice].materia);
     $('#txtNota').val(objetoJSON[indice].nota);
 
-    $('.vgVentana').show();
+    $('#vgVentana').show();
+    $('#ventana').show();
     
   }
 
@@ -107,34 +170,40 @@ function LimpiarTabla(){
 
 function Cerrar()
 {
-    $('.vgVentana').hide();
+    $('#ventana').hide();
+    $('#vgVentana').hide();
+    $('#contenedor').hide();
 
 }
 
 
 $(document).ready(function()
 {
-     $('#btnGuardar').click(Guardar)
-
-    $('#btnCerrar').click(Cerrar)
-
+     $('#btnGuardar').click(Guardar);
+     $('#btnCerrar').click(Cerrar);
+     $('#btnCerrarContenedor').click(Cerrar);
+     $('#btnGuardarContenedor').click(Guardar);
 
     $('#spinner').html("<img src='spinner.gif'>");
     $('#spinner').hide();
-    $('.vgVentana').hide();
+    $('#vgVentana').hide();
+    $('#ventana').hide();
     
     var usuario = localStorage.getItem('usuario');
   
     if(usuario==='Admin')  
     {
         $('#spinner').hide();
-        $("#contenedor").show();
+        $('#btnCerrarContenedor').hide();
         TraerPersonas();
         return;
     }
 
     TraerPersonas();
-    $("#contenedor").hide();
+    $('#btnCerrarContenedor').hide();
+    $("#vgVentana").hide();
+    $("#ventana").hide();
+   
    
 })
 

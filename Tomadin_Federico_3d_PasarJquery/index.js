@@ -67,23 +67,6 @@ app.post("/login",function(req,res){
     
 });
 
-/*app.post("/agregarNota", function(req,res){
-    setTimeout(function(){
-        console.log("Llego al servidor "+JSON.stringify(req.body));
-
-        if(req.body.id!=undefined && req.body.legajo!=undefined && req.body.nombre!=undefined && req.body.materia!=undefined && req.body.nota!=undefined){
-            console.log("Sale del servidor "+"{'respuesta': 'ok'}");
-           notas.push(req.body);
-
-            res.send({'respuesta': 'ok'});    
-        
-        return;      
-              
-            }
-
-    },2000)
-})*/
-
 app.post("/editarNota",function(req,res){
     setTimeout(function(){
         console.log("Llego al servidor "+JSON.stringify(req.body));
@@ -97,19 +80,42 @@ app.post("/editarNota",function(req,res){
 					notas[i].materia = req.body.materia;
 					notas[i].nota = req.body.nota;
 					res.send({'type': 'ok'});
-					console.log("Sale del servidor "+"{'type': 'error',{'type': 'ok'}")
-					return;	
-                }
-              
-              
-            }
+					console.log("Sale del servidor "+"{'type': 'ok'}")
+					return;
+					
+				}
+			}
                 res.send({'type': 'error','message':'No exite la nota que se quiere modificar'});
 				console.log("Sale del servidor "+"{'type': 'error','message':'No exite la nota que se quiere modificar'}")
             return;
-        }
+        }else{
+			console.log("Sale del servidor "+"{'type': 'error','message':'Faltan datoas'}")
+			res.send({'type': 'error','message':'Faltan datoas'});	
+		}
         
-        else{
+    },2000);
+    
+});
 
+app.post("/eliminarNota",function(req,res){
+    setTimeout(function(){
+        console.log("Llego al servidor "+JSON.stringify(req.body));
+       
+        if(req.body.id!=undefined ){
+           
+			for(var i =0;i<notas.length;i++){
+				if(notas[i].id == req.body.id){
+					notas.splice(i, 1);
+					res.send({'type': 'ok'});
+					console.log("Sale del servidor "+"{'type': 'ok'}")
+					return;
+					
+				}
+			}
+                res.send({'type': 'error','message':'No exite la nota que se quiere eliminar'});
+				console.log("Sale del servidor "+"{'type': 'error','message':'No exite la nota que se quiere eliminar'}")
+            return;
+        }else{
 			console.log("Sale del servidor "+"{'type': 'error','message':'Faltan datoas'}")
 			res.send({'type': 'error','message':'Faltan datoas'});	
 		}

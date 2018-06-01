@@ -113,6 +113,8 @@ function CargarLista() {
     })
 }
 
+
+
 function BorrarJquery(index) {
     info = 'indice=' + encodeURIComponent(index);
     $.ajax({

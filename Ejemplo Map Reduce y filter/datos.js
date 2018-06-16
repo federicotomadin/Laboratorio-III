@@ -1009,15 +1009,29 @@ var datos =[
   // Retornar un array de objetos que solo contengan las claves name, email y age, 
   // de todos los usuarios mayores que '25'
   lib.userOlderThan = function () {
-  
-
+   
   };
 
   // Retornar un objeto que contenga solo el nombre y la edad (name y age) del usuario 
   // mas grande.
   lib.olderUser = function () {
+   
+      var edadMayor = datos.reduce(function(edad,user){
+        if(user.age > edad){
+          edad = user.age;
+        }      
+        return edad;
+      },0);
+      
+      var retorno = datos.filter(function(user){
+          return user.age == edadMayor
+      }).map(function(user){
+        return {"name" : user.name, "age" : user.age};
+      }); 
   
-  };
+      return retorno;
+    };
+    
 
   // Retornar el promedio de edad de los usuarios (number)
   lib.userAgeAverage = function () {

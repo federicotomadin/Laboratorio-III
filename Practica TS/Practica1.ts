@@ -1,15 +1,15 @@
 // Tipos
-var batman = "Bruce";
-var superman = "Clark";
+var batman:string = 'Bruce';
+var superman :string = "Clark";
 
-var existe = false;
+var existe : boolean = false;
 
-// Tuplas
-var parejaHeroes = [batman,superman];
+// Tuplas 
+var parejaHeroes:string[]  = [batman,superman];
 var villano = ["Lex Lutor",5,true];
 
 // Arreglos
-var aliados = ["Mujer Maravilla","Acuaman","San", "Flash"];
+var aliados:string[] = ["Mujer Maravilla","Acuaman","San", "Flash"];
 
 //Enumeraciones
 var fuerzaFlash = 5;

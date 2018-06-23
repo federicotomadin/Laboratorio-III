@@ -6,6 +6,7 @@ carroceria:string;
 modelo:string;
 antibalas:boolean;
 pasajeros:number|undefined;
+
  
 constructor(carro:string,mod:string,anti:boolean,pasa?:number){
  
@@ -32,18 +33,21 @@ var villanos:otra[]=[villano1,villano2];
 
 
 // Villanos debe de ser un arreglo de objetos personalizados
-var villanos = [{
-  nombre:"Lex Luthor",
-  edad: 54,
-  mutante:false
+var villanos:otra[] = [{
+  carroceria:"Lex Luthor",
+  modelo: 54,
+  antibalas:false, 
+  pasajeros:null
 },{
-  nombre: "Erik Magnus Lehnsherr",
-  edad: 49,
-  mutante: true
+  carroceria: "Erik Magnus Lehnsherr",
+  modelo: 49,
+  antibalas: true,
+  pasajeros:null
 },{
-  nombre: "James Logan",
-  edad: undefined,
-  mutante: true
+  carroceria: "James Logan",
+  modelo: undefined,
+  antibalas: true,
+  pasajeros:null
 }];
 
 // Multiples tipos
@@ -66,8 +70,8 @@ var charles:charles = {
 };
 
 var apocalipsis:apocalipsis = {
-  lider:true,
-  miembros: ["Magneto","Tormenta","Psylocke","Angel"]
+  poder:true,
+  estatura: ["Magneto","Tormenta","Psylocke","Angel"]
 }
 
 // Mystique, debe poder ser cualquiera de esos dos mutantes (charles o apocalipsis)

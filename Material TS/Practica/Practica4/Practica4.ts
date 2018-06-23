@@ -36,7 +36,8 @@ Reir():void;
 let Guason:Pelicula = {
   reir: true,
   comer:true,
-  llorar:false
+  llorar:false,
+  Reir() {}
 }
 
 function Reir( guason:Pelicula ):void{
@@ -47,8 +48,14 @@ function Reir( guason:Pelicula ):void{
 
 
 // Cree una interfaz para la siguiente funcion
+interface Ciudad{
 
-function ciudadGotica( ciudadanos:string[] ):number{
+  ciudadGotica(variable:string[]):number;
+  }
+  
+
+
+function ciudadGoticaa( ciudadanos:string[] ):number{
   return ciudadanos.length;
 }
 
@@ -63,3 +70,34 @@ function ciudadGotica( ciudadanos:string[] ):number{
     - estadoCivil
     - imprimirBio(): void // en consola una breve descripcion.
 */
+
+
+interface Propiedades {
+  nombre: string;
+  edad:number;
+  sexo:string;
+  estadoCivil:string;
+  imprimirBio():void;
+}
+
+class Personas implements Propiedades
+{
+  nombre: string;
+  edad:number;
+  sexo:string;
+  estadoCivil:string;
+
+  constructor(nom:string,ed:number,sexo:string,estado:string)
+  {
+    this.nombre=nom;
+    this.edad=ed;
+    this.sexo=sexo;
+    this.estadoCivil=estado;
+  }
+
+  imprimirBio()
+  {
+     console.log({"Nombre" : this.nombre, "Edad":this.edad, "sexo":this.sexo, "estadoCivo":this.estadoCivil} )
+  }
+}
+

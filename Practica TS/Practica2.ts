@@ -1,22 +1,22 @@
 // Funciones Básicas
-function sumar( a, b ){
+function sumar( a:number, b:number ){
   return a + b;
 }
 
-var contar = function( heroes ){
+var contar = function( heroes:string[] ):number{
   return heroes.length;
 }
 var superHeroes = ["Flash", "Arrow", "Superman", "Linterna Verde"];
 contar(superHeroes);
 
 //Parametros por defecto
-function llamarBatman( llamar ){
+function llamarBatman( llamar:boolean ){
   if( llamar ){
     console.log("Batiseñal activada");
   }
 }
 
-llamarBatman();
+llamarBatman(true);
 
 // Rest?
 function unirheroes( ...personas:string[] ){
@@ -25,8 +25,8 @@ function unirheroes( ...personas:string[] ){
 
 
 // Tipo funcion
-function noHaceNada( numero, texto, booleano, arreglo ){
+function noHaceNada( numero:number, texto:string, booleano:boolean, arreglo:string[] ){
 }
 
 // Crear el tipo de funcion que acepte la funcion "noHaceNada"
-var noHaceNadaTampoco;
+var noHaceNadaTampocoo = noHaceNada(1,"",true,["asdf","asdf"]);

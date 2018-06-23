@@ -23,30 +23,30 @@
       <div class="container-fluid">
         <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
           <input type="hidden" id="indexModificar">
-          <h2>Ingrese los datos de la mascota</h2>
-          <br>
+          <h2>Ingrese los datos de la mascota</h2><br>
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="ID" placeholder="ID" /><input type="checkbox" class="chID" onchange="Controladora.FiltroColID()"/>
+          
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="ID" placeholder="ID"/><input type="checkbox" class="chID" onchange="Controladora.FiltroColID()"/>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="Nombre" placeholder="Nombre" /><input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()" />
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="Nombre" placeholder="Nombre"/><input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()"/>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="Edad" placeholder="Edad" /><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()" />
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="Edad" placeholder="Edad"/><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()"/>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="CantidadPatas" placeholder="CantidadPatas" /><input type="checkbox" class="chCantidadPatas" onchange="Controladora.FiltroColCantidadPatas()" />
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="CantidadPatas" placeholder="CantidadPatas"/><input type="checkbox" class="chCantidadPatas" onchange="Controladora.FiltroColCantidadPatas()" />
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-6 control-label">Tipo</label>
+            <label class="col-md-6 col-sm-6 col-lg-6 control-label">Tipo</label>
             <div class="col-md-6">
               <select name="Tipo" id="Tipo">
 
@@ -54,18 +54,26 @@
               </select>
             </div>
           </div>
-          <br>
+        
+
+          
+        
+        
+ 
+         
           <div class="form-group">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6 col-lg-6">
               <input type="button" id="CargarMascota" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarMascota()">
               <input type="button" value="Mostrar" id="MostrarMascota" class="btn btn-primary" onclick="Controladora.MostrarMascotas()">
-              <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br>
+              <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br><br>
               <input type="button" value="Promedio de Patas" id="PromedioPatas" class="btn btn-default" onclick="Controladora.PromedioPatas()">
               <div id="promedio"><br>
               </div>
             </div>
           </div>
-        </div>
+        
+        
+      </div>
         <!--cierre de la columna-->
 
          <!--Comienza la tabla-->

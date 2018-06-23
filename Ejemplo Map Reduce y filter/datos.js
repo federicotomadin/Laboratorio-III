@@ -997,19 +997,47 @@ var datos =[
 
   // Retornar una array de strings (el nombre de los usarios de sexo femenino)
   lib.femaleUsers = function () {
+    var femenino = datos.filter(function(item){
+         if(item.gender === "female")
+         return true;
 
+    }).map(function(item){
+          return {"nombre" : item.name }
+
+    });
+    return femenino;
   
   };
 
   // Retornar una array de strings (el email de los usarios de sexo masculino)
   lib.maleUsersEmails = function () {
+    var femenino = datos.filter(function(item){
+      if(item.gender === "male")
+      return true;
+
+      }).map(function(item){
+       return {"email" : item.email }
+
+      });
+ return femenino;
+
   
   };
 
   // Retornar un array de objetos que solo contengan las claves name, email y age, 
   // de todos los usuarios mayores que '25'
   lib.userOlderThan = function () {
+    var usuario = datos.filter(function(item){
+
+           return item.age>25
+
+
+    }).map(function(item){
+
+      return {"Name" : item.name , "email" : item.email, "edad" : item.age  }
+    })
    
+    return usuario;
   };
 
   // Retornar un objeto que contenga solo el nombre y la edad (name y age) del usuario 
@@ -1035,17 +1063,47 @@ var datos =[
 
   // Retornar el promedio de edad de los usuarios (number)
   lib.userAgeAverage = function () {
-  
+        var promedio = datos.reduce(function(prom,item){
+
+           return  prom += item.age;         
+
+        }, 0)
+
+        return promedio / (datos.length);  
   };
 
   // Retornar el promedio de edad de los usuarios hombres (number)
   lib.userMaleAgeAverage = function () {
+    var promedio = datos.reduce(function(prom,item){
+
+      if(item.gender == "male")
+      {
+      prom += item.age;  
+      }   
+      return prom;    
+
+   }, 0)
+
+   return promedio / (datos.length);  
     
   
   };
 
   // Retornar el promedio de edad de los usuarios mujeres (number)
   lib.userFemaleAgeAverage = function () {
+
+    var promedio = datos.reduce(function(prom,item){
+
+      if(item.gender == "female")
+      {
+      prom += item.age;  
+      }   
+      return prom;    
+
+   }, 0)
+
+   return promedio / (datos.length);  
+
   
   };
 
@@ -1053,6 +1111,9 @@ var datos =[
   // cada property del objeto es el nombre de una etiqueta
   // y el value es la cantidad de usuarios que tienene esa etiqueta
   lib.tagCloud = function () {
+    
+
+
     
   };
   

@@ -7,4 +7,4 @@ $(function () {
     console.log("HOla");
 });
 //compilo con con tsc app
-//para dejar compilarndo tsc -w
+//para dejar compilarndo tsc -w 

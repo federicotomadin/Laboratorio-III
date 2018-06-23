@@ -16,24 +16,26 @@ var Batimovil = {
 var Guason = {
     reir: true,
     comer: true,
-    llorar: false
+    llorar: false,
+    Reir: function () { }
 };
 function Reir(guason) {
     if (guason.reir) {
         console.log("JAJAJAJA");
     }
 }
-// Cree una interfaz para la siguiente funcion
-function ciudadGotica(ciudadanos) {
+function ciudadGoticaa(ciudadanos) {
     return ciudadanos.length;
 }
-// Cree una interfaz que obligue crear una clase
-// con las siguientes propiedades y metodos
-/*
-  propiedades:
-    - nombre
-    - edad
-    - sexo
-    - estadoCivil
-    - imprimirBio(): void // en consola una breve descripcion.
-*/
+var Personas = /** @class */ (function () {
+    function Personas(nom, ed, sexo, estado) {
+        this.nombre = nom;
+        this.edad = ed;
+        this.sexo = sexo;
+        this.estadoCivil = estado;
+    }
+    Personas.prototype.imprimirBio = function () {
+        console.log({ "Nombre": this.nombre, "Edad": this.edad, "sexo": this.sexo, "estadoCivo": this.estadoCivil });
+    };
+    return Personas;
+}());

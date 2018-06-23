@@ -19,25 +19,28 @@ var villano2 = new otra("Erik Magnus Lehnsherr", "6x6", false);
 var villanos = [villano1, villano2];
 // Villanos debe de ser un arreglo de objetos personalizados
 var villanos = [{
-        nombre: "Lex Luthor",
-        edad: 54,
-        mutante: false
+        carroceria: "Lex Luthor",
+        modelo: 54,
+        antibalas: false,
+        pasajeros: null
     }, {
-        nombre: "Erik Magnus Lehnsherr",
-        edad: 49,
-        mutante: true
+        carroceria: "Erik Magnus Lehnsherr",
+        modelo: 49,
+        antibalas: true,
+        pasajeros: null
     }, {
-        nombre: "James Logan",
-        edad: undefined,
-        mutante: true
+        carroceria: "James Logan",
+        modelo: undefined,
+        antibalas: true,
+        pasajeros: null
     }];
 var charles = {
     poder: "psiquico",
     estatura: 1.78
 };
 var apocalipsis = {
-    lider: true,
-    miembros: ["Magneto", "Tormenta", "Psylocke", "Angel"]
+    poder: true,
+    estatura: ["Magneto", "Tormenta", "Psylocke", "Angel"]
 };
 // Mystique, debe poder ser cualquiera de esos dos mutantes (charles o apocalipsis)
 var mystique;

@@ -1,6 +1,6 @@
 
 // Objetos
-var batimovil = {
+var batimovill = {
   carroceria: "Negra",
   modelo: "6x6",
   antibalas: true,
@@ -16,6 +16,7 @@ var bumblebee = {
     console.log("Disparando");
   }
 };
+
 
 
 // Villanos debe de ser un arreglo de objetos personalizados
@@ -40,9 +41,11 @@ var charles = {
   estatura: 1.78
 };
 
-var apocalipsis = {
-  lider:true,
-  miembros: ["Magneto","Tormenta","Psylocke","Angel"]
+
+
+var apocalipsis:apocalipsis = {
+  poder:true,
+  estatura: ["Magneto","Tormenta","Psylocke","Angel"]
 }
 
 // Mystique, debe poder ser cualquiera de esos dos mutantes (charles o apocalipsis)

@@ -1,21 +1,24 @@
 // Tipos
-var batman:string = 'Bruce';
-var superman :string = "Clark";
+var batmann: string = 'Bruce';
+var supermann :string = "Clark";
 
-var existe : boolean = false;
+var existee : boolean = false;
 
 // Tuplas 
-var parejaHeroes:string[]  = [batman,superman];
-var villano = ["Lex Lutor",5,true];
+var parejaHeroesss :string[]  = [batmann,supermann];
+var villano  = ["Lex Lutor",5,true];
 
 // Arreglos
-var aliados:string[] = ["Mujer Maravilla","Acuaman","San", "Flash"];
+var aliadoss:string[] = ["Mujer Maravilla","Acuaman","San", "Flash"];
 
 //Enumeraciones
-var fuerzaFlash = 5;
-var fuerzaSuperman = 100;
-var fuerzaBatman = 1;
-var fuerzaAcuaman = 0;
+enum Fuerzas{
+ fuerzaFlash = 5,
+ fuerzaSuperman = 100,
+ fuerzaBatman = 1,
+ fuerzaAcuaman = 0,
+}
+
 
 // Retorno de funciones
 function activar_batiseñal(){
@@ -27,6 +30,6 @@ function pedir_ayuda(){
 }
 
 // Aserciones de Tipo
-var poder = "100";
-var largoDelPoder = poder.length;
+var poderr = "100";
+var largoDelPoderr = poder.length;
 console.log( largoDelPoder );

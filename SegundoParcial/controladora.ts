@@ -3,7 +3,6 @@
 /// <reference path="Mascota.ts" />
 
 
-
 $(document).ready(function () {
 
 
@@ -21,17 +20,17 @@ class Controladora {
         let edad = Number($("#Edad").val());
         let tipo = String($("#Tipo").val());
         let cantidad_patas = Number($("#CantidadPatas").val());
-        let MascotasStorage = localStorage.getItem("Mascotas");
-        let arrayMascotas = Array<clases.Mascota>();
+        let arrayMascotas: Array<clases.Mascota> = JSON.parse(localStorage.getItem("Mascotas"));
         let ObjetoMascota: clases.Mascota = new clases.Mascota(id, nombre, edad, cantidad_patas, tipo);
-      /*  if (MascotasStorage == null) {
+        
+        if (arrayMascotas == null) {
 
             console.log("agregar");
             arrayMascotas = new Array<clases.Mascota>();
             arrayMascotas.push(ObjetoMascota);
             localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
 
-        }*/
+        }
       
 
             //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
@@ -44,16 +43,11 @@ class Controladora {
                 arrayMascotas.splice(i, 1);
 
             }
-
-
             arrayMascotas.push(ObjetoMascota);
             localStorage.setItem("Mascotas", JSON.stringify(arrayMascotas));
-            Controladora.LimpiarForm();
-        
-
-          Controladora.MostrarMascotas();
+            Controladora.LimpiarForm();     
+            Controladora.MostrarMascotas();
     }
-
 
     public static LimpiarForm() {
         $("#ID").val("");
@@ -89,8 +83,7 @@ class Controladora {
 
    
 
-//------------------------------PROMEDIO --------------------------------------------------//
-
+//----------------------------------PROMEDIO --------------------------------------------------//
 
 
     public static PromedioPatas() {
@@ -105,33 +98,18 @@ class Controladora {
     }
 
 
+//-------------------------------------- CARGA SELECT --------------------------------------//
 
-//----------------------------- CARGA SELECT --------------------------------------//
-
-
-
-    public static CargarSelect() {
-
+      public static CargarSelect() {
 
         for (let i = 0; i < 6; i++) {
             $("#Tipo").append(new Option(clases.Tipos[i]));
         }
-
-
     }
-
-
-
-
 
  //--------------------------------  FILTROS  -----------------------------------//
 
-
-
-
-
-
- public static FiltroColID(): void {
+     public static FiltroColID(): void {
     
     
             let arrayMascotas: Array<clases.Mascota> = JSON.parse(localStorage.getItem("Mascotas"));

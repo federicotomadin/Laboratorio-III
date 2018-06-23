@@ -2,7 +2,7 @@
  namespace  clases
  {
  
-    export class  Animal
+    export class  Persona
     {
         nombre:string;
         edad:number;
@@ -18,7 +18,7 @@
 
 
 
-    public AnimalJson():string
+    public PersonaJson():string
     {
         return `${this.nombre}, ${this.edad}, ${this.cantidad_patas}`;
     }

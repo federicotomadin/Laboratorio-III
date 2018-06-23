@@ -9,12 +9,11 @@
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="Animal.js"></script>
-  <script src="Mascota.js"></script>
+  <script src="Persona.js"></script>
+  <script src="Alumno.js"></script>
   <script src="enum.js"></script>
-  <script src="controladora.js"></script>
+  <script src="Controladora.js"></script>
 </head>
 
 <body>
@@ -23,26 +22,34 @@
       <div class="container-fluid">
         <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
           <input type="hidden" id="indexModificar">
-          <h2>Ingrese los datos de la mascota</h2><br>
-          <div class="form-group">
-          
+          <h2>Ingrese los datos del Alumno</h2><br>
+         <!-- <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
               <input type="text" id="ID" placeholder="ID"/><input type="checkbox" class="chID" onchange="Controladora.FiltroColID()"/>
+              onkeypress=" Controladora.MostrarAlumnos();
+            </div>
+          </div>-->
+          <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+              <input type="text" id="Buscar" placeholder="Buscar Por Nombre" onkeydown="Controladora.FiltroNombre()"/>
+            </div>
+          </div>
+
+
+          
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="Nombre" placeholder="Nombre"/><input type="checkbox" class="chNombre" onclick="if(this.checked==true){Controladora.FiltroColNombre();}else{Controladora.MostrarAlumnos();}"/>
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Nombre" placeholder="Nombre"/><input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()"/>
+              <input type="text" id="Edad" placeholder="Edad"/><input type="checkbox" class="chEdad" onclick="if(this.checked==true){Controladora.FiltroColEdad();}else{Controladora.MostrarAlumnos();}"/>
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Edad" placeholder="Edad"/><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="CantidadPatas" placeholder="CantidadPatas"/><input type="checkbox" class="chCantidadPatas" onchange="Controladora.FiltroColCantidadPatas()" />
+              <input type="text" id="CantidadPatas" placeholder="CantidadPatas"/><input type="checkbox" class="chCantidadPatas" onclick="if(this.checked==true){Controladora.FiltroColCantidadPatas();}else{Controladora.MostrarAlumnos();}" />
             </div>
           </div>
           <div class="form-group">
@@ -55,16 +62,12 @@
             </div>
           </div>
         
-
-          
-        
-        
  
          
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="button" id="CargarMascota" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarMascota()">
-              <input type="button" value="Mostrar" id="MostrarMascota" class="btn btn-primary" onclick="Controladora.MostrarMascotas()">
+              <input type="button" id="CargarAlumno" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarAlumno()">
+              <input type="button" value="Mostrar" id="MostrarAlumno" class="btn btn-primary" onclick="Controladora.MostrarAlumnos()">
               <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br><br>
               <input type="button" value="Promedio de Patas" id="PromedioPatas" class="btn btn-default" onclick="Controladora.PromedioPatas()">
               <div id="promedio"><br>

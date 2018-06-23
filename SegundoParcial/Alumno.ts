@@ -1,9 +1,9 @@
-/// <reference path="Animal.ts" />
+/// <reference path="Persona.ts" />
 
 namespace clases
 {
     
-    export class Mascota extends clases.Animal
+    export class Alumno extends clases.Persona
     {
     id:number;
     tipo:string;
@@ -16,8 +16,8 @@ namespace clases
         this.tipo=tip;
     }
 
-    public MascotaJson():string{
-        let json= super.AnimalJson() +  `${this.id},${this.tipo}`
+    public PersonaJson():string{
+        let json= super.PersonaJson() +  `${this.id},${this.tipo}`
         return json;
 
     }

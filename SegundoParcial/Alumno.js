@@ -1,4 +1,4 @@
-"use strict";
+/// <reference path="Persona.ts" />
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -9,22 +9,21 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-/// <reference path="Animal.ts" />
 var clases;
 (function (clases) {
-    var Mascota = /** @class */ (function (_super) {
-        __extends(Mascota, _super);
-        function Mascota(identidad, nom, ed, cantPatas, tip) {
+    var Alumno = /** @class */ (function (_super) {
+        __extends(Alumno, _super);
+        function Alumno(identidad, nom, ed, cantPatas, tip) {
             var _this = _super.call(this, nom, ed, cantPatas) || this;
             _this.id = identidad;
             _this.tipo = tip;
             return _this;
         }
-        Mascota.prototype.MascotaJson = function () {
-            var json = _super.prototype.AnimalJson.call(this) + (this.id + "," + this.tipo);
+        Alumno.prototype.PersonaJson = function () {
+            var json = _super.prototype.PersonaJson.call(this) + (this.id + "," + this.tipo);
             return json;
         };
-        return Mascota;
-    }(clases.Animal));
-    clases.Mascota = Mascota;
+        return Alumno;
+    }(clases.Persona));
+    clases.Alumno = Alumno;
 })(clases || (clases = {}));

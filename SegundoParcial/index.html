@@ -9,7 +9,7 @@
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+ <!-- <script src="node_modules/jquery/dist/jquery.min.js"></script>-->
   <script src="Persona.js"></script>
   <script src="Alumno.js"></script>
   <script src="enum.js"></script>
@@ -30,10 +30,10 @@
             </div>
           </div>-->
           <div class="form-group">
-            <div class="col-md-12 col-sm-12 col-lg-12">
-              <input type="text" id="Buscar" placeholder="Buscar Por Nombre" onkeydown="Controladora.FiltroNombre()"/>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
+              <input type="text" id="Buscar" placeholder="Buscar Por Nombre" onkeydown="if($('#Buscar').val()==''){Controladora.MostrarAlumnos();}else {Controladora.FiltroNombre();}"/>
             </div>
-          </div>
+          </div><br>
 
 
           
@@ -44,12 +44,17 @@
           </div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Edad" placeholder="Edad"/><input type="checkbox" class="chEdad" onclick="if(this.checked==true){Controladora.FiltroColEdad();}else{Controladora.MostrarAlumnos();}"/>
+              <input type="text" id="Legajo" placeholder="Legajo"/><input type="checkbox" class="chLegajo" onclick="if(this.checked==true){Controladora.FiltroColLegajo();}else{Controladora.MostrarAlumnos();}"/>
             </div>
           </div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="CantidadPatas" placeholder="CantidadPatas"/><input type="checkbox" class="chCantidadPatas" onclick="if(this.checked==true){Controladora.FiltroColCantidadPatas();}else{Controladora.MostrarAlumnos();}" />
+              <input type="text" id="Materia" placeholder="Materia"/><input type="checkbox" class="chMateria" onclick="if(this.checked==true){Controladora.FiltroColMateria();}else{Controladora.MostrarAlumnos();}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+              <input type="text" id="Nota" placeholder="Nota"/><input type="checkbox" class="chNota" onclick="if(this.checked==true){Controladora.FiltroColNota();}else{Controladora.MostrarAlumnos();}" />
             </div>
           </div>
           <div class="form-group">
@@ -69,7 +74,7 @@
               <input type="button" id="CargarAlumno" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarAlumno()">
               <input type="button" value="Mostrar" id="MostrarAlumno" class="btn btn-primary" onclick="Controladora.MostrarAlumnos()">
               <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br><br>
-              <input type="button" value="Promedio de Patas" id="PromedioPatas" class="btn btn-default" onclick="Controladora.PromedioPatas()">
+              <input type="button" value="Promedio de Notas" id="PromedioNotas" class="btn btn-default" onclick="Controladora.PromedioNotas()">
               <div id="promedio"><br>
               </div>
             </div>

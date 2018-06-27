@@ -17,12 +17,12 @@ class Controladora {
     public static AgregarAlumno() {
 
         let id = this.GenerarId();
-        let nombre = String($("#Nombre").val());
-        let edad = Number($("#Edad").val());
-        let tipo = String($("#Tipo").val());
-        let cantidad_patas = Number($("#CantidadPatas").val());
+        let nombre:string = String($("#Nombre").val());
+        let legajo:number = Number($("#Legajo").val());
+        let materia:string = String($("#Materia").val());
+        let nota:number = Number($("#Nota").val());
         let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
-        let ObjetoAlumno: clases.Alumno = new clases.Alumno(id, nombre, edad, cantidad_patas, tipo);
+        let ObjetoAlumno: clases.Alumno = new clases.Alumno(id, nombre, legajo,materia,nota);
         
         if (arrayAlumnos == null) {
 
@@ -49,9 +49,9 @@ class Controladora {
                     if(aux==i)
                     {    
                         arrayAlumnos[i].nombre= ObjetoAlumno.nombre;
-                        arrayAlumnos[i].edad= ObjetoAlumno.edad;
-                        arrayAlumnos[i].tipo=ObjetoAlumno.tipo;
-                        arrayAlumnos[i].cantidad_patas=ObjetoAlumno.cantidad_patas;
+                        arrayAlumnos[i].nota= ObjetoAlumno.legajo;
+                        arrayAlumnos[i].materia=ObjetoAlumno.materia;
+                        arrayAlumnos[i].nota=ObjetoAlumno.nota;
                     }
                 }                
              
@@ -70,17 +70,17 @@ class Controladora {
     public static LimpiarForm() {
         $("#ID").val("");
         $("#Nombre").val("");
-        $("#Edad").val("");
-        $("#Tipo").val("morocho");
-        $("#CantidadPatas").val("");
+        $("#Legajo").val("");
+        $("#Materia").val("morocho");
+        $("#Nota").val("");
     }
 
 
     public static MostrarAlumnos(): void {
 
-        let stringTabla: string;
+        let stringTabla: String;
         stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
 
         let valoresTabla = " ";
         let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
@@ -90,9 +90,9 @@ class Controladora {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + arrayAlumnos[i].id + "</td>";
             valoresTabla += "<td>" + arrayAlumnos[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].edad + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].cantidad_patas + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].tipo + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].legajo + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].materia + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].nota + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarAlumno(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
@@ -105,12 +105,12 @@ class Controladora {
 //----------------------------------PROMEDIO --------------------------------------------------//
 
 
-    public static PromedioPatas() {
+    public static PromedioNotas() {
         let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
 
         let total = 0;
         var suma = arrayAlumnos.reduce(function (total, elemento) {
-            return total += elemento.cantidad_patas;
+            return total += elemento.nota;
         }, 0);
 
         $("#promedio").html(String((suma / arrayAlumnos.length)))
@@ -167,36 +167,36 @@ class Controladora {
     
         }
     
-        public static FiltroColEdad()
+        public static FiltroColLegajo()
         {
             let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
             let arrayMapAlumnos = arrayAlumnos.map(function (elemeto) {
-                return (elemeto.edad);
+                return (elemeto.legajo);
     
             });
-            let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Edad</th><th>ACCION</th></tr></thead>";
+            let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Legajo</th><th>ACCION</th></tr></thead>";
             let valoresTabla = "";
             for (let i = 0; i < arrayMapAlumnos.length; i++) {
                 valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayAlumnos[i].edad + "</td>";
+                valoresTabla += "<td>" + arrayAlumnos[i].legajo + "</td>";
                 valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
                 valoresTabla += "</tr>";
             }
             $("#divTabla").html(stringTabla + valoresTabla);
         }
     
-        public static FiltroColCantidadPatas()
+        public static FiltroColMateria()
         {
             let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
             let arrayMapAlumnos = arrayAlumnos.map(function (elemeto) {
-                return (elemeto.cantidad_patas);
+                return (elemeto.materia);
     
             });
-            let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Cantidad de Patas</th><th>ACCION</th></tr></thead>";
+            let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Materia</th><th>ACCION</th></tr></thead>";
             let valoresTabla = "";
             for (let i = 0; i < arrayMapAlumnos.length; i++) {
                 valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayAlumnos[i].cantidad_patas + "</td>";
+                valoresTabla += "<td>" + arrayAlumnos[i].materia + "</td>";
                 valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
                 valoresTabla += "</tr>";
             }
@@ -215,30 +215,32 @@ class Controladora {
             let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
             $("#ID").val(arrayAlumnos[index].id);
             $("#Nombre").val(arrayAlumnos[index].nombre);
-            $("#Edad").val(arrayAlumnos[index].edad);
-            $("#CantidadPatas").val(arrayAlumnos[index].cantidad_patas);
-            $("#Tipo").val(arrayAlumnos[index].tipo);
+            $("#Legajo").val(arrayAlumnos[index].legajo);
+            $("#Materia").val(arrayAlumnos[index].materia);
+            $("#Nota").val(arrayAlumnos[index].nota);
             $("#indexModificar").val(index.toString());
         }
     
     
-        public static FiltrarPorTipo() {
-            let stringTabla: string = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
-                "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+        public static FiltrarPorNota() {
+            let stringTabla: string;
+            stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
+
             let valoresTabla = "";
             let arrayAlumnos: Array<clases.Alumno> = JSON.parse(localStorage.getItem("Alumnos"));
             let AlumnosFiltradas: Array<clases.Alumno> = arrayAlumnos.filter(function (elemento) {
     
-                return elemento.tipo == $("#Tipo").val();
+                return elemento.nota == $("#Nota").val();
             })
     
             for (let i = 0; i < AlumnosFiltradas.length; i++) {
                 valoresTabla += "<tr>";
                 valoresTabla += "<td>" + AlumnosFiltradas[i].id + "</td>";
                 valoresTabla += "<td>" + AlumnosFiltradas[i].nombre + "</td>";
-                valoresTabla += "<td>" + AlumnosFiltradas[i].edad + "</td>";
-                valoresTabla += "<td>" + AlumnosFiltradas[i].cantidad_patas + "</td>";
-                valoresTabla += "<td>" + AlumnosFiltradas[i].tipo + "</td>";
+                valoresTabla += "<td>" + AlumnosFiltradas[i].legajo + "</td>";
+                valoresTabla += "<td>" + AlumnosFiltradas[i].materia + "</td>";
+                valoresTabla += "<td>" + AlumnosFiltradas[i].nota + "</td>";
                 valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
 
                 valoresTabla += "</tr>";
@@ -275,16 +277,18 @@ class Controladora {
                 }       
                
             });
+            let stringTabla: string;
             stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
+
             let valoresTabla = "";
             for (let i = 0; i < arrayMapAlumnos.length; i++) {
                 valoresTabla += "<tr>";
                 valoresTabla += "<td>" + arrayMapAlumnos[i].id + "</td>";
                 valoresTabla += "<td>" + arrayMapAlumnos[i].nombre + "</td>";
-                valoresTabla += "<td>" + arrayMapAlumnos[i].edad + "</td>";
-                valoresTabla += "<td>" + arrayMapAlumnos[i].cantidad_patas + "</td>";
-                valoresTabla += "<td>" + arrayMapAlumnos[i].tipo + "</td>";
+                valoresTabla += "<td>" + arrayMapAlumnos[i].legajo + "</td>";
+                valoresTabla += "<td>" + arrayMapAlumnos[i].materia + "</td>";
+                valoresTabla += "<td>" + arrayMapAlumnos[i].nota + "</td>";
                 valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarAlumno(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
                 valoresTabla += "</tr>";
             }

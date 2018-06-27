@@ -11,11 +11,11 @@ var Controladora = /** @class */ (function () {
     Controladora.AgregarAlumno = function () {
         var id = this.GenerarId();
         var nombre = String($("#Nombre").val());
-        var edad = Number($("#Edad").val());
-        var tipo = String($("#Tipo").val());
-        var cantidad_patas = Number($("#CantidadPatas").val());
+        var legajo = Number($("#Legajo").val());
+        var materia = String($("#Materia").val());
+        var nota = Number($("#Nota").val());
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
-        var ObjetoAlumno = new clases.Alumno(id, nombre, edad, cantidad_patas, tipo);
+        var ObjetoAlumno = new clases.Alumno(id, nombre, legajo, materia, nota);
         if (arrayAlumnos == null) {
             console.log("agregar");
             arrayAlumnos = new Array();
@@ -34,9 +34,9 @@ var Controladora = /** @class */ (function () {
             for (var i = 0; i < arrayAlumnos.length; i++) {
                 if (aux == i) {
                     arrayAlumnos[i].nombre = ObjetoAlumno.nombre;
-                    arrayAlumnos[i].edad = ObjetoAlumno.edad;
-                    arrayAlumnos[i].tipo = ObjetoAlumno.tipo;
-                    arrayAlumnos[i].cantidad_patas = ObjetoAlumno.cantidad_patas;
+                    arrayAlumnos[i].nota = ObjetoAlumno.legajo;
+                    arrayAlumnos[i].materia = ObjetoAlumno.materia;
+                    arrayAlumnos[i].nota = ObjetoAlumno.nota;
                 }
             }
             localStorage.setItem("Alumnos", JSON.stringify(arrayAlumnos));
@@ -52,34 +52,34 @@ var Controladora = /** @class */ (function () {
     Controladora.LimpiarForm = function () {
         $("#ID").val("");
         $("#Nombre").val("");
-        $("#Edad").val("");
-        $("#Tipo").val("morocho");
-        $("#CantidadPatas").val("");
+        $("#Legajo").val("");
+        $("#Materia").val("morocho");
+        $("#Nota").val("");
     };
     Controladora.MostrarAlumnos = function () {
         var stringTabla;
         stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
         var valoresTabla = " ";
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         for (var i = 0; i < arrayAlumnos.length; i++) {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + arrayAlumnos[i].id + "</td>";
             valoresTabla += "<td>" + arrayAlumnos[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].edad + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].cantidad_patas + "</td>";
-            valoresTabla += "<td>" + arrayAlumnos[i].tipo + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].legajo + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].materia + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].nota + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarAlumno(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
     //----------------------------------PROMEDIO --------------------------------------------------//
-    Controladora.PromedioPatas = function () {
+    Controladora.PromedioNotas = function () {
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         var total = 0;
         var suma = arrayAlumnos.reduce(function (total, elemento) {
-            return total += elemento.cantidad_patas;
+            return total += elemento.nota;
         }, 0);
         $("#promedio").html(String((suma / arrayAlumnos.length)));
     };
@@ -120,31 +120,31 @@ var Controladora = /** @class */ (function () {
         }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
-    Controladora.FiltroColEdad = function () {
+    Controladora.FiltroColLegajo = function () {
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         var arrayMapAlumnos = arrayAlumnos.map(function (elemeto) {
-            return (elemeto.edad);
+            return (elemeto.legajo);
         });
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Edad</th><th>ACCION</th></tr></thead>";
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Legajo</th><th>ACCION</th></tr></thead>";
         var valoresTabla = "";
         for (var i = 0; i < arrayMapAlumnos.length; i++) {
             valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayAlumnos[i].edad + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].legajo + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
-    Controladora.FiltroColCantidadPatas = function () {
+    Controladora.FiltroColMateria = function () {
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         var arrayMapAlumnos = arrayAlumnos.map(function (elemeto) {
-            return (elemeto.cantidad_patas);
+            return (elemeto.materia);
         });
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Cantidad de Patas</th><th>ACCION</th></tr></thead>";
+        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Materia</th><th>ACCION</th></tr></thead>";
         var valoresTabla = "";
         for (var i = 0; i < arrayMapAlumnos.length; i++) {
             valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayAlumnos[i].cantidad_patas + "</td>";
+            valoresTabla += "<td>" + arrayAlumnos[i].materia + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
@@ -160,26 +160,27 @@ var Controladora = /** @class */ (function () {
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         $("#ID").val(arrayAlumnos[index].id);
         $("#Nombre").val(arrayAlumnos[index].nombre);
-        $("#Edad").val(arrayAlumnos[index].edad);
-        $("#CantidadPatas").val(arrayAlumnos[index].cantidad_patas);
-        $("#Tipo").val(arrayAlumnos[index].tipo);
+        $("#Legajo").val(arrayAlumnos[index].legajo);
+        $("#Materia").val(arrayAlumnos[index].materia);
+        $("#Nota").val(arrayAlumnos[index].nota);
         $("#indexModificar").val(index.toString());
     };
-    Controladora.FiltrarPorTipo = function () {
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+    Controladora.FiltrarPorNota = function () {
+        var stringTabla;
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
         var valoresTabla = "";
         var arrayAlumnos = JSON.parse(localStorage.getItem("Alumnos"));
         var AlumnosFiltradas = arrayAlumnos.filter(function (elemento) {
-            return elemento.tipo == $("#Tipo").val();
+            return elemento.nota == $("#Nota").val();
         });
         for (var i = 0; i < AlumnosFiltradas.length; i++) {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + AlumnosFiltradas[i].id + "</td>";
             valoresTabla += "<td>" + AlumnosFiltradas[i].nombre + "</td>";
-            valoresTabla += "<td>" + AlumnosFiltradas[i].edad + "</td>";
-            valoresTabla += "<td>" + AlumnosFiltradas[i].cantidad_patas + "</td>";
-            valoresTabla += "<td>" + AlumnosFiltradas[i].tipo + "</td>";
+            valoresTabla += "<td>" + AlumnosFiltradas[i].legajo + "</td>";
+            valoresTabla += "<td>" + AlumnosFiltradas[i].materia + "</td>";
+            valoresTabla += "<td>" + AlumnosFiltradas[i].nota + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
@@ -204,16 +205,17 @@ var Controladora = /** @class */ (function () {
                     return true;
             }
         });
+        var stringTabla;
         stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>CANTIDAD DE PATAS</th><th>TIPO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
         var valoresTabla = "";
         for (var i = 0; i < arrayMapAlumnos.length; i++) {
             valoresTabla += "<tr>";
             valoresTabla += "<td>" + arrayMapAlumnos[i].id + "</td>";
             valoresTabla += "<td>" + arrayMapAlumnos[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayMapAlumnos[i].edad + "</td>";
-            valoresTabla += "<td>" + arrayMapAlumnos[i].cantidad_patas + "</td>";
-            valoresTabla += "<td>" + arrayMapAlumnos[i].tipo + "</td>";
+            valoresTabla += "<td>" + arrayMapAlumnos[i].legajo + "</td>";
+            valoresTabla += "<td>" + arrayMapAlumnos[i].materia + "</td>";
+            valoresTabla += "<td>" + arrayMapAlumnos[i].nota + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarAlumno(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }

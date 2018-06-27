@@ -13,14 +13,16 @@ var clases;
 (function (clases) {
     var Alumno = /** @class */ (function (_super) {
         __extends(Alumno, _super);
-        function Alumno(identidad, nom, ed, cantPatas, tip) {
-            var _this = _super.call(this, nom, ed, cantPatas) || this;
-            _this.id = identidad;
-            _this.tipo = tip;
+        function Alumno(id, nombre, legajo, materia, nota) {
+            var _this = _super.call(this, nombre) || this;
+            _this.id = id;
+            _this.legajo = legajo;
+            _this.materia = materia;
+            _this.nota = nota;
             return _this;
         }
         Alumno.prototype.PersonaJson = function () {
-            var json = _super.prototype.PersonaJson.call(this) + (this.id + "," + this.tipo);
+            var json = _super.prototype.PersonaJson.call(this) + (this.legajo + "," + this.materia + "," + this.nota);
             return json;
         };
         return Alumno;

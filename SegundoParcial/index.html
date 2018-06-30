@@ -19,85 +19,92 @@
 <body>
   <div class="container">
     <div class="row responsive-utilities-test visible-on">
-      <!--<div class="container-fluid">-->
-        <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:cornflowerblue;">
+      <div class="container-fluid">
+       <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:cornflowerblue;">
           <input type="hidden" id="indexModificar">
           <h2 align="center">ABM Personas</h2><br>
 
-          <label for="">Id        
-            
-              <input type="text" id="ID" disabled/>
-     
-        </label><br>      
+          
+           <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 ">Id</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="Id" type="text" disabled>
+                </div>
+           </div>
+           <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 ">Nombre</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="Nombre" type="text" value="Matias">
+                </div>
+           </div>
+           <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 ">Apellido</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="Apellido" type="text" value="Ramos">
+                </div>
+           </div>
+           <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 ">Edad</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="Edad" type="text" value="30">
+                </div>
+           </div>
+           <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2">Sexo</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="Sexo">
+                    </select>
+                </div>
+             </div>
 
+             <hr>
 
           
-         <label for="">Nombre
-      
-              <input type="text" id="Nombre" placeholder="Matias"/>
-            
-            </label><br>
-
+          <div class="col-md-12">
+          <input  type="button" id="CargarCliente" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarCliente()">
         
-            <label for="">Apellido
-              <input type="text" id="Apellido" placeholder="Ramos"/>
-            </label><br>
-         
-         
-         <label for="">Edad
+          <input align="center" type="button" id="EliminarCliente" value="Eliminar" class="btn btn-danger col-md-offset-2" onclick="Controladora.EliminarCliente()">
+      
+          <input type="button" id="LimpiarLocalStorage" value="Limpiar LocalStorage" class="btn btn-danger col-md-offset-3" onclick="Controladora.LimpiarLocalStorage()">
+         </div><br><hr>
+       
+        <h3 align="center">Filtros</h3><hr>
+
+
+        <div class="col-md-12">
+        <label for="">Filtrar Por                           
+        <select name="Sexo" id="FiltrarSexo">
+        </select> 
+        </label>
           
-              <input  type="text" id="Edad" placeholder="30"/>
-            </label><br>
-
-      
-            <label >Sexo
-         
-              <select name="Sexo" id="Sexo">
-
-
-              </select>
-            </label><br><br>
-
-              <input type="button" id="CargarCliente" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarCliente()">
-              <input type="button" id="EliminarCliente" value="Eliminar" class="btn btn-danger" onclick="Controladora.EliminarCliente()">
-              <input type="button" id="LimpiarLocalStorage" value="Limpiar LocalStorage" class="btn btn-danger" onclick="Controladora.LimpiarLocalStorage()">
-
-              <h3 align="center">Filtros</h3><br>
-
-              <label for="">Filtrar Por
-              
-               
-              
-                  <select name="Sexo" id="FiltrarSexo">
-    
-    
-                  </select>
-                 </label>
-
-                  <label for="">Promedio de edad</label>
-                  <input type="text" id="Promedio">
-                  <input type="button" value="Calcular Promedio" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()"><br><br>
+        <label class="col-md-offset-1">Promedio de Edad</label>           
+        <input type="text" class="col-md-offset-1 " id="Promedio">
+                          
+        <input type="button" value="Calcular Promedio" id="PromedioEdad" class="btn btn-default col-md-offset-1" onclick="Controladora.PromedioEdad()">    
+      </div><br><hr>
                   
-
      
-
-
-      <h5><strong>Campos mostrados</strong> Tildar los campos a mostrar </h5>
-      <label class="checkbox-inline"><input checked type="checkbox" value="Id" onclick="if(this.checked==true){Controladora.FiltroColId();}else{Controladora.MostrarClientes()";} >Id</label>
-      <label class="checkbox-inline"><input checked type="checkbox" value="Nombre" onclick="if(this.checked==true){Controladora.FiltroColNombre();}else{Controladora.MostrarClientes();}">Nombre</label>
-      <label class="checkbox-inline"><input checked type="checkbox" value="Edad" onclick="if(this.checked==true){Controladora.FiltroColEdad();}else{Controladora.MostrarClientes();}">Edad</label>
-      <label class="checkbox-inline"><input checked type="checkbox" value="Apellido" onclick="if(this.checked==true){Controladora.FiltroColApellido();}else{Controladora.MostrarClientes();}">Apellido</label><br>
-      <h3 align="center">Lista de Personas</h3><br>
+      <h5><strong>Campos mostrados</strong> Tildar los campos a mostrar </h5><hr>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Id" onclick="if(this.checked==false){Controladora.FiltroColId();}else{Controladora.MostrarClientes()}";} >Id</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Nombre" onclick="if(this.checked==false){Controladora.FiltroColNombre();}else{Controladora.MostrarClientes();}">Nombre</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Edad" onclick="if(this.checked==false){Controladora.FiltroColEdad();}else{Controladora.MostrarClientes();}">Edad</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Apellido" onclick="if(this.checked==false){Controladora.FiltroColApellido();}else{Controladora.MostrarClientes();}">Apellido</label><br><hr>
+      <h3 align="center">Lista de Personas</h3><hr>
       
 
          
-         
+        
   
         
    
          <!--Comienza la tabla-->
-        <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:lavenderblush">
-          <div id="divTabla">
+        <div class="table-responsive" style="background-color:lavenderblush">
+          <div id="divTabla" onclick="">
          tabla aqui..
           </div>
         </div>

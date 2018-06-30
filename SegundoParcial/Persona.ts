@@ -9,8 +9,9 @@
         apellido: string;
       
 
-    constructor(nom:string,ape:string)
+    constructor(id:number,nom:string,ape:string)
     {
+        this.id=id;
         this.nombre=nom;
         this.apellido=ape;
     

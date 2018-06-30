@@ -1,7 +1,8 @@
 var clases;
 (function (clases) {
     var Persona = /** @class */ (function () {
-        function Persona(nom, ape) {
+        function Persona(id, nom, ape) {
+            this.id = id;
             this.nombre = nom;
             this.apellido = ape;
         }

@@ -14,7 +14,7 @@ var clases;
     var Cliente = /** @class */ (function (_super) {
         __extends(Cliente, _super);
         function Cliente(id, nombre, apellido, edad, sexo) {
-            var _this = _super.call(this, nombre, apellido) || this;
+            var _this = _super.call(this, id, nombre, apellido) || this;
             _this.edad = edad;
             _this.sexo = sexo;
             return _this;

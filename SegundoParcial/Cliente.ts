@@ -12,7 +12,7 @@ namespace clases
 
     constructor(id:number,nombre:string,apellido:string,edad:number,sexo:string)
     {
-        super(nombre,apellido);
+        super(id,nombre,apellido);
         this.edad=edad;
         this.sexo=sexo;      
     }

@@ -15,7 +15,6 @@ class Controladora {
     public static AgregarCliente() {
 
         let id = this.GenerarId();
-        console.log(this.GenerarId());
         let nombre:string = String($("#Nombre").val());
         let apellido:string = String($("#Apellido").val());
         let edad:number = Number($("#Edad").val());   
@@ -29,7 +28,7 @@ class Controladora {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm(); 
-            Controladora.CargarSelect();
+           // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
 
@@ -41,7 +40,7 @@ class Controladora {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm(); 
-            Controladora.CargarSelect();
+           // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
 
@@ -81,10 +80,10 @@ class Controladora {
 
     public static LimpiarForm() {
         $("#Id").val("");
-        $("#Nombre").val("");
-        $("#Apellido").val("");
-        $("#Edad").val("");
-        $("#Sexo").val("");
+        $("#Nombre").val("Matias");
+        $("#Apellido").val("Ramos");
+        $("#Edad").val("30");
+        $("#Sexo").val("Masculino");
     }
 
 
@@ -108,9 +107,10 @@ class Controladora {
 
         let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
   
+     
 
         for (let i = 0; i < arrayClientes.length; i++) {
-            valoresTabla += "<tr onclick='Controladora.ModificarCliente("i")'>";
+            valoresTabla += "<tr onclick='Controladora.ModificarCliente(" + i + ")'>";
             valoresTabla += "<td>" + arrayClientes[i].id + "</td>";
             valoresTabla += "<td>" + arrayClientes[i].nombre + "</td>";
             valoresTabla += "<td>" + arrayClientes[i].apellido + "</td>";
@@ -135,8 +135,8 @@ class Controladora {
             return elemento.sexo==sexo;
 
         }).reduce(function(previo,actual){
-            edadAcum +=actual.edad
-        }
+            edadAcum +=actual.edad;
+        });
 
         $("#Promedio").val(edadAcum/(arrayClientes.length));
 
@@ -181,8 +181,7 @@ class Controladora {
         }
     
         public static FiltroColNombre()
-        {
-            
+        {         
             let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
             let arrayMapClientes = arrayClientes.map(function (elemento) {
                 return (elemento.id,elemento.apellido,elemento.edad,elemento.sexo);
@@ -226,7 +225,7 @@ class Controladora {
 
       
     
-        public static function FiltroColEdad()
+        public static  FiltroColEdad()
         {
             let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
             let arrayMapClientes = arrayClientes.map(function (elemento) {
@@ -247,11 +246,13 @@ class Controladora {
             $("#divTabla").html(stringTabla + valoresTabla);
         }
     
-        public static EliminarCliente(index: number): void {
+        public static EliminarCliente(): void {
+            let index= Number($("#indexModificar").val());
             let arrayClientes: Array<JSON> = JSON.parse(localStorage.getItem("Clientes"));
             arrayClientes.splice(index, 1);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.MostrarClientes();
+            Controladora.LimpiarForm();
     
         }
     
@@ -264,43 +265,20 @@ class Controladora {
             $("#Sexo").val(arrayClientes[index].sexo);
             $("#indexModificar").val(index.toString());
         }
-    
-    
-        public static FiltrarPorNota() {
-            let stringTabla: string;
-            stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
 
-            let valoresTabla = "";
-            let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
-            let ClientesFiltradas: Array<clases.Cliente> = arrayClientes.filter(function (elemento) {
-    
-                return elemento.nota == $("#Nota").val();
-            })
-    
-            for (let i = 0; i < ClientesFiltradas.length; i++) {
-                valoresTabla += "<tr>";
-                valoresTabla += "<td>" + ClientesFiltradas[i].id + "</td>";
-                valoresTabla += "<td>" + ClientesFiltradas[i].nombre + "</td>";
-                valoresTabla += "<td>" + ClientesFiltradas[i].legajo + "</td>";
-                valoresTabla += "<td>" + ClientesFiltradas[i].materia + "</td>";
-                valoresTabla += "<td>" + ClientesFiltradas[i].nota + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-
-                valoresTabla += "</tr>";
-            }
-            $("#divTabla").html(stringTabla + valoresTabla);   
-    
+        public static LimpiarLocalStorage()
+        {
+            localStorage.clear();
         }
-
+    
+      
         public static GenerarId():number
         {    
         if(localStorage.getItem("Clientes")=="")  return 0   
         else
         {
         let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
-        }    
-        console.log(arrayClientes);
+        }      
         
         var Mayor = arrayClientes.reduce(function(max, elemento){
             return (max>elemento.id)? max:elemento.id;               

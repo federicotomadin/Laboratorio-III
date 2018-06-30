@@ -9,7 +9,6 @@ var Controladora = /** @class */ (function () {
     }
     Controladora.AgregarCliente = function () {
         var id = this.GenerarId();
-        console.log(this.GenerarId());
         var nombre = String($("#Nombre").val());
         var apellido = String($("#Apellido").val());
         var edad = Number($("#Edad").val());
@@ -20,7 +19,7 @@ var Controladora = /** @class */ (function () {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm();
-            Controladora.CargarSelect();
+            // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
         }
@@ -29,7 +28,7 @@ var Controladora = /** @class */ (function () {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm();
-            Controladora.CargarSelect();
+            // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
         }
@@ -64,10 +63,10 @@ var Controladora = /** @class */ (function () {
     };
     Controladora.LimpiarForm = function () {
         $("#Id").val("");
-        $("#Nombre").val("");
-        $("#Apellido").val("");
-        $("#Edad").val("");
-        $("#Sexo").val("");
+        $("#Nombre").val("Matias");
+        $("#Apellido").val("Ramos");
+        $("#Edad").val("30");
+        $("#Sexo").val("Masculino");
     };
     Controladora.MostrarClientes = function () {
         var stringTabla;
@@ -82,9 +81,7 @@ var Controladora = /** @class */ (function () {
         else {
             var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
             for (var i = 0; i < arrayClientes.length; i++) {
-                valoresTabla += "<tr onclick='Controladora.ModificarCliente(";
-                i;
-                ")'>";
+                valoresTabla += "<tr onclick='Controladora.ModificarCliente(" + i + ")'>";
                 valoresTabla += "<td>" + arrayClientes[i].id + "</td>";
                 valoresTabla += "<td>" + arrayClientes[i].nombre + "</td>";
                 valoresTabla += "<td>" + arrayClientes[i].apellido + "</td>";
@@ -104,7 +101,8 @@ var Controladora = /** @class */ (function () {
             return elemento.sexo == sexo;
         }).reduce(function (previo, actual) {
             edadAcum += actual.edad;
-        }, $("#Promedio").val(edadAcum / (arrayClientes.length)));
+        });
+        $("#Promedio").val(edadAcum / (arrayClientes.length));
     };
     //-------------------------------------- CARGA SELECT --------------------------------------//
     Controladora.CargarSelect = function () {
@@ -169,116 +167,80 @@ var Controladora = /** @class */ (function () {
         }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
-    Controladora["function"] = FiltroColEdad();
+    Controladora.FiltroColEdad = function () {
+        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
+        var arrayMapClientes = arrayClientes.map(function (elemento) {
+            return (elemento.id, elemento.nombre, elemento.apellido, elemento.sexo);
+        });
+        var stringTabla;
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Sexo</th></tr></thead>";
+        var valoresTabla = " ";
+        for (var i = 0; i < arrayClientes.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayClientes[i].id + "</td>";
+            valoresTabla += "<td>" + arrayClientes[i].nombre + "</td>";
+            valoresTabla += "<td>" + arrayClientes[i].apellido + "</td>";
+            valoresTabla += "<td>" + arrayClientes[i].sexo + "</td>";
+            valoresTabla += "</tr>";
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    Controladora.EliminarCliente = function () {
+        var index = Number($("#indexModificar").val());
+        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
+        arrayClientes.splice(index, 1);
+        localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
+        Controladora.MostrarClientes();
+        Controladora.LimpiarForm();
+    };
+    Controladora.ModificarCliente = function (index) {
+        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
+        $("#Id").val(arrayClientes[index].id);
+        $("#Nombre").val(arrayClientes[index].nombre);
+        $("#Apellido").val(arrayClientes[index].apellido);
+        $("#Edad").val(arrayClientes[index].edad);
+        $("#Sexo").val(arrayClientes[index].sexo);
+        $("#indexModificar").val(index.toString());
+    };
+    Controladora.LimpiarLocalStorage = function () {
+        localStorage.clear();
+    };
+    Controladora.GenerarId = function () {
+        if (localStorage.getItem("Clientes") == "")
+            return 0;
+        else {
+            var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
+        }
+        var Mayor = arrayClientes.reduce(function (max, elemento) {
+            return (max > elemento.id) ? max : elemento.id;
+        }, 0);
+        return Mayor + 1;
+    };
+    Controladora.FiltroNombre = function () {
+        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
+        var arrayMapClientes = arrayClientes.filter(function (elemento) {
+            var variable = elemento.nombre;
+            console.log(variable.charAt(1));
+            for (var i = 0; i < variable.length; i++) {
+                if (variable.charAt(i) == String($("#Buscar").val()) || variable == String($("#Buscar").val()))
+                    return true;
+            }
+        });
+        var stringTabla;
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
+            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = "";
+        for (var i = 0; i < arrayMapClientes.length; i++) {
+            valoresTabla += "<tr>";
+            valoresTabla += "<td>" + arrayMapClientes[i].id + "</td>";
+            valoresTabla += "<td>" + arrayMapClientes[i].nombre + "</td>";
+            valoresTabla += "<td>" + arrayMapClientes[i].legajo + "</td>";
+            valoresTabla += "<td>" + arrayMapClientes[i].materia + "</td>";
+            valoresTabla += "<td>" + arrayMapClientes[i].nota + "</td>";
+            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarCliente(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
+            valoresTabla += "</tr>";
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
     return Controladora;
 }());
-{
-    var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
-    var arrayMapClientes = arrayClientes.map(function (elemento) {
-        return (elemento.id, elemento.nombre, elemento.apellido, elemento.sexo);
-    });
-    var stringTabla = void 0;
-    stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Sexo</th></tr></thead>";
-    var valoresTabla = " ";
-    for (var i = 0; i < arrayClientes.length; i++) {
-        valoresTabla += "<tr>";
-        valoresTabla += "<td>" + arrayClientes[i].id + "</td>";
-        valoresTabla += "<td>" + arrayClientes[i].nombre + "</td>";
-        valoresTabla += "<td>" + arrayClientes[i].apellido + "</td>";
-        valoresTabla += "<td>" + arrayClientes[i].sexo + "</td>";
-        valoresTabla += "</tr>";
-    }
-    $("#divTabla").html(stringTabla + valoresTabla);
-}
-EliminarCliente(index, number);
-void {
-    let: arrayClientes, JSON: .parse(localStorage.getItem("Clientes")),
-    arrayClientes: .splice(index, 1),
-    localStorage: .setItem("Clientes", JSON.stringify(arrayClientes)),
-    Controladora: .MostrarClientes()
-};
-ModificarCliente(index, number);
-void {
-    let: arrayClientes, JSON: .parse(localStorage.getItem("Clientes")),
-    $: function () {
-        if ( === void 0) {  = "#Id"; }
-    },
-    $: function () {
-        if ( === void 0) {  = "#Nombre"; }
-    },
-    $: function () {
-        if ( === void 0) {  = "#Apellido"; }
-    },
-    $: function () {
-        if ( === void 0) {  = "#Edad"; }
-    },
-    $: function () {
-        if ( === void 0) {  = "#Sexo"; }
-    },
-    $: function () {
-        if ( === void 0) {  = "#indexModificar"; }
-    }
-};
-FiltrarPorNota();
-{
-    var stringTabla = void 0;
-    stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-        "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
-    var valoresTabla = "";
-    var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
-    var ClientesFiltradas = arrayClientes.filter(function (elemento) {
-        return elemento.nota == $("#Nota").val();
-    });
-    for (var i = 0; i < ClientesFiltradas.length; i++) {
-        valoresTabla += "<tr>";
-        valoresTabla += "<td>" + ClientesFiltradas[i].id + "</td>";
-        valoresTabla += "<td>" + ClientesFiltradas[i].nombre + "</td>";
-        valoresTabla += "<td>" + ClientesFiltradas[i].legajo + "</td>";
-        valoresTabla += "<td>" + ClientesFiltradas[i].materia + "</td>";
-        valoresTabla += "<td>" + ClientesFiltradas[i].nota + "</td>";
-        valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-        valoresTabla += "</tr>";
-    }
-    $("#divTabla").html(stringTabla + valoresTabla);
-}
-GenerarId();
-number;
-{
-    if (localStorage.getItem("Clientes") == "")
-        return 0;
-    else {
-        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
-    }
-    console.log(arrayClientes);
-    var Mayor = arrayClientes.reduce(function (max, elemento) {
-        return (max > elemento.id) ? max : elemento.id;
-    }, 0);
-    return Mayor + 1;
-}
-FiltroNombre();
-{
-    var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
-    var arrayMapClientes = arrayClientes.filter(function (elemento) {
-        var variable = elemento.nombre;
-        console.log(variable.charAt(1));
-        for (var i = 0; i < variable.length; i++) {
-            if (variable.charAt(i) == String($("#Buscar").val()) || variable == String($("#Buscar").val()))
-                return true;
-        }
-    });
-    var stringTabla = void 0;
-    stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-        "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
-    var valoresTabla = "";
-    for (var i = 0; i < arrayMapClientes.length; i++) {
-        valoresTabla += "<tr>";
-        valoresTabla += "<td>" + arrayMapClientes[i].id + "</td>";
-        valoresTabla += "<td>" + arrayMapClientes[i].nombre + "</td>";
-        valoresTabla += "<td>" + arrayMapClientes[i].legajo + "</td>";
-        valoresTabla += "<td>" + arrayMapClientes[i].materia + "</td>";
-        valoresTabla += "<td>" + arrayMapClientes[i].nota + "</td>";
-        valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarCliente(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
-        valoresTabla += "</tr>";
-    }
-    $("#divTabla").html(stringTabla + valoresTabla);
-}

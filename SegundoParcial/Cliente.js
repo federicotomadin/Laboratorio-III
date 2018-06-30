@@ -11,21 +11,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var clases;
 (function (clases) {
-    var Alumno = /** @class */ (function (_super) {
-        __extends(Alumno, _super);
-        function Alumno(id, nombre, legajo, materia, nota) {
-            var _this = _super.call(this, nombre) || this;
-            _this.id = id;
-            _this.legajo = legajo;
-            _this.materia = materia;
-            _this.nota = nota;
+    var Cliente = /** @class */ (function (_super) {
+        __extends(Cliente, _super);
+        function Cliente(id, nombre, apellido, edad, sexo) {
+            var _this = _super.call(this, nombre, apellido) || this;
+            _this.edad = edad;
+            _this.sexo = sexo;
             return _this;
         }
-        Alumno.prototype.PersonaJson = function () {
-            var json = _super.prototype.PersonaJson.call(this) + (this.legajo + "," + this.materia + "," + this.nota);
-            return json;
-        };
-        return Alumno;
+        return Cliente;
     }(clases.Persona));
-    clases.Alumno = Alumno;
+    clases.Cliente = Cliente;
 })(clases || (clases = {}));

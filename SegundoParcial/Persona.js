@@ -1,8 +1,9 @@
 var clases;
 (function (clases) {
     var Persona = /** @class */ (function () {
-        function Persona(nom) {
+        function Persona(nom, ape) {
             this.nombre = nom;
+            this.apellido = ape;
         }
         Persona.prototype.PersonaJson = function () {
             return "" + this.nombre;

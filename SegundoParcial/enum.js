@@ -2,9 +2,7 @@ var clases;
 (function (clases) {
     var Tipos;
     (function (Tipos) {
-        Tipos[Tipos["rubio"] = 0] = "rubio";
-        Tipos[Tipos["morocho"] = 1] = "morocho";
-        Tipos[Tipos["pelirrojo"] = 2] = "pelirrojo";
-        Tipos[Tipos["casta\u00F1o"] = 3] = "casta\u00F1o";
+        Tipos[Tipos["Masculino"] = 0] = "Masculino";
+        Tipos[Tipos["Femenino"] = 1] = "Femenino";
     })(Tipos = clases.Tipos || (clases.Tipos = {}));
 })(clases || (clases = {}));

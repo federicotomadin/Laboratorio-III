@@ -11,7 +11,7 @@
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
  <!-- <script src="node_modules/jquery/dist/jquery.min.js"></script>-->
   <script src="Persona.js"></script>
-  <script src="Alumno.js"></script>
+  <script src="Cliente.js"></script>
   <script src="enum.js"></script>
   <script src="Controladora.js"></script>
 </head>
@@ -19,73 +19,84 @@
 <body>
   <div class="container">
     <div class="row responsive-utilities-test visible-on">
-      <div class="container-fluid">
-        <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
+      <!--<div class="container-fluid">-->
+        <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:cornflowerblue;">
           <input type="hidden" id="indexModificar">
-          <h2>Ingrese los datos del Alumno</h2><br>
-         <!-- <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="ID" placeholder="ID"/><input type="checkbox" class="chID" onchange="Controladora.FiltroColID()"/>
-              onkeypress=" Controladora.MostrarAlumnos();
-            </div>
-          </div>-->
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-              <input type="text" id="Buscar" placeholder="Buscar Por Nombre" onkeydown="if($('#Buscar').val()==''){Controladora.MostrarAlumnos();}else {Controladora.FiltroNombre();}"/>
-            </div>
-          </div><br>
+          <h2 align="center">ABM Personas</h2><br>
+
+          <label for="">Id        
+            
+              <input type="text" id="ID" disabled/>
+     
+        </label><br>      
 
 
           
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Nombre" placeholder="Nombre"/><input type="checkbox" class="chNombre" onclick="if(this.checked==true){Controladora.FiltroColNombre();}else{Controladora.MostrarAlumnos();}"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Legajo" placeholder="Legajo"/><input type="checkbox" class="chLegajo" onclick="if(this.checked==true){Controladora.FiltroColLegajo();}else{Controladora.MostrarAlumnos();}"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Materia" placeholder="Materia"/><input type="checkbox" class="chMateria" onclick="if(this.checked==true){Controladora.FiltroColMateria();}else{Controladora.MostrarAlumnos();}" />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="text" id="Nota" placeholder="Nota"/><input type="checkbox" class="chNota" onclick="if(this.checked==true){Controladora.FiltroColNota();}else{Controladora.MostrarAlumnos();}" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-6 col-sm-6 col-lg-6 control-label">Tipo</label>
-            <div class="col-md-6">
-              <select name="Tipo" id="Tipo">
+         <label for="">Nombre
+      
+              <input type="text" id="Nombre" placeholder="Matias"/>
+            
+            </label><br>
+
+        
+            <label for="">Apellido
+              <input type="text" id="Apellido" placeholder="Ramos"/>
+            </label><br>
+         
+         
+         <label for="">Edad
+          
+              <input  type="text" id="Edad" placeholder="30"/>
+            </label><br>
+
+      
+            <label >Sexo
+         
+              <select name="Sexo" id="Sexo">
 
 
               </select>
-            </div>
-          </div>
-        
- 
-         
-          <div class="form-group">
-            <div class="col-md-6 col-sm-6 col-lg-6">
-              <input type="button" id="CargarAlumno" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarAlumno()">
-              <input type="button" value="Mostrar" id="MostrarAlumno" class="btn btn-primary" onclick="Controladora.MostrarAlumnos()">
-              <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()"><br><br>
-              <input type="button" value="Promedio de Notas" id="PromedioNotas" class="btn btn-default" onclick="Controladora.PromedioNotas()">
-              <div id="promedio"><br>
-              </div>
-            </div>
-          </div>
-        
-        
-      </div>
-        <!--cierre de la columna-->
+            </label><br><br>
 
+              <input type="button" id="CargarCliente" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarCliente()">
+              <input type="button" id="EliminarCliente" value="Eliminar" class="btn btn-danger" onclick="Controladora.EliminarCliente()">
+              <input type="button" id="LimpiarLocalStorage" value="Limpiar LocalStorage" class="btn btn-danger" onclick="Controladora.LimpiarLocalStorage()">
+
+              <h3 align="center">Filtros</h3><br>
+
+              <label for="">Filtrar Por
+              
+               
+              
+                  <select name="Sexo" id="FiltrarSexo">
+    
+    
+                  </select>
+                 </label>
+
+                  <label for="">Promedio de edad</label>
+                  <input type="text" id="Promedio">
+                  <input type="button" value="Calcular Promedio" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()"><br><br>
+                  
+
+     
+
+
+      <h5><strong>Campos mostrados</strong> Tildar los campos a mostrar </h5>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Id" onclick="if(this.checked==true){Controladora.FiltroColId();}else{Controladora.MostrarClientes()";} >Id</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Nombre" onclick="if(this.checked==true){Controladora.FiltroColNombre();}else{Controladora.MostrarClientes();}">Nombre</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Edad" onclick="if(this.checked==true){Controladora.FiltroColEdad();}else{Controladora.MostrarClientes();}">Edad</label>
+      <label class="checkbox-inline"><input checked type="checkbox" value="Apellido" onclick="if(this.checked==true){Controladora.FiltroColApellido();}else{Controladora.MostrarClientes();}">Apellido</label><br>
+      <h3 align="center">Lista de Personas</h3><br>
+      
+
+         
+         
+  
+        
+   
          <!--Comienza la tabla-->
-        <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:lavenderblush">
+        <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:lavenderblush">
           <div id="divTabla">
          tabla aqui..
           </div>

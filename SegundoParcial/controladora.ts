@@ -27,8 +27,7 @@ class Controladora {
             let arrayClientes = new Array<clases.Cliente>();
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
-            Controladora.LimpiarForm(); 
-           // Controladora.CargarSelect();
+            Controladora.LimpiarForm();           
             Controladora.MostrarClientes();
             return;
 
@@ -39,8 +38,7 @@ class Controladora {
             let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
-            Controladora.LimpiarForm(); 
-           // Controladora.CargarSelect();
+            Controladora.LimpiarForm();            
             Controladora.MostrarClientes();
             return;
 
@@ -103,12 +101,8 @@ class Controladora {
         }
         else
         {
-        
-
         let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
   
-     
-
         for (let i = 0; i < arrayClientes.length; i++) {
             valoresTabla += "<tr onclick='Controladora.ModificarCliente(" + i + ")'>";
             valoresTabla += "<td>" + arrayClientes[i].id + "</td>";
@@ -121,9 +115,7 @@ class Controladora {
     }
 
         $("#divTabla").html(stringTabla + valoresTabla);
-    }
-
-   
+    } 
 
 //----------------------------------PROMEDIO --------------------------------------------------//
         public static PromedioEdad()
@@ -141,7 +133,6 @@ class Controladora {
         $("#Promedio").val(edadAcum/(arrayClientes.length));
 
         }
-
 
 //-------------------------------------- CARGA SELECT --------------------------------------//
 
@@ -222,8 +213,6 @@ class Controladora {
             }
             $("#divTabla").html(stringTabla + valoresTabla);
         }
-
-      
     
         public static  FiltroColEdad()
         {
@@ -285,42 +274,5 @@ class Controladora {
         
         }, 0);
         return Mayor +1;
-        } 
-
-        public static FiltroNombre()
-        {
-            let arrayClientes: Array<clases.Cliente> = JSON.parse(localStorage.getItem("Clientes"));
-            let arrayMapClientes = arrayClientes.filter(function (elemento) {
-                let variable:string = elemento.nombre;
-              
-                console.log(variable.charAt(1));
-                
-                for (let i = 0; i < variable.length; i++) 
-                {
-                    if (variable.charAt(i)==String($("#Buscar").val()) || variable==String($("#Buscar").val()))
-                    return true;
-
-                }       
-               
-            });
-            let stringTabla: string;
-            stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
-
-            let valoresTabla = "";
-            for (let i = 0; i < arrayMapClientes.length; i++) {
-                valoresTabla += "<tr>";
-                valoresTabla += "<td>" + arrayMapClientes[i].id + "</td>";
-                valoresTabla += "<td>" + arrayMapClientes[i].nombre + "</td>";
-                valoresTabla += "<td>" + arrayMapClientes[i].legajo + "</td>";
-                valoresTabla += "<td>" + arrayMapClientes[i].materia + "</td>";
-                valoresTabla += "<td>" + arrayMapClientes[i].nota + "</td>";
-                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarCliente(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
-                valoresTabla += "</tr>";
-            }
-            $("#divTabla").html(stringTabla + valoresTabla);
-        }
-      
-    
-
+        }      
 }

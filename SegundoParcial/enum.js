@@ -1,3 +1,4 @@
+"use strict";
 var clases;
 (function (clases) {
     var Tipos;

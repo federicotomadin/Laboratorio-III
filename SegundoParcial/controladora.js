@@ -1,3 +1,4 @@
+"use strict";
 /// <reference path="Persona.ts" />
 /// <reference path="Cliente.ts" />
 $(document).ready(function () {
@@ -19,7 +20,6 @@ var Controladora = /** @class */ (function () {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm();
-            // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
         }
@@ -28,7 +28,6 @@ var Controladora = /** @class */ (function () {
             arrayClientes.push(ObjetoClientes);
             localStorage.setItem("Clientes", JSON.stringify(arrayClientes));
             Controladora.LimpiarForm();
-            // Controladora.CargarSelect();
             Controladora.MostrarClientes();
             return;
         }
@@ -215,32 +214,6 @@ var Controladora = /** @class */ (function () {
             return (max > elemento.id) ? max : elemento.id;
         }, 0);
         return Mayor + 1;
-    };
-    Controladora.FiltroNombre = function () {
-        var arrayClientes = JSON.parse(localStorage.getItem("Clientes"));
-        var arrayMapClientes = arrayClientes.filter(function (elemento) {
-            var variable = elemento.nombre;
-            console.log(variable.charAt(1));
-            for (var i = 0; i < variable.length; i++) {
-                if (variable.charAt(i) == String($("#Buscar").val()) || variable == String($("#Buscar").val()))
-                    return true;
-            }
-        });
-        var stringTabla;
-        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>LEGAJO</th><th>MATERIA</th><th>NOTA</th><th>ACCION</th></tr></thead>";
-        var valoresTabla = "";
-        for (var i = 0; i < arrayMapClientes.length; i++) {
-            valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayMapClientes[i].id + "</td>";
-            valoresTabla += "<td>" + arrayMapClientes[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayMapClientes[i].legajo + "</td>";
-            valoresTabla += "<td>" + arrayMapClientes[i].materia + "</td>";
-            valoresTabla += "<td>" + arrayMapClientes[i].nota + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarCliente(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarAlumno(" + i + ")'>Modificar</button>" + "</td>";
-            valoresTabla += "</tr>";
-        }
-        $("#divTabla").html(stringTabla + valoresTabla);
     };
     return Controladora;
 }());

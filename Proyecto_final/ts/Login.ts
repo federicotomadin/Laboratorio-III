@@ -29,11 +29,35 @@ class Login {
 
     }
 
+
+
     public static GuardarContrasenia()
     {
         let clave=String($("#Clave").val());
 
         localStorage.setItem("Clave",clave);
+
+        var persona = { "nombre" : nombre , "apellido" : apellido };
+        
+        $.ajax({
+            beforesend: function(){},
+            url: "http://localhost:3000/agregarpersona",
+            type: "post",
+            dataType: "html",
+            data: persona,
+            success:function(result)
+            {
+                ValidarUsuario();
+
+            },
+            cache: false,
+            error:function(jqXHR, textStatus, textError){ alert("error!!" + textStatus + textError)},
+            contentType: false,
+            processData: false         
+            });
+
+
+        })
 
     }
 

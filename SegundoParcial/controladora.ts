@@ -127,9 +127,11 @@ class Controladora {
             return elemento.sexo==sexo;
 
         }).reduce(function(previo,actual){
-            edadAcum +=actual.edad;
+            edadAcum += (previo.edad + actual.edad);
+           
+           
         });
-
+        
         $("#Promedio").val(edadAcum/(arrayClientes.length));
 
         }

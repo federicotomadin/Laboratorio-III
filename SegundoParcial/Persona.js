@@ -1,4 +1,3 @@
-"use strict";
 var clases;
 (function (clases) {
     var Persona = /** @class */ (function () {

@@ -1,4 +1,3 @@
-"use strict";
 /// <reference path="Persona.ts" />
 /// <reference path="Cliente.ts" />
 $(document).ready(function () {
@@ -99,7 +98,7 @@ var Controladora = /** @class */ (function () {
         var arrayMapClientes = arrayClientes.filter(function (elemento) {
             return elemento.sexo == sexo;
         }).reduce(function (previo, actual) {
-            edadAcum += actual.edad;
+            edadAcum += (previo.edad + actual.edad);
         });
         $("#Promedio").val(edadAcum / (arrayClientes.length));
     };

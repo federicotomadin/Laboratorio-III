@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -14,15 +13,14 @@ var clases;
 (function (clases) {
     var Empleado = /** @class */ (function (_super) {
         __extends(Empleado, _super);
-        function Empleado(identidad, nom, ed, tip, foto) {
-            var _this = _super.call(this, nom, ed) || this;
-            _this.id = identidad;
-            _this.tipo = tip;
-            _this.foto = foto;
+        function Empleado(leg, nom, ape, ed, horario) {
+            var _this = _super.call(this, nom, ape, ed) || this;
+            _this.legajo = leg;
+            _this.horario = horario;
             return _this;
         }
         Empleado.prototype.EmpleadoJson = function () {
-            var json = _super.prototype.PersonaJson.call(this) + (this.id + "," + this.tipo);
+            var json = _super.prototype.PersonaJson.call(this) + (this.legajo + "," + this.horario);
             return json;
         };
         return Empleado;

@@ -1,249 +1,186 @@
-"use strict";
 /// <reference path="Persona.ts" />
 /// <reference path="Empleado.ts" />
 $(document).ready(function () {
-    alert("Bienvenido al sistema");
     Controladora.CargarSelect();
     Controladora.MostrarEmpleado();
 });
-var foto_string = null;
 var Controladora = /** @class */ (function () {
     function Controladora() {
     }
     Controladora.AgregarEmpleado = function () {
-        var id = Number($("#ID").val());
+        var legajo = Number($("#Legajo").val());
         var nombre = String($("#Nombre").val());
+        var apellido = String($("#Apellido").val());
         var edad = Number($("#Edad").val());
-        var tipo = String($("#Tipo").val());
-        var IndiceStorage = localStorage.getItem("Indice");
-        var arrayIndice = Array();
-        var EmpleadoStorage = localStorage.getItem("Empleado");
-        var arrayEmpleado = Array();
-        // let ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
-        if (EmpleadoStorage == null) {
-            //  console.log("agregar");
-            var ObjetoEmpleado_1 = new clases.Empleado(id, nombre, edad, tipo, foto_string);
-            ObjetoEmpleado_1.id = 0;
-            var variable = String(ObjetoEmpleado_1.id);
-            localStorage.setItem("Indice", variable);
-            arrayEmpleado = new Array();
-            arrayEmpleado.push(ObjetoEmpleado_1);
+        var horario = String($("#Horario").val());
+        var index = Number($("#indexModificar").val());
+        var ObjetoEmpleado = new clases.Empleado(legajo, nombre, apellido, edad, horario);
+        if (index != 0) {
+            var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
+            arrayEmpleados.splice(index, 1);
+            console.log(index);
+            arrayEmpleados.push(ObjetoEmpleado);
+            localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
+            Controladora.LimpiarForm();
+            Controladora.MostrarEmpleado();
+            return;
+        }
+        var EmpleadoStorage = localStorage.getItem("Empleados");
+        if (localStorage.getItem("Empleados") == "") {
+            var arrayEmpleados = new Array();
+            arrayEmpleados.push(ObjetoEmpleado);
+            localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
+            Controladora.LimpiarForm();
+            Controladora.MostrarEmpleado();
+            return;
+        }
+        if (localStorage.getItem("Empleados") != "") {
+            var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
+            arrayEmpleados.push(ObjetoEmpleado);
+            localStorage.setItem("Empleados", JSON.stringify(arrayEmpleados));
+            Controladora.LimpiarForm();
+            Controladora.MostrarEmpleado();
+            return;
+        }
+        //si no es NULL quiere decir que estoy modificando esa posicion de memoria.
+        /*    let index = $("#indexModificar").val();
+            arrayEmpleado= JSON.parse(localStorage.getItem('Empleados'));
+            if (index !== "") {
+                let i: number = Number(index);
+                let aux=Number(arrayEmpleado[index].legajo);
+                let paraEnum= new Array<number>();
+                let ObjetoEmpleado: clases.Empleado = new clases.Empleado(aux, nombre, edad, tipo,foto_string);
+              
+              //  console.log("Mascota a modificar");
+                //console.log(arrayMascotas[i]);
+                arrayEmpleado.splice(i, 1);
+            arrayEmpleado.push(ObjetoEmpleado);
+
+          
+          
+
+          /*  localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado2));
+            Controladora.LimpiarForm();
+            Controladora.MostrarEmpleado();
+            return;*/
+        //}
+        /*    ObjetoEmpleado: clases.Empleado = new clases.Empleado(id, nombre, edad, tipo,foto_string);
+            arrayIndice = new  Array<number>();
+            arrayIndice=JSON.parse(localStorage.getItem("Indice"));
+            arrayIndice.push(6);
+            localStorage.setItem("Indice",JSON.stringify(arrayIndice));
+            arrayIndice=JSON.parse(localStorage.getItem("Indice"));
+            ObjetoEmpleado.legajo=arrayIndice.length;
+            arrayEmpleado.push(ObjetoEmpleado);
             localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
-            Controladora.MostrarEmpleado();
-            Controladora.LimpiarForm();
-            return;
-        }
-        //sino es NULL quiere decir que estoy modificando esa posicion de memoria.
-        var index = $("#indexModificar").val();
-        arrayEmpleado = JSON.parse(localStorage.getItem('Empleado'));
-        if (index !== "") {
-            var i = Number(index);
-            var aux = Number(arrayEmpleado[index].id);
-            var paraEnum = new Array();
-            var ObjetoEmpleado_2 = new clases.Empleado(aux, nombre, edad, tipo, foto_string);
-            //  console.log("Mascota a modificar");
-            //console.log(arrayMascotas[i]);
-            arrayEmpleado.splice(i, 1);
-            arrayEmpleado.push(ObjetoEmpleado_2);
-            //guardo los id en un array numerico para ordenarlo
-            for (var i_1 = 0; i_1 < arrayEmpleado.length; i_1++) {
-                paraEnum.push(arrayEmpleado[i_1].id);
-            }
-            paraEnum.sort(Controladora.funcionDeComparacion);
-            //creo un array auxiliar y voy comparando cada enum con el 
-            //elemento del array
-            var arrayEmpleado2 = new Array();
-            for (var i_2 = 0; i_2 < paraEnum.length; i_2++) {
-                for (var j = 0; j < arrayEmpleado.length; j++) {
-                    if (paraEnum[i_2] == arrayEmpleado[j].id) {
-                        arrayEmpleado2.push(arrayEmpleado[j]);
-                    }
-                }
-            }
-            localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado2));
-            Controladora.LimpiarForm();
-            Controladora.MostrarEmpleado();
-            return;
-        }
-        var ObjetoEmpleado = new clases.Empleado(id, nombre, edad, tipo, foto_string);
-        arrayIndice = new Array();
-        arrayIndice = JSON.parse(localStorage.getItem("Indice"));
-        arrayIndice.push(6);
-        localStorage.setItem("Indice", JSON.stringify(arrayIndice));
-        arrayIndice = JSON.parse(localStorage.getItem("Indice"));
-        ObjetoEmpleado.id = arrayIndice.length;
-        arrayEmpleado.push(ObjetoEmpleado);
-        localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
-        Controladora.LimpiarForm();
+            Controladora.LimpiarForm();*/
         Controladora.MostrarEmpleado();
     };
-    Controladora.funcionDeComparacion = function (a, b) {
-        if (a < b) {
-            return -1;
-        }
-        if (a > b) {
-            return 1;
-        }
-        // a debe ser igual b
-        return 0;
-    };
-    Controladora.encodeImageFileAsURL = function () {
-        var filesSelected = document.getElementById("inputFileToLoad").files;
-        if (filesSelected.length > 0) {
-            var fileToLoad = filesSelected[0];
-            var fileReader = new FileReader();
-            fileReader.onload = function (fileLoadedEvent) {
-                var srcData = fileLoadedEvent.target.result;
-                foto_string = srcData;
-            };
-            fileReader.readAsDataURL(fileToLoad);
-        }
-        /* let file_data = $('#file').val();
-         let  FotoStorage = localStorage.getItem("foto");
-
-         localStorage.setItem("foto", JSON.stringify(file_data));
-
-         localStorage.getItem('foto');
-         let variable='<img src="file_data">';
-         
-       console.log(file_data);
-         $('#respuesta').html('<img src='+ file_data + '/>');
-         */
-        /*$('#file').change(function() {
-            
-                        var file = (this.files[0].name).toString();
-            
-                        $('#respuesta').empty().text(file);
-            
-                        portrait_uploader.reader.onload = function(e)
-                        {
-                            $('#respuesta').attr('src', e.target.result);
-                        }
-            
-     
-        
-    })*/
-    };
     Controladora.LimpiarForm = function () {
-        $("#ID").val("");
+        $("#Legajo").val("");
         $("#Nombre").val("");
+        $("#Apellido").val("");
         $("#Edad").val("");
-        $("#Tipo").val("perro");
-        $("#foto").val("");
+        $("#Horario").val("mañana");
     };
     Controladora.MostrarEmpleado = function () {
         var stringTabla;
-        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>Legajo</th>" +
+            "<th>NOMBRE</th><th>APELLIDO</th><th>EDAD</th><th>HORARIO</th><th>ACCION</th></tr></thead>";
         var valoresTabla = " ";
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
-        for (var i = 0; i < arrayEmpleado.length; i++) {
+        if (localStorage.getItem("Empleados") == null) {
+            localStorage.setItem("Empleados", "");
+        }
+        else if (localStorage.getItem("Empleados") == "") {
+            localStorage.setItem("Empleados", "");
+        }
+        else {
+            var arrayEmpleado = JSON.parse(localStorage.getItem("Empleados"));
+            for (var i = 0; i < arrayEmpleado.length; i++) {
+                valoresTabla += "<tr>";
+                valoresTabla += "<td>" + arrayEmpleado[i].legajo + "</td>";
+                valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
+                valoresTabla += "<td>" + arrayEmpleado[i].apellido + "</td>";
+                valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
+                valoresTabla += "<td>" + arrayEmpleado[i].horario + "</td>";
+                valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
+                valoresTabla += "</tr>";
+            }
+        }
+        $("#divTabla").html(stringTabla + valoresTabla);
+    };
+    Controladora.FiltrarNombreApellido = function () {
+        var arrayEmpleados = JSON.parse(localStorage.getItem("Empleados"));
+        var arrayMapEmpleados = arrayEmpleados.map(function (elemento) {
+            return (elemento.nombre, elemento.apellido);
+        });
+        var stringTabla;
+        stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr>" +
+            "<th>NOMBRE</th><th>APELLIDO</th><th>ACCION</th></tr></thead>";
+        var valoresTabla = " ";
+        for (var i = 0; i < arrayEmpleados.length; i++) {
             valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayEmpleado[i].id + "</td>";
-            valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
-            valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
-            valoresTabla += "<td>" + arrayEmpleado[i].tipo + "</td>";
-            valoresTabla += "<td>" + "<img src='" + arrayEmpleado[i].foto + "' height='50' alt=''></td>";
+            valoresTabla += "<td>" + arrayEmpleados[i].nombre + "</td>";
+            valoresTabla += "<td>" + arrayEmpleados[i].apellido + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }
         $("#divTabla").html(stringTabla + valoresTabla);
     };
     //------------------------------PROMEDIO --------------------------------------------------//
-    Controladora.PromedioEdad = function () {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
-        var total = 0;
-        var suma = arrayEmpleado.reduce(function (total, elemento) {
-            return total += elemento.edad;
-        }, 0);
-        $("#promedio").html(String((suma / arrayEmpleado.length)));
+    Controladora.PromedioEdadPorHorario = function () {
+        var edadAcum = 0;
+        var horario = $("#Horario").val();
+        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleados"));
+        var arrayMapEmpleado = arrayEmpleado.filter(function (elemento) {
+            return elemento.horario == horario;
+        }).reduce(function (previo, actual) {
+            edadAcum += (previo.edad + actual.edad);
+        });
+        $("#Promedio").val(edadAcum / (arrayEmpleado.length));
     };
     //----------------------------- CARGA SELECT --------------------------------------//
     Controladora.CargarSelect = function () {
         for (var i = 0; i < 4; i++) {
-            $("#Tipo").append(new Option(clases.Tipos[i]));
+            $("#Horario").append(new Option(clases.Horarios[i]));
         }
     };
     //--------------------------------  FILTROS  -----------------------------------//
-    Controladora.FiltroColID = function () {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
-        var arrayMapEmpleado = arrayEmpleado.map(function (elemeto) {
-            return (elemeto.id);
-        });
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th><th>ACCION</th></tr></thead>";
-        var valoresTabla = "";
-        for (var i = 0; i < arrayMapEmpleado.length; i++) {
-            valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayEmpleado[i].id + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-            valoresTabla += "</tr>";
-        }
-        $("#divTabla").html(stringTabla + valoresTabla);
-    };
-    Controladora.FiltroColNombre = function () {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
-        var arrayMapEmpleado = arrayEmpleado.map(function (elemeto) {
-            return (elemeto.nombre);
-        });
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Nombre</th><th>ACCION</th></tr></thead>";
-        var valoresTabla = "";
-        for (var i = 0; i < arrayMapEmpleado.length; i++) {
-            valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayEmpleado[i].nombre + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-            valoresTabla += "</tr>";
-        }
-        $("#divTabla").html(stringTabla + valoresTabla);
-    };
-    Controladora.FiltroColEdad = function () {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
-        var arrayMapEmpleado = arrayEmpleado.map(function (elemeto) {
-            return (elemeto.edad);
-        });
-        var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>Edad</th><th>ACCION</th></tr></thead>";
-        var valoresTabla = "";
-        for (var i = 0; i < arrayMapEmpleado.length; i++) {
-            valoresTabla += "<tr>";
-            valoresTabla += "<td>" + arrayEmpleado[i].edad + "</td>";
-            valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
-            valoresTabla += "</tr>";
-        }
-        $("#divTabla").html(stringTabla + valoresTabla);
-    };
     Controladora.EliminarEmpleado = function (index) {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
+        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleados"));
         arrayEmpleado.splice(index, 1);
-        localStorage.setItem("Empleado", JSON.stringify(arrayEmpleado));
+        localStorage.setItem("Empleados", JSON.stringify(arrayEmpleado));
         Controladora.MostrarEmpleado();
     };
     Controladora.ModificarEmpleado = function (index) {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
+        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleados"));
         console.log(arrayEmpleado);
-        $("#ID").val(arrayEmpleado[index].id);
+        $("#Legajo").val(arrayEmpleado[index].legajo);
         $("#Nombre").val(arrayEmpleado[index].nombre);
+        $("#Apellido").val(arrayEmpleado[index].apellido);
         $("#Edad").val(arrayEmpleado[index].edad);
-        $("#Tipo").val(arrayEmpleado[index].tipo);
+        $("#Horario").val(arrayEmpleado[index].horario);
         // $("#foto").val(arrayEmpleado[index].foto);
         $("#indexModificar").val(index.toString());
     };
-    Controladora.FiltrarPorTipo = function () {
-        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleado"));
+    Controladora.FiltrarPorHorario = function () {
+        var arrayEmpleado = JSON.parse(localStorage.getItem("Empleados"));
         var EmpleadoFiltradas = arrayEmpleado.filter(function (elemento) {
-            return elemento.tipo == $("#Tipo_Modal").val();
+            return elemento.horario == $("#Horario").val();
         });
         EmpleadoFiltradas.map(function (user) {
-            return { id: user.id, nombre: user.nombre, edad: user.edad, tipo: user.tipo, foto: user.foto };
+            return { id: user.legajo, nombre: user.nombre, apellido: user.apellido, edad: user.edad, horario: user.horario };
         });
         var stringTabla = "<table  class='table table-bordered'><thead class='thead thead-dark'><tr><th>ID</th>" +
-            "<th>NOMBRE</th><th>EDAD</th><th>TIPO</th><th>FOTO</th><th>ACCION</th></tr></thead>";
+            "<th>NOMBRE</th><th>APELLIDO</th><th>EDAD</th><th>HORARIO</th><th>ACCION</th></tr></thead>";
         var valoresTabla = "";
         for (var i = 0; i < EmpleadoFiltradas.length; i++) {
             valoresTabla += "<tr>";
-            valoresTabla += "<td>" + EmpleadoFiltradas[i].id + "</td>";
+            valoresTabla += "<td>" + EmpleadoFiltradas[i].legajo + "</td>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].nombre + "</td>";
+            valoresTabla += "<td>" + EmpleadoFiltradas[i].apellido + "</td>";
             valoresTabla += "<td>" + EmpleadoFiltradas[i].edad + "</td>";
-            valoresTabla += "<td>" + EmpleadoFiltradas[i].tipo + "</td>";
-            valoresTabla += "<td>" + "<img src='" + EmpleadoFiltradas[i].foto + "' height='50' alt=''></td>";
+            valoresTabla += "<td>" + EmpleadoFiltradas[i].horario + "</td>";
             valoresTabla += "<td>" + "<button class='btn btn-danger' onclick='Controladora.EliminarEmpleado(" + i + ")'>Eliminar</button><button class='btn btn-success' onclick='Controladora.ModificarEmpleado(" + i + ")'>Modificar</button>" + "</td>";
             valoresTabla += "</tr>";
         }

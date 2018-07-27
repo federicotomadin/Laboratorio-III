@@ -158,7 +158,6 @@ class Controladora {
     
             });
 
-            console.log(arrayClientes);
             let stringTabla:string;
             stringTabla = "<table  class='table table-bordered'><thead class='thead '><tr><th>Nombre</th><th>Apellido</th><th>Edad</th><th>Sexo</th></tr></thead>";
             let valoresTabla:string = " ";

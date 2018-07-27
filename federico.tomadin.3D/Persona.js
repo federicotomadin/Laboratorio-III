@@ -1,9 +1,9 @@
-"use strict";
 var clases;
 (function (clases) {
     var Persona = /** @class */ (function () {
-        function Persona(nom, ed) {
+        function Persona(nom, ape, ed) {
             this.nombre = nom;
+            this.apellido = ape;
             this.edad = ed;
         }
         Persona.prototype.PersonaJson = function () {

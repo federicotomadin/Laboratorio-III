@@ -1,11 +1,9 @@
-"use strict";
 var clases;
 (function (clases) {
-    var Tipos;
-    (function (Tipos) {
-        Tipos[Tipos["rubio"] = 0] = "rubio";
-        Tipos[Tipos["morocho"] = 1] = "morocho";
-        Tipos[Tipos["pelirrojo"] = 2] = "pelirrojo";
-        Tipos[Tipos["casta\u00F1o"] = 3] = "casta\u00F1o";
-    })(Tipos = clases.Tipos || (clases.Tipos = {}));
+    var Horarios;
+    (function (Horarios) {
+        Horarios[Horarios["ma\u00F1ana"] = 0] = "ma\u00F1ana";
+        Horarios[Horarios["tarde"] = 1] = "tarde";
+        Horarios[Horarios["noche"] = 2] = "noche";
+    })(Horarios = clases.Horarios || (clases.Horarios = {}));
 })(clases || (clases = {}));

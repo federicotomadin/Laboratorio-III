@@ -10,8 +10,6 @@
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-
-
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="Persona.js"></script>
   <script src="Empleado.js"></script>
@@ -22,129 +20,67 @@
 <body>
   <div class="container">
     <div class="container-fluid">
-      <div class="row responsive-utilities-test visible-on">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Laboratorio III</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-left">
-              <li>
-                <a href="#" onclick="Controladora.MostrarEmpleado()">Mostrar</a>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Ver
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal">Filtrar</a>
-                  </li>
-                  <li>
-                      <a onclick="Controladora.PromedioEdad()" href="#">Promedio</a>
-                    </li>
-                </ul>
-                  <!-- Modal -->
-                  
-                  <div id="myModal" data-backdrop="false" class="modal "  >
-                    <div class="modal-dialog modal-xs">
-
-                      <!-- Modal content-->
-                    
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title">Filtrar</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="Tipo_Modal">Horario</label>
-                                <select class="form-control" id="Tipo_Modal">
-                                  <option>rubio</option>
-                                  <option>morocho</option>
-                                  <option>pelirrojo</option>
-                                  <option>castaño</option>
-                                </select>
-                              </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger btn-md addnewrow pull-left 	glyphicon glyphicon-remove"  data-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-success btn-md" onclick="Controladora.FiltrarPorTipo()" data-dismiss="modal">Filtrar</button>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-               
-              </li>
-          </div>
-        </nav><br><br><br>
-
-
-
+      <div class="row responsive-utilities-test visible-on">     
 
         <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:cornflowerblue;">
           <input type="hidden" id="indexModificar">
           <h2>Ingrese los datos de la Empleado</h2>
           <br>
-        <!--  <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="ID" placeholder="ID" disabled /> <input type="checkbox" class="chID" onchange="Controladora.FiltroColID()" />
-            </div>
-          </div> -->
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="Nombre" placeholder="Nombre" /><input type="checkbox" class="chNombre" onchange="Controladora.FiltroColNombre()" />
+            <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">
+              <input class="col-sm-12 col-xs-12 col-md-12 col-lg-12" type="number" id="Legajo" placeholder="Legajo" />
             </div>
           </div>.<br>
           <div class="form-group">
-            <div class="col-md-6">
-              <input type="text" id="Edad" placeholder="Edad" /><input type="checkbox" class="chEdad" onchange="Controladora.FiltroColEdad()" />
+            <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">
+              <input class="col-sm-12 col-xs-12 col-md-12 col-lg-12" type="text" id="Nombre" placeholder="Nombre" />
             </div>
           </div>.<br>
           <div class="form-group">
-            <div class="col-md-6">
-              <input id="inputFileToLoad" type="file" onchange="Controladora.encodeImageFileAsURL()" />
+            <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">
+              <input class="col-sm-12 col-xs-12 col-md-12 col-lg-12" type="text" id="Apellido" placeholder="Apellido" />
             </div>
           </div>.<br>
           <div class="form-group">
-            <label class="col-md-3 control-label">Tipo</label>
-            <div class="col-md-1">
-              <select name="Tipo" id="Tipo">
+            <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6">
+              <input class="col-sm-12 col-xs-12 col-md-12 col-lg-12" type="number" id="Edad" placeholder="Edad" />
+            </div>
+          </div>.<br>
+     
+
+          <div class="form-group">
+            <label class="col-sm-3 col-xs-3 col-md-3 col-lg-3 control-label">Horario</label>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">
+              <select name="Horario" id="Horario">
               </select>
             </div>
           </div>
+
           <br>
           <div class="form-group">
             <div class="col-xs-3 col-sm-3 col-md-6">
               <input type="button" id="CargarEmpleado" value="Agregar" class="btn btn-primary" onclick="Controladora.AgregarEmpleado()">
               <input type="button" value="Mostrar" id="CargarFoto" class="btn btn-primary" onclick="Controladora.MostrarEmpleado()">
-              <input type="button" value="Promedio de Edad" id="PromedioEdad" class="btn btn-default" onclick="Controladora.PromedioEdad()">
-              <input type="button" value="Filtrar por Tipo" id="FiltrarPorTipo" class="btn btn-default" onclick="Controladora.FiltrarPorTipo()">
+              <input type="button" value="Promedio de Edad" id="PromedioEdadPorHorario" class="btn btn-default" onclick="Controladora.PromedioEdadPorHorario()"><input class="col-sm-4 col-xs-4 col-md-4 col-lg-4" type="text" id="Promedio">
+              <input type="button" value="Filtrar por Horario" id="FiltrarPorHorario" class="btn btn-default" onclick="Controladora.FiltrarPorHorario()">
+              <input type="button" value="Mostrar Nombre Y Apellidos" id="FiltrarNombreApellido" class="btn btn-default" onclick="Controladora.FiltrarNombreApellido()">
               <br>
-
-              <div id="respuesta"></div>
-              <div id="promedio">
+              <div id="respuesta"></div>              
                 <br>
-              </div>
+              
             </div>
           </div>
         </div>
         <!--cierre de la columna-->
 
         <!--Comienza la tabla-->
+        <div class="table-responsive">
         <div class="col-xs-6 col-sm-6 col-md-6" style="background-color:lavenderblush">
           <div id="divTabla">
             tabla aqui..
           </div>
         </div>
+      
 
       </div>
       <!--cierre del conteiner-fluid-->
@@ -152,6 +88,7 @@
     <!--cierre del responsive-->
 
   </div>
+</div>
   <!--cierre del conteiner-->
 </body>
 

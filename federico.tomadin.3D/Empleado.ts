@@ -4,21 +4,19 @@ namespace clases
     
  export class Empleado extends clases.Persona
 {
-   id:any;
-   tipo:string;
-   foto:string|null
+   legajo:number;
+   horario:string;
    
 
-   constructor(identidad:number,nom:string,ed:number,tip:string,foto:string|null)
+   constructor(leg:number,nom:string,ape:string,ed:number,horario:string)
    {
-       super(nom,ed);
-       this.id=identidad;
-       this.tipo=tip;
-       this.foto=foto;
+       super(nom,ape,ed);       
+       this.legajo=leg;
+       this.horario=horario;
    }
 
    public EmpleadoJson():string{
-      let json= super.PersonaJson() +  `${this.id},${this.tipo}`
+      let json= super.PersonaJson() +  `${this.legajo},${this.horario}`
       return json;
 
    }
